@@ -1,7 +1,11 @@
+'use client'
 import { FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa'
 import { SiHuggingface } from 'react-icons/si'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function Footer() {
+  const { language } = useLanguage();
+
   return (
     <footer className="footer">
       <div className="social-links">
@@ -23,7 +27,7 @@ export default function Footer() {
       </div>
       <div className="footer-text">
         <p>NONHUMAN © All Rights Reserved 2025</p>
-        <p>Pushing the boundaries of artificial intelligence</p>
+        <p>{language === 'en' ? 'Understanding new types of intelligence' : 'Entendiendo nuevos tipos de inteligencia'}</p>
       </div>
     </footer>
   )

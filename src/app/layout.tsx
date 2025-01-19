@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import { LanguageProvider } from './context/LanguageContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,13 +25,15 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
       </head>
       <body className={inter.className}>
-        <div className="layout-container">
-          <Header />
-          <main className="main-content">
-            {children}
-          </main>
-          <Footer />
-        </div>
+        <LanguageProvider>
+          <div className="layout-container">
+            <Header />
+            <main className="main-content">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </LanguageProvider>
       </body>
     </html>
   )
