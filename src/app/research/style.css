@@ -1,0 +1,86 @@
+.research-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .research-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+  
+  .research-title {
+    font-size: 3rem;
+    color: var(--primary-color);
+    font-family: "Lora", serif;
+    font-weight: 500;
+  }
+  
+  .search-container {
+    flex: 0 1 300px;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 0;
+    background: transparent;
+    color: var(--primary-color);
+    font-size: 1rem;
+  }
+  
+  .search-input::placeholder {
+    color: rgba(250, 250, 250, 0.6);
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    --card-width: 500px;
+  }
+  
+  .project-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    max-width: var(--card-width);
+    margin: 0 auto;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .project-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+  }
+  
+  .project-info {
+    padding: 1.5rem;
+  }
+  
+  .project-title {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
+  
+  .project-date {
+    color: var(--text-color);
+    opacity: 0.8;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .project-description {
+    color: var(--text-color);
+    line-height: 1.5;
+    font-size: 1rem;
+  }

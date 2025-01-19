@@ -5,47 +5,70 @@ interface GameOfLifeProps {
   gridSize?: number; // tamaño de la cuadrícula (30px por defecto)
   cellSize?: number; // tamaño de cada celda
   updateSpeed?: number; // Velocidad de actualización en ms (default: 2000ms)
+  initialActiveCells?: number; // Número de celdas activas iniciales
+  reloadInterval?: number;
+  spreadRadius?: number; // Radio de dispersión para las celdas
 }
 
 export default function GameOfLife({ 
   gridSize = 30, 
   cellSize = 30,
-  updateSpeed = 2000 // 2 segundos por defecto para hacerlo más lento
+  updateSpeed = 2000,
+  initialActiveCells = 100, // Aumentado el número por defecto
+  reloadInterval = 10000,
+  spreadRadius = 20 // Radio de dispersión más grande
 }: GameOfLifeProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [grid, setGrid] = useState<boolean[][]>([]);
   const rows = Math.ceil(window.innerHeight / cellSize);
   const cols = Math.ceil(window.innerWidth / cellSize);
 
-  // Inicializar grid con puntos aleatorios alrededor del título
-  useEffect(() => {
+  // Función para crear un nuevo patrón aleatorio
+  const createRandomPattern = () => {
     const initialGrid = Array(rows).fill(null).map(() =>
       Array(cols).fill(false)
     );
 
-    // Obtener la posición del título
-    const titleElement = document.querySelector('.title');
-    if (titleElement) {
-      const rect = titleElement.getBoundingClientRect();
-      const centerRow = Math.floor(rect.top / cellSize);
-      const centerCol = Math.floor(rect.left / cellSize);
-      const width = Math.ceil(rect.width / cellSize);
-      const height = Math.ceil(rect.height / cellSize);
+    // Definir múltiples puntos de origen
+    const origins = [
+      { row: Math.floor(rows / 2), col: Math.floor(cols / 2) },           // Centro
+      { row: Math.floor(rows / 3), col: Math.floor(cols / 3) },           // Superior izquierda
+      { row: Math.floor(rows / 3), col: Math.floor((cols * 2) / 3) },     // Superior derecha
+      { row: Math.floor((rows * 2) / 3), col: Math.floor(cols / 3) },     // Inferior izquierda
+      { row: Math.floor((rows * 2) / 3), col: Math.floor((cols * 2) / 3)} // Inferior derecha
+    ];
 
-      // Crear puntos aleatorios alrededor del título
-      for (let i = -5; i < height + 5; i++) {
-        for (let j = -5; j < width + 5; j++) {
-          const row = centerRow + i;
-          const col = centerCol + j;
-          if (row >= 0 && row < rows && col >= 0 && col < cols) {
-            initialGrid[row][col] = Math.random() > 0.85;
-          }
-        }
+    let cellsPlaced = 0;
+    while (cellsPlaced < initialActiveCells) {
+      // Seleccionar un punto de origen aleatorio
+      const origin = origins[Math.floor(Math.random() * origins.length)];
+      
+      // Radio aleatorio alrededor del punto de origen
+      const radius = Math.floor(Math.random() * spreadRadius);
+      const angle = Math.random() * Math.PI * 2;
+      
+      const row = origin.row + Math.floor(Math.cos(angle) * radius);
+      const col = origin.col + Math.floor(Math.sin(angle) * radius);
+
+      // Asegurarse de que la celda está dentro de los límites y no está ya activa
+      if (row >= 0 && row < rows && col >= 0 && col < cols && !initialGrid[row][col]) {
+        initialGrid[row][col] = true;
+        cellsPlaced++;
       }
     }
 
-    setGrid(initialGrid);
-  }, [rows, cols, cellSize]);
+    return initialGrid;
+  };
+
+  // Inicializar y recargar periódicamente
+  useEffect(() => {
+    setGrid(createRandomPattern());
+    const reloadId = setInterval(() => {
+      setGrid(createRandomPattern());
+    }, reloadInterval);
+
+    return () => clearInterval(reloadId);
+  }, [rows, cols]);
 
   // Manejar clicks en el canvas
   const handleCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
@@ -60,7 +83,7 @@ export default function GameOfLife({
     const col = Math.floor(x / cellSize);
 
     setGrid(prevGrid => {
-      const newGrid = [...prevGrid.map(row => [...row])];
+      const newGrid = prevGrid.map(row => [...row]);
       newGrid[row][col] = !newGrid[row][col];
       return newGrid;
     });
