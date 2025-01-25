@@ -1,4 +1,5 @@
 'use client'
+import MainLayout from '../main-layout'
 import { useState } from 'react'
 import ProjectCard from './components/ProjectCard'
 import { useLanguage } from '../context/LanguageContext'
@@ -10,9 +11,9 @@ export default function Research() {
 
   const projects = [
     {
-      title: "nanoGPT",
+      title: "MIND",
       date: "January 19, 2025",
-      imageUrl: "/projects/nanoGPT.png",
+      imageUrl: "/projects/mind.png",
       description: language === 'en' 
         ? "Explaining Large Language Models (LLM) from scratch. Everything you need to know about them and how to build one"
         : "Explicando los Large Language Models (LLM) desde cero. Todo lo que necesitas saber sobre estos y cómo construir uno"
@@ -33,32 +34,34 @@ export default function Research() {
   );
 
   return (
-    <div className="research-container">
-      <div className="research-header">
-        <h1 className="research-title lora-main">
-          {language === 'en' ? 'Research' : 'Investigación'}
-        </h1>
-        <div className="search-container">
-          <input 
-            type="text" 
-            placeholder={language === 'en' ? "Search projects..." : "Buscar proyectos..."}
-            className="search-input"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+    <MainLayout>
+      <div className="research-container">
+        <div className="research-header">
+          <h1 className="research-title lora-main">
+            {language === 'en' ? 'Research' : 'Investigación'}
+          </h1>
+          <div className="search-container">
+            <input 
+              type="text" 
+              placeholder={language === 'en' ? "Search projects..." : "Buscar proyectos..."}
+              className="search-input"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="projects-grid">
+          {filteredProjects.map((project, index) => (
+            <ProjectCard
+              key={index}
+              title={project.title}
+              date={project.date}
+              imageUrl={project.imageUrl}
+              description={project.description}
+            />
+          ))}
         </div>
       </div>
-      <div className="projects-grid">
-        {filteredProjects.map((project, index) => (
-          <ProjectCard
-            key={index}
-            title={project.title}
-            date={project.date}
-            imageUrl={project.imageUrl}
-            description={project.description}
-          />
-        ))}
-      </div>
-    </div>
+    </MainLayout>
   );
 }

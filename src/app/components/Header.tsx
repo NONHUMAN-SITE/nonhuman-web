@@ -11,7 +11,15 @@ export default function Header() {
   };
 
   return (
-    <header className="header">
+    <header className="header" style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 1000,
+      backgroundColor: 'rgba(0, 0, 0, 0.9)', // Fondo semi-transparente
+      backdropFilter: 'blur(5px)' // Efecto de desenfoque
+    }}>
       <nav className="nav-container">
         <ul className="nav-list">
           <li><Link href="/">{language === 'en' ? 'Home' : 'Inicio'}</Link></li>
