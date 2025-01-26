@@ -1,110 +1,107 @@
-.roadmap-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  position: relative;
-  z-index: 1;
-}
-
 .roadmap-title {
-  text-align: center;
-  font-size: 3rem;
-  font-family: "Space Mono", monospace;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-bottom: 3rem;
+    text-align: center;
+    font-size: 3rem;
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    color: var(--primary-color);
+    background-color: transparent;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.5),
+                 0 0 20px rgba(var(--primary-color-rgb), 0.3);
 }
 
 .roadmap-index {
-  max-width: 800px;
-  margin: 0 auto 4rem;
-  padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: black;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .index-section {
-  margin-bottom: 2rem;
-  font-family: "Space Mono", monospace;
+    margin-bottom: 2rem;
+    font-family: "Space Mono", monospace;
 }
 
 .index-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
 }
 
 .index-subitem {
-  padding-left: 2rem;
-  color: var(--text-color);
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  opacity: 0.8;
+    padding-left: 2rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    opacity: 0.8;
 }
 
 .content-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    padding: 0 2rem;
 }
 
 .content-card {
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 12px;
-  padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
+    background-color: black;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
 }
 
 .content-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .card-title {
-  font-size: 1.5rem;
-  color: var(--primary-color);
-  margin-bottom: 0;
-  font-family: "Space Mono", monospace;
-  font-weight: 700;
-  flex: 1;
-  margin-right: 1rem;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0;
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    flex: 1;
+    margin-right: 1rem;
 }
 
 .card-description {
-  color: var(--text-color);
-  line-height: 1.6;
-  opacity: 0.8;
+    color: var(--text-color);
+    line-height: 1.6;
+    opacity: 0.8;
 }
 
 .index-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
 }
 
 .status-badge {
-  background-color: rgba(197, 7, 255, 0.2);
-  color: #9c07ff;
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-family: "Space Mono", monospace;
-  font-weight: 400;
-  border: 1px solid rgba(156, 7, 255, 0.3);
-  backdrop-filter: blur(5px);
-  white-space: nowrap;
+    background-color: rgba(197, 7, 255, 0.2);
+    color: #9c07ff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    border: 1px solid rgba(156, 7, 255, 0.3);
+    backdrop-filter: blur(5px);
+    white-space: nowrap;
 }
