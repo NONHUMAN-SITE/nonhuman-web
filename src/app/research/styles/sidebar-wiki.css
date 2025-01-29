@@ -1,15 +1,16 @@
 .sidebar-wiki {
   width: 280px;
-  position: fixed;
+  position: sticky;
   top: 100px;
-  right: calc((100vw - 1800px) / 2 + 2rem);
-  height: calc(100vh - 120px);
+  height: fit-content;
+  max-height: calc(100vh - 120px);
   padding: 1.5rem;
   background-color: black;
   border-radius: 12px;
   border: none;
   flex-shrink: 0;
   overflow-y: auto;
+  margin-left: 2rem;
 }
 
 .toc-item {
@@ -52,7 +53,7 @@
 
 @media (max-width: 1800px) {
   .sidebar-wiki {
-    right: 2rem;
+    /* Eliminado right: 2rem ya que no es necesario con position: sticky */
   }
 }
 
@@ -60,9 +61,10 @@
   .sidebar-wiki {
     position: relative;
     width: 100%;
-    right: auto;
     top: auto;
     height: auto;
+    max-height: none;
     margin-top: 2rem;
+    margin-left: 0;
   }
 }

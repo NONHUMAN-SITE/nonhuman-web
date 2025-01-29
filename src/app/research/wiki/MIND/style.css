@@ -166,7 +166,7 @@
 
 .wiki-layout {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   max-width: 1800px;
   margin: 0 auto;
   padding: 2rem;
@@ -174,13 +174,14 @@
   position: relative;
   width: 100%;
   margin-top: 80px;
-  overflow: visible;
+  min-height: calc(100vh - 80px);
 }
 
 .wiki-layout .content-container {
-  width: 1200px;
+  width: 900px;
   flex-shrink: 0;
-  margin: 0 auto;
+  margin: 0;
+  margin-left: 100px;
   padding: 2rem;
   background-color: black;
   border-radius: 12px;
@@ -209,7 +210,7 @@
   }
 
   .wiki-layout .content-container {
-    width: calc(100% - 320px);
+    width: 800px;
   }
 }
 
