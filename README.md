@@ -5,6 +5,10 @@
 ## Descripción
 Este repositorio contiene el código fuente de la página oficial de [NONHUMAN](https://nonhuman.com). Es un proyecto web que puede ejecutarse y desarrollarse utilizando `npm run dev`.
 
+## To Do:
+- [ ] Filtrar los comentarios de las partes del código para que no las cuente como headers en markdown.
+- [ ] Asegurar que el bold en los headers sea automático para renderizar correctamente el markdown.
+- [ ] Asegurar que el markdown sea renderizado correctamente en el servidor.
 ## Características principales
 El componente más importante de este proyecto es el **renderizador de Markdown**, el cual permite interpretar y estructurar contenido escrito en formato Markdown con algunas personalizaciones adicionales.
 
