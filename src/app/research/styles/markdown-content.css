@@ -44,7 +44,7 @@
 .markdown-content .copy-button {
   position: absolute;
   top: 0.75rem;
-  right: 1rem;
+  right: 1.5rem;
   padding: 0.25rem;
   cursor: pointer;
   opacity: 0.7;
@@ -52,6 +52,7 @@
   background: none;
   border: none;
   color: #e5e5e5;
+  z-index: 10;
 }
 
 .markdown-content .copy-button:hover {
@@ -180,4 +181,36 @@ html {
   margin: 2rem 0;
   border: 0;
   border-top: 1px solid #ddd;
+}
+
+/* Notificación de copiado */
+.copied-notification {
+  position: absolute;
+  top: 0.75rem;
+  right: 4rem;
+  background: #10b981;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  animation: fadeOut 2s forwards;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 20;
+}
+
+.copied-notification::after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 4px;
+  border-style: solid;
+  border-color: transparent transparent transparent #10b981;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; transform: translateY(0); }
+  70% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
 } 

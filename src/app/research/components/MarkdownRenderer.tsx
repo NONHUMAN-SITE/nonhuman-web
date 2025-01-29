@@ -10,7 +10,7 @@ import 'katex/dist/katex.min.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import '../styles/markdown-content.css'
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
-import React from 'react'
+import React, { useState } from 'react'
 import { Components } from 'react-markdown'
 
 interface MarkdownRendererProps {
@@ -47,10 +47,13 @@ interface ChildProps {
 }
 
 export default function MarkdownRenderer({ content, options }: MarkdownRendererProps) {
+  const [showCopied, setShowCopied] = useState(false);
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
       .then(() => {
-        console.log('Código copiado al portapapeles');
+        setShowCopied(true);
+        setTimeout(() => setShowCopied(false), 2000);
       })
       .catch(err => {
         console.error('Error al copiar:', err);
@@ -159,35 +162,27 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
             const code = React.Children.toArray(children)[0] as CodeElement;
             let codeText = '';
             
-            if (code?.props?.children) {
-              if (typeof code.props.children === 'string') {
-                codeText = code.props.children;
-              } else if (Array.isArray(code.props.children)) {
-                codeText = code.props.children
-                  .map((child: ReactNode) => {
-                    if (typeof child === 'string') return child;
-                    if (React.isValidElement<{ children?: string }>(child) && typeof child.props?.children === 'string') {
-                      return child.props.children;
-                    }
-                    return '';
-                  })
-                  .join('');
+            const extractCodeText = (node: ReactNode): string => {
+              if (typeof node === 'string') return node;
+              if (Array.isArray(node)) return node.map(extractCodeText).join('');
+              if (React.isValidElement(node)) {
+                const element = node as React.ReactElement<{ children?: ReactNode }>;
+                if (element.props.children) {
+                  return extractCodeText(element.props.children);
+                }
+                return '';
               }
+              return '';
+            };
+
+            if (code?.props?.children) {
+              codeText = extractCodeText(code.props.children);
             }
             
             return (
-              <pre {...props} className={`relative ${props.className || ''}`}>
-                <button 
-                  className="copy-button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    copyToClipboard(codeText);
-                  }}
-                >
-                  <MdContentCopy size={20} />
-                </button>
+              <CodeBlock {...props} codeText={codeText}>
                 {children}
-              </pre>
+              </CodeBlock>
             );
           },
           code: ({ inline, className, children, ...props }: CodeProps) => {
@@ -216,7 +211,12 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
             </blockquote>
           ),
           a: ({ children, href }) => (
-            <a href={href} className="text-green-600 hover:text-green-800 hover:underline">
+            <a 
+              href={href} 
+              className="text-green-600 hover:text-green-800 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {children}
             </a>
           ),
@@ -227,3 +227,36 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
     </div>
   );
 }
+
+const CodeBlock = ({ children, className, codeText, ...props }: { children: ReactNode; className?: string; codeText: string }) => {
+  const [showCopied, setShowCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(codeText)
+      .then(() => {
+        setShowCopied(true);
+        setTimeout(() => setShowCopied(false), 2000);
+      })
+      .catch(err => console.error('Error copying:', err));
+  };
+
+  return (
+    <pre {...props} className={`relative ${className || ''}`}>
+      <button 
+        className="copy-button"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleCopy();
+        }}
+      >
+        <MdContentCopy size={20} />
+      </button>
+      {showCopied && (
+        <div className="copied-notification">
+          ✓ Copied!
+        </div>
+      )}
+      {children}
+    </pre>
+  );
+};
