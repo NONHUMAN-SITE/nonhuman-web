@@ -5,6 +5,7 @@ import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import rehypeSlug from 'rehype-slug'
 import rehypePrism from 'rehype-prism-plus'
+import rehypeRaw from 'rehype-raw'
 import { MdContentCopy } from "react-icons/md";
 import 'katex/dist/katex.min.css'
 import 'prismjs/themes/prism-tomorrow.css'
@@ -65,6 +66,7 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
       <ReactMarkdown 
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[
+          rehypeRaw,
           [rehypeSlug, { 
             slugify: (text: string) => {
               const id = options?.slugify?.(text) || text
@@ -220,7 +222,28 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
               {children}
             </a>
           ),
+          details: ({ children, node }) => (
+            <details className="html-details">
+              {children}
+            </details>
+          ),
+          summary: ({ children, node }) => (
+            <summary className="html-summary">
+              {children}
+            </summary>
+          ),
+          div: ({ children, className }) => (
+            <div className={className}>
+              {children}
+            </div>
+          )
         }}
+        allowedElements={[
+          'details', 'summary', 'div', 'span',
+          'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+          'p', 'img', 'pre', 'code', 'table', 'blockquote', 'a'
+        ]}
+        unwrapDisallowed={true}
       >
         {content}
       </ReactMarkdown>

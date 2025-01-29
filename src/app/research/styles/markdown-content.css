@@ -157,23 +157,48 @@ html {
   margin-right: 0.5rem;
 }
 
-/* Details/Summary */
+/* Details/Summary mejorado */
 .markdown-content details {
-  margin: 1rem 0;
-  padding: 0.5rem 1rem;
-  background-color: #f8f9fa;
-  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .markdown-content summary {
+  padding: 1rem 1.5rem;
+  background-color: #262626;
   cursor: pointer;
   font-weight: 600;
-  margin: -0.5rem -1rem;
-  padding: 0.5rem 1rem;
+  color: #10b981;
+  list-style: none;
+  position: relative;
 }
 
-.markdown-content details[open] summary {
-  margin-bottom: 0.5rem;
+.markdown-content summary::-webkit-details-marker {
+  display: none;
+}
+
+.markdown-content summary:after {
+  content: "►";
+  position: absolute;
+  right: 1rem;
+  transition: transform 0.2s;
+}
+
+.markdown-content details[open] summary:after {
+  transform: rotate(90deg);
+}
+
+.markdown-content details[open] {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+}
+
+.markdown-content details > div {
+  padding: 1.5rem;
+  border-top: 1px solid #333;
 }
 
 /* Horizontal rules */
