@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NONHUMAN-WEB
 
-## Getting Started
+![NONHUMAN Logo](link_to_logo.png)
 
-First, run the development server:
+## Descripción
+Este repositorio contiene el código fuente de la página oficial de [NONHUMAN](https://nonhuman.com). Es un proyecto web que puede ejecutarse y desarrollarse utilizando `npm run dev`.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Características principales
+El componente más importante de este proyecto es el **renderizador de Markdown**, el cual permite interpretar y estructurar contenido escrito en formato Markdown con algunas personalizaciones adicionales.
+
+### Sintaxis de Markdown personalizada
+Para garantizar que el formato de Markdown sea interpretado correctamente, es importante seguir las siguientes reglas:
+
+#### Código
+Para resaltar fragmentos de código, se debe iniciar con triple tilde (` ``` `) seguido del lenguaje de programación a renderizar. Por ejemplo:
+
+```markdown
+```python
+print("Hola, mundo!")
+```
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Imágenes con tamaño personalizado
+Para insertar imágenes con un tamaño definido, utilizamos la siguiente sintaxis:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```markdown
+![titulo_imagen|longitud](https://example.com/image.png)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Donde:
+- `titulo_imagen` es el texto alternativo de la imagen.
+- `longitud` es el tamaño deseado de la imagen.
+- El enlace de la imagen debe ser un **URL público accesible**.
 
-## Learn More
+#### Estructuración basada en encabezados
+Nuestro renderizador también estructura automáticamente el contenido en base a los encabezados definidos en Markdown:
+- `# Encabezado 1` (h1)
+- `## Encabezado 2` (h2)
+- `### Encabezado 3` (h3)
+- Y así sucesivamente...
 
-To learn more about Next.js, take a look at the following resources:
+Esto permite una organización clara y jerárquica de la información dentro del contenido renderizado.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Instalación y ejecución
+Para ejecutar el proyecto en un entorno local:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```sh
+npm install
+npm run dev
+```
 
-## Deploy on Vercel
+## Contacto
+Para cualquier consulta o duda sobre este proyecto, puedes enviarme un correo a **leo.perez.nestares@gmail.com**.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+¡Gracias por contribuir a NONHUMAN-WEB!
+
