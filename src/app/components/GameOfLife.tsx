@@ -8,6 +8,7 @@ interface GameOfLifeProps {
   initialActiveCells?: number; // Número de celdas activas iniciales
   reloadInterval?: number;
   spreadRadius?: number; // Radio de dispersión para las celdas
+  enabled?: boolean; // Nueva prop
 }
 
 export default function GameOfLife({ 
@@ -16,7 +17,8 @@ export default function GameOfLife({
   updateSpeed = 2000,
   initialActiveCells = 100, // Aumentado el número por defecto
   reloadInterval = 10000,
-  spreadRadius = 20 // Radio de dispersión más grande
+  spreadRadius = 20, // Radio de dispersión más grande
+  enabled = true // Por defecto está habilitado
 }: GameOfLifeProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [grid, setGrid] = useState<boolean[][]>([]);
@@ -172,7 +174,7 @@ export default function GameOfLife({
     return () => clearInterval(intervalId);
   }, [grid, cellSize, updateSpeed]);
 
-  return (
+  return enabled ? (
     <canvas
       ref={canvasRef}
       onClick={handleCanvasClick}
@@ -186,5 +188,5 @@ export default function GameOfLife({
         cursor: 'pointer',
       }}
     />
-  );
+  ) : null;
 }

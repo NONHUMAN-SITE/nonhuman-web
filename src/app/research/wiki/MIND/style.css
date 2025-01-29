@@ -115,3 +115,42 @@
   transform: scale(1.02);
   opacity: 0.9;
 }
+
+.content-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: black;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.markdown-content {
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Estilos para las ecuaciones matemáticas */
+.katex-display {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.katex {
+  font-size: 1.1em;
+}
+
+/* Estilos para ecuaciones inline */
+.katex-inline {
+  padding: 0 0.2em;
+}
+
+/* Ajustes para el scroll horizontal en ecuaciones largas */
+.katex-display > .katex {
+  white-space: nowrap;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+}
