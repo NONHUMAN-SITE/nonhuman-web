@@ -3,6 +3,8 @@ import { useParams } from 'next/navigation'
 import { useLanguage } from '@/app/context/LanguageContext'
 import { useEffect, useState } from 'react'
 import MarkdownRenderer from '@/app/research/components/MarkdownRenderer'
+import SidebarWiki from '@/app/research/components/SidebarWiki'
+import '../style.css'
 
 export default function MINDContentPage() {
   const params = useParams()
@@ -29,8 +31,11 @@ export default function MINDContentPage() {
   }, [slug, language])
 
   return (
-    <div className="content-container">
-      <MarkdownRenderer content={content} />
+    <div className="wiki-layout">
+      <div className="content-container">
+        <MarkdownRenderer content={content} />
+      </div>
+      <SidebarWiki content={content} />
     </div>
   )
 }

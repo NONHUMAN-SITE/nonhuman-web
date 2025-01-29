@@ -154,3 +154,63 @@
   overflow-y: hidden;
   padding: 0.5rem 0;
 }
+
+.wiki-layout {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  gap: 2rem;
+  position: relative;
+  width: 100%;
+}
+
+.wiki-layout .content-container {
+  width: 800px;
+  flex-shrink: 0;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: black;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wiki-layout .sidebar-wiki {
+  width: 280px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+  padding: 1.5rem;
+  background-color: black;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.toc-item {
+  padding: 0.5rem 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.toc-item:hover {
+  color: var(--primary-color);
+}
+
+.toc-h1 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.toc-h2 {
+  font-size: 0.9rem;
+  padding-left: 1rem;
+  opacity: 0.8;
+}
+
+.toc-h3 {
+  font-size: 0.85rem;
+  padding-left: 2rem;
+  opacity: 0.7;
+}
