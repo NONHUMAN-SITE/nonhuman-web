@@ -105,3 +105,13 @@
     backdrop-filter: blur(5px);
     white-space: nowrap;
 }
+
+.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.clickable:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}

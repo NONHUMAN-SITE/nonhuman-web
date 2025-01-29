@@ -2,9 +2,11 @@
 import { useLanguage } from '@/app/context/LanguageContext'
 import GameOfLife from '@/app/components/GameOfLife'
 import './style.css'
+import { useRouter } from 'next/navigation'
 
 export default function MINDPage() {
   const { language } = useLanguage()
+  const router = useRouter()
 
   const roadmapItems = [
     {
@@ -123,6 +125,10 @@ export default function MINDPage() {
     }
   ]
 
+  const handleItemClick = (itemId: string) => {
+    router.push(`/research/wiki/MIND/${itemId}`)
+  }
+
   return (
     <>
       <GameOfLife 
@@ -148,7 +154,11 @@ export default function MINDPage() {
                 )}
               </div>
               {section.subItems.map((item) => (
-                <div key={item.id} className="index-subitem space-mono-regular">
+                <div 
+                  key={item.id} 
+                  className="index-subitem space-mono-regular clickable"
+                  onClick={() => handleItemClick(item.id)}
+                >
                   {item.id} {item.name}
                 </div>
               ))}
@@ -160,7 +170,11 @@ export default function MINDPage() {
         <div className="content-grid">
           {roadmapItems.flatMap((section) =>
             section.subItems.map((item) => (
-              <div key={item.id} className="content-card">
+              <div 
+                key={item.id} 
+                className="content-card clickable"
+                onClick={() => handleItemClick(item.id)}
+              >
                 <div className="card-header">
                   <h3 className="card-title space-mono-bold">
                     {item.id} {item.name}
