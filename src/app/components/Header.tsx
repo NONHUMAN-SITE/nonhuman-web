@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 import { HiLanguage } from "react-icons/hi2"
 import { useLanguage } from '../context/LanguageContext'
 
@@ -21,6 +22,16 @@ export default function Header() {
       backdropFilter: 'blur(5px)' // Efecto de desenfoque
     }}>
       <nav className="nav-container">
+        <Link href="/" className="logo-container">
+          <Image
+            src="/NONHUMAN-LOGO.png"
+            alt="NONHUMAN Logo"
+            width={50}
+            height={50}
+            className="logo-image"
+            style={{ borderRadius: '8px' }}
+          />
+        </Link>
         <ul className="nav-list">
           <li><Link href="/">{language === 'en' ? 'Home' : 'Inicio'}</Link></li>
           <li><Link href="/research">{language === 'en' ? 'Research' : 'Investigación'}</Link></li>

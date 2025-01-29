@@ -22,11 +22,31 @@ export default function GameOfLife({
 }: GameOfLifeProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [grid, setGrid] = useState<boolean[][]>([]);
-  const rows = Math.ceil(window.innerHeight / cellSize);
-  const cols = Math.ceil(window.innerWidth / cellSize);
+  const [dimensions, setDimensions] = useState({ 
+    rows: 0, 
+    cols: 0 
+  });
+
+  // Calcular dimensiones solo en el cliente
+  useEffect(() => {
+    const calculateDimensions = () => ({
+      rows: Math.ceil(window.innerHeight / cellSize),
+      cols: Math.ceil(window.innerWidth / cellSize)
+    });
+    
+    setDimensions(calculateDimensions());
+    
+    const handleResize = () => {
+      setDimensions(calculateDimensions());
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [cellSize]);
 
   // Función para crear un nuevo patrón aleatorio
   const createRandomPattern = () => {
+    const { rows, cols } = dimensions;
     const initialGrid = Array(rows).fill(null).map(() =>
       Array(cols).fill(false)
     );
@@ -62,15 +82,17 @@ export default function GameOfLife({
     return initialGrid;
   };
 
-  // Inicializar y recargar periódicamente
+  // En el useEffect de inicialización
   useEffect(() => {
-    setGrid(createRandomPattern());
-    const reloadId = setInterval(() => {
+    if (dimensions.rows > 0 && dimensions.cols > 0) {
       setGrid(createRandomPattern());
-    }, reloadInterval);
+      const reloadId = setInterval(() => {
+        setGrid(createRandomPattern());
+      }, reloadInterval);
 
-    return () => clearInterval(reloadId);
-  }, [rows, cols]);
+      return () => clearInterval(reloadId);
+    }
+  }, [dimensions.rows, dimensions.cols]);
 
   // Manejar clicks en el canvas
   const handleCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
@@ -101,8 +123,8 @@ export default function GameOfLife({
         for (let x = -1; x <= 1; x++) {
           for (let y = -1; y <= 1; y++) {
             if (x === 0 && y === 0) continue;
-            const newI = (i + x + rows) % rows;
-            const newJ = (j + y + cols) % cols;
+            const newI = (i + x + dimensions.rows) % dimensions.rows;
+            const newJ = (j + y + dimensions.cols) % dimensions.cols;
             if (currentGrid[newI][newJ]) neighbors++;
           }
         }

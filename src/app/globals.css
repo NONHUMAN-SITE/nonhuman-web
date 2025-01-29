@@ -45,12 +45,27 @@ body {
   align-items: center;
 }
 
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+  transform: scale(1.1);
+}
+
 .nav-list {
   display: flex;
   justify-content: center;
   gap: 3rem;
   list-style: none;
-  margin-left: 350px;
+  margin-left: 50px;
 }
 
 .nav-list a {
