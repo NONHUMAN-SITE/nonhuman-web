@@ -23,12 +23,12 @@
 }
 
 .toc-item:hover {
-  color: #90EE90;
+  color: #10b981;
   opacity: 1;
 }
 
 .toc-item.active {
-  color: #90EE90;
+  color: #10b981;
   opacity: 1;
   font-weight: 600;
   text-shadow: 0 0 10px rgba(144, 238, 144, 0.3);
