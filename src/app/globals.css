@@ -86,6 +86,9 @@ body {
   color: var(--primary-color);
   text-shadow: 0 0 10px var(--primary-color);
   margin-bottom: 1rem;
+  font-family: "Press Start 2P", serif;
+  font-weight: 400;
+  letter-spacing: 4px;
 }
 
 .lora-main {

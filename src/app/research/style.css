@@ -14,8 +14,9 @@
   .research-title {
     font-size: 3rem;
     color: var(--primary-color);
-    font-family: "Lora", serif;
-    font-weight: 500;
+    font-family: "Press Start 2P", serif;
+    font-weight: 400;
+    letter-spacing: 4px;
   }
   
   .search-container {
