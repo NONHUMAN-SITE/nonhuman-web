@@ -12,7 +12,27 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'none',
+            color: 'inherit',
+            a: {
+              color: '#10b981',
+              '&:hover': {
+                color: '#059669',
+              },
+            },
+            blockquote: {
+              borderLeftColor: '#10b981',
+              backgroundColor: '#f3f4f6',
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 } satisfies Config;

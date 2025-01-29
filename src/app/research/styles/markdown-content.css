@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 1rem;
-  scroll-behavior: smooth;
+  line-height: 1.6;
 }
 
 .markdown-content figure {
@@ -28,31 +28,156 @@
 .markdown-content pre {
   margin: 1.5em 0;
   background-color: #1a1a1a;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   overflow-x: auto;
+  position: relative;
+  padding: 2.5rem 1.5rem 1.5rem;
 }
 
 .markdown-content pre > code {
   font-family: 'Fira Code', monospace;
   font-size: 0.9em;
-  line-height: 1.5;
+  line-height: 1.7;
+}
+
+/* Botón de copiar */
+.markdown-content .copy-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  background: none;
+  border: none;
+  color: #e5e5e5;
+}
+
+.markdown-content .copy-button:hover {
+  opacity: 1;
+}
+
+/* Eliminar el pseudo-elemento anterior que usaba el emoji */
+.markdown-content pre::before {
+  content: none;
 }
 
 .markdown-content h1,
 .markdown-content h2,
 .markdown-content h3 {
-  scroll-margin-top: 120px;
-  position: relative;
-  scroll-padding-top: 120px;
+  scroll-margin-top: 120px; /* Ajustar según altura del header */
 }
 
 /* Añadir esto para el enfoque suave */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 120px;
 }
 
-[data-heading] {
-  scroll-margin-block-start: 120px;
-  position: relative;
+/* Espaciado entre secciones */
+.markdown-content > * {
+  margin-bottom: 1.5rem;
+}
+
+/* Listas */
+.markdown-content ul,
+.markdown-content ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.markdown-content li {
+  margin: 0.5rem 0;
+}
+
+/* Listas anidadas */
+.markdown-content ul ul,
+.markdown-content ol ol,
+.markdown-content ul ol,
+.markdown-content ol ul {
+  margin: 0.5rem 0 0.5rem 1.5rem;
+}
+
+/* Tablas */
+.markdown-content table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1rem 0;
+  background-color: #1a1a1a;
+  border-radius: 0.75rem;
+  overflow: hidden; /* Importante para mantener los bordes redondeados */
+}
+
+.markdown-content th,
+.markdown-content td {
+  border: 1px solid #333;
+  padding: 1rem;
+  text-align: left;
+  color: #e5e5e5;
+}
+
+.markdown-content th {
+  background-color: #262626;
+  font-weight: 600;
+}
+
+.markdown-content tr:nth-child(even) {
+  background-color: #222;
+}
+
+.markdown-content tr:hover {
+  background-color: #2a2a2a;
+}
+
+/* Blockquotes */
+.markdown-content blockquote {
+  border-left: 4px solid #10b981;
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  background-color: #1a1a1a;
+  color: #e5e5e5;
+  font-style: italic;
+  border-radius: 0.25rem;
+}
+
+/* Links */
+.markdown-content a {
+  color: #10b981;
+  text-decoration: none;
+}
+
+.markdown-content a:hover {
+  text-decoration: underline;
+}
+
+/* Task lists */
+.markdown-content input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+/* Details/Summary */
+.markdown-content details {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+}
+
+.markdown-content summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin: -0.5rem -1rem;
+  padding: 0.5rem 1rem;
+}
+
+.markdown-content details[open] summary {
+  margin-bottom: 0.5rem;
+}
+
+/* Horizontal rules */
+.markdown-content hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid #ddd;
 } 
