@@ -1,4 +1,5 @@
 'use client'
+import { useEffect, useState } from 'react';
 
 interface HeadingItem {
   text: string;
@@ -11,15 +12,17 @@ interface SidebarWikiProps {
 }
 
 export default function SidebarWiki({ content }: SidebarWikiProps) {
+  const [activeId, setActiveId] = useState<string>('');
+  const [headings, setHeadings] = useState<HeadingItem[]>([]);
+
   const extractHeadings = (markdown: string): HeadingItem[] => {
-    const headingRegex = /^(#{1,3})\s+(.+)$/gm;
+    const headingRegex = /^#{1,3}\s+(.+)$/gm;
     const headings: HeadingItem[] = [];
     
-    let match;
+    let match: RegExpExecArray | null;
     while ((match = headingRegex.exec(markdown)) !== null) {
-      const level = match[1].length;
-      const text = match[2].trim();
-      // Generar un ID único basado en el texto del encabezado
+      const level = match[0].split(' ')[0].length;
+      const text = match[1].trim();
       const id = text
         .toLowerCase()
         .replace(/[^\w\s-]/g, '')
@@ -35,13 +38,23 @@ export default function SidebarWiki({ content }: SidebarWikiProps) {
   const scrollToHeading = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      // Añadir un pequeño offset para no ocultar el encabezado detrás del navbar
-      window.scrollBy(0, -80);
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+      
+      setTimeout(() => {
+        window.scrollBy(0, -120);
+      }, 100);
+      
+      setActiveId(id);
     }
   };
 
-  const headings = extractHeadings(content);
+  useEffect(() => {
+    const extractedHeadings = extractHeadings(content);
+    setHeadings(extractedHeadings);
+  }, [content]);
 
   return (
     <div className="sidebar-wiki">
@@ -51,7 +64,9 @@ export default function SidebarWiki({ content }: SidebarWikiProps) {
           {headings.map((heading, index) => (
             <li 
               key={index}
-              className={`toc-item toc-h${heading.level}`}
+              className={`toc-item toc-h${heading.level} ${
+                activeId === heading.id ? 'active' : ''
+              }`}
               onClick={() => scrollToHeading(heading.id)}
             >
               {heading.text}

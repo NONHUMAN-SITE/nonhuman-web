@@ -32,8 +32,17 @@ export default function MINDContentPage() {
 
   return (
     <div className="wiki-layout">
-      <div className="content-container">
-        <MarkdownRenderer content={content} />
+      <div className="content-container max-w-4xl mx-auto px-4">
+        <MarkdownRenderer 
+          content={content}
+          options={{
+            slugify: (str: string) => str
+              .toLowerCase()
+              .replace(/[^\w\s-]/g, '')
+              .replace(/\s+/g, '-')
+              .replace(/-+/g, '-')
+          }}
+        />
       </div>
       <SidebarWiki content={content} />
     </div>

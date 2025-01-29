@@ -191,11 +191,20 @@
 .toc-item {
   padding: 0.5rem 0;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  color: var(--text-color);
+  opacity: 0.7;
 }
 
 .toc-item:hover {
   color: var(--primary-color);
+  opacity: 1;
+}
+
+.toc-item.active {
+  color: var(--primary-color);
+  opacity: 1;
+  font-weight: 600;
 }
 
 .toc-h1 {

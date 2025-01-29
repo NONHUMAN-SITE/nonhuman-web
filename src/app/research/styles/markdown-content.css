@@ -1,0 +1,38 @@
+.markdown-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.markdown-content figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.markdown-content img {
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.2s;
+  width: 100%;
+  max-width: 600px;
+  object-fit: contain;
+}
+
+.markdown-content img:hover {
+  transform: scale(1.01);
+}
+
+/* Estilos para el contenedor de código */
+.markdown-content pre {
+  margin: 1.5em 0;
+  background-color: #1a1a1a;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.markdown-content pre > code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+} 
