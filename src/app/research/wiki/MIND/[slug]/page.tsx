@@ -6,6 +6,12 @@ import MarkdownRenderer from '@/app/research/components/MarkdownRenderer'
 import SidebarWiki from '@/app/research/components/SidebarWiki'
 import '../style.css'
 
+const slugify = (str: string) => str
+  .toLowerCase()
+  .replace(/[^\w\s-]/g, '')
+  .replace(/\s+/g, '-')
+  .replace(/-+/g, '-')
+
 export default function MINDContentPage() {
   const params = useParams()
   const { language } = useLanguage()
@@ -32,19 +38,16 @@ export default function MINDContentPage() {
 
   return (
     <div className="wiki-layout">
-      <div className="content-container max-w-4xl mx-auto px-4">
+      <div className="content-container">
         <MarkdownRenderer 
           content={content}
-          options={{
-            slugify: (str: string) => str
-              .toLowerCase()
-              .replace(/[^\w\s-]/g, '')
-              .replace(/\s+/g, '-')
-              .replace(/-+/g, '-')
-          }}
+          options={{ slugify }}
         />
       </div>
-      <SidebarWiki content={content} />
+      <SidebarWiki 
+        content={content}
+        slugify={slugify}
+      />
     </div>
   )
 }

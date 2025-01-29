@@ -35,4 +35,15 @@
   font-family: 'Fira Code', monospace;
   font-size: 0.9em;
   line-height: 1.5;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+  scroll-margin-top: 120px; /* Ajustar según altura del header */
+}
+
+/* Añadir esto para el enfoque suave */
+html {
+  scroll-behavior: smooth;
 } 
