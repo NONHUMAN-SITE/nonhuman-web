@@ -250,12 +250,38 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
             <div className={className}>
               {children}
             </div>
-          )
+          ),
+          ul: ({ children }) => (
+            <ul className="list-disc list-outside pl-6 my-4">
+              {children}
+            </ul>
+          ),
+          ol: ({ children }) => (
+            <ol className="list-decimal list-outside pl-6 my-4">
+              {children}
+            </ol>
+          ),
+          li: ({ children }) => (
+            <li className="my-2">
+              {children}
+            </li>
+          ),
+          em: ({ children }) => (
+            <em className="italic font-medium">
+              {children}
+            </em>
+          ),
+          strong: ({ children }) => (
+            <strong className="font-bold">
+              {children}
+            </strong>
+          ),
         }}
         allowedElements={[
           'details', 'summary', 'div', 'span',
           'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-          'p', 'img', 'pre', 'code', 'table', 'blockquote', 'a'
+          'p', 'img', 'pre', 'code', 'table', 'blockquote', 'a',
+          'ul', 'ol', 'li', 'em', 'strong'
         ]}
         unwrapDisallowed={true}
       >

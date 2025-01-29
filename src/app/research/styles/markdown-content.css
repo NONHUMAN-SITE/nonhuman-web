@@ -81,22 +81,65 @@ html {
 }
 
 /* Listas */
-.markdown-content ul,
-.markdown-content ol {
-  padding-left: 1.5rem;
+.markdown-content ul {
+  list-style-type: disc;
   margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.markdown-content ol {
+  list-style-type: decimal;
+  margin: 1rem 0;
+  padding-left: 1.5rem;
 }
 
 .markdown-content li {
   margin: 0.5rem 0;
+  line-height: 1.6;
+  color: var(--text-color);
 }
 
 /* Listas anidadas */
 .markdown-content ul ul,
-.markdown-content ol ol,
 .markdown-content ul ol,
-.markdown-content ol ul {
-  margin: 0.5rem 0 0.5rem 1.5rem;
+.markdown-content ol ul,
+.markdown-content ol ol {
+  margin: 0.5rem 0;
+}
+
+/* Estilos para énfasis y negrita */
+.markdown-content em {
+  font-style: italic;
+  font-weight: 500;
+  color: #10b981; /* Color verde para destacar */
+}
+
+.markdown-content strong {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Estilos específicos para el patrón * *Ejemplo:* */
+.markdown-content em strong,
+.markdown-content strong em {
+  font-weight: 600;
+  font-style: italic;
+  color: #10b981;
+}
+
+/* Mejorar el espaciado entre elementos de lista */
+.markdown-content li > p {
+  margin: 0;
+}
+
+.markdown-content li > * {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Asegurar que los guiones se muestren correctamente */
+.markdown-content li::marker {
+  color: #10b981;
 }
 
 /* Tablas */
