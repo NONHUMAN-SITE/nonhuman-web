@@ -9,6 +9,9 @@ Este repositorio contiene el código fuente de la página oficial de [NONHUMAN](
 - [ ] Filtrar los comentarios de las partes del código para que no las cuente como headers en markdown.
 - [ ] Asegurar que el bold en los headers sea automático para renderizar correctamente el markdown.
 - [ ] Asegurar que el markdown sea renderizado correctamente en el servidor.
+- [ ] Pensar en cómo renderizar el Mermaid, si de forma local o si de forma externa.
+- [ ] Agregar la parte del lenguaje en los markdowns
+
 ## Características principales
 El componente más importante de este proyecto es el **renderizador de Markdown**, el cual permite interpretar y estructurar contenido escrito en formato Markdown con algunas personalizaciones adicionales.
 
@@ -59,6 +62,31 @@ Para ejecutar el proyecto en un entorno local:
 npm install
 npm run dev
 ```
+
+### ¿Cómo agregar un nuevo wiki?
+
+La estructura está determinada por la carpeta `public/wiki`. Entonces dentro de esta carpeta se debe crear una carpeta con el nombre del wiki, y dentro de esta carpeta se deben crear los archivos en formato JSON que tenga el siguiente formato:
+
+```json
+{
+    "es":{
+        "title":"",
+        "description":"",
+        "authors":"",
+        "date":"",
+        "url":""
+    },
+    "en":{
+        "title":"",
+        "description":"",
+        "authors":"",
+        "date":"",
+        "url":""
+    }
+}
+```
+
+donde 'url' es la ruta relativa al archivo markdown que contiene el contenido del wiki. Esta puede ser interna si se encuentra en public/wiki o externa si se encuentra en alguna url externa.
 
 ## Contacto
 Para cualquier consulta o duda sobre este proyecto, puedes enviarme un correo a **leo.perez.nestares@gmail.com**.

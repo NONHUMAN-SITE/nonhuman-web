@@ -1,0 +1,16 @@
+{
+    "es":{
+        "title":"1.2 Test",
+        "description":"Test",
+        "authors":"Leonardo Pérez, Brik Meza, Randy Loayza",
+        "date":"29 de enero de 2025",
+        "url":"wiki/MIND/1.2.es.md"
+    },
+    "en":{
+        "title":"1.2 Test",
+        "description":"Test",
+        "authors":"Leonardo Pérez, Brik Meza, Randy Loayza",
+        "date":"January 29, 2025",
+        "url":"wiki/MIND/1.2.en.md"
+    }
+}

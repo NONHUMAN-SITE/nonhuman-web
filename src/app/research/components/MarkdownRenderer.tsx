@@ -202,11 +202,25 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
               </code>
             )
           },
-          table: ({ children }) => (
-            <div className="overflow-x-auto">
-              <table className="min-w-full">{children}</table>
-            </div>
-          ),
+          table: ({ children }) => {
+            // Asegurarse de que los children están dentro de filas
+            const rows = React.Children.toArray(children).filter(child => {
+              // Filtrar nodos de texto y elementos no válidos
+              if (typeof child === 'string') return false;
+              if (React.isValidElement(child) && child.type === 'tr') return true;
+              return false;
+            });
+
+            return (
+              <div className="overflow-x-auto">
+                <table className="min-w-full">
+                  <tbody>
+                    {rows}
+                  </tbody>
+                </table>
+              </div>
+            );
+          },
           blockquote: ({ children }) => (
             <blockquote className="border-l-4 border-green-500 pl-4 italic">
               {children}

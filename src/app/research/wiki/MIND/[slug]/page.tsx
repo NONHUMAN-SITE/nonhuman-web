@@ -6,6 +6,19 @@ import MarkdownRenderer from '@/app/research/components/MarkdownRenderer'
 import SidebarWiki from '@/app/research/components/SidebarWiki'
 import '../style.css'
 
+interface ContentMetadata {
+  title: string;
+  description: string;
+  authors: string;
+  date: string;
+  url: string;
+}
+
+interface ContentData {
+  es: ContentMetadata;
+  en: ContentMetadata;
+}
+
 const slugify = (str: string) => {
   // Primero normalizamos el string y reemplazamos caracteres especiales
   const normalized = str
@@ -38,15 +51,27 @@ export default function MINDContentPage() {
   const { language } = useLanguage()
   const slug = params.slug as string
   const [content, setContent] = useState<string>('')
+  const [metadata, setMetadata] = useState<ContentMetadata | null>(null)
 
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const response = await fetch(`/wiki/MIND/${slug}.md`)
-        const text = await response.text()
+        // Primero obtenemos los metadatos del JSON
+        const metadataResponse = await fetch(`/wiki/MIND/${slug}.json`)
+        const contentData: ContentData = await metadataResponse.json()
+        const currentMetadata = contentData[language as keyof ContentData]
+        setMetadata(currentMetadata)
+
+        // Luego cargamos el contenido basado en la URL del metadata
+        const contentUrl = currentMetadata.url.startsWith('http') 
+          ? currentMetadata.url // URL externa
+          : `/${currentMetadata.url}` // URL local (añadimos / al inicio)
+
+        const contentResponse = await fetch(contentUrl)
+        const text = await contentResponse.text()
         setContent(text)
       } catch (error) {
-        console.error('Error loading markdown content:', error)
+        console.error('Error loading content:', error)
         setContent(language === 'en' 
           ? '# Error\nContent not found or error loading the page.'
           : '# Error\nContenido no encontrado o error al cargar la página.'
@@ -55,11 +80,21 @@ export default function MINDContentPage() {
     }
 
     fetchContent()
-  }, [slug, language])
+  }, [slug, language]) // Agregamos language como dependencia
 
   return (
     <div className="wiki-layout">
       <div className="content-container">
+        {metadata && (
+          <div className="content-metadata">
+            <h1>{metadata.title}</h1>
+            <p className="metadata-description">{metadata.description}</p>
+            <div className="metadata-info">
+              <span>{metadata.authors}</span>
+              <span>{metadata.date}</span>
+            </div>
+          </div>
+        )}
         <MarkdownRenderer 
           content={content}
           options={{ slugify }}
