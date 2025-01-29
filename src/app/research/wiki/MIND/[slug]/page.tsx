@@ -6,11 +6,32 @@ import MarkdownRenderer from '@/app/research/components/MarkdownRenderer'
 import SidebarWiki from '@/app/research/components/SidebarWiki'
 import '../style.css'
 
-const slugify = (str: string) => str
-  .toLowerCase()
-  .replace(/[^\w\s-]/g, '')
-  .replace(/\s+/g, '-')
-  .replace(/-+/g, '-')
+const slugify = (str: string) => {
+  // Primero normalizamos el string y reemplazamos caracteres especiales
+  const normalized = str
+    .replace(/[áàäâã]/g, 'a')
+    .replace(/[éèëê]/g, 'e')
+    .replace(/[íìïî]/g, 'i')
+    .replace(/[óòöôõ]/g, 'o')
+    .replace(/[úùüû]/g, 'u')
+    .replace(/[ÁÀÄÂÃ]/g, 'a')
+    .replace(/[ÉÈËÊ]/g, 'e')
+    .replace(/[ÍÌÏÎ]/g, 'i')
+    .replace(/[ÓÒÖÔÕ]/g, 'o')
+    .replace(/[ÚÙÜÛ]/g, 'u')
+    .replace(/ñ/g, 'n')
+    .replace(/Ñ/g, 'n');
+
+  // Luego aplicamos las transformaciones estándar
+  return normalized
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '') // Solo letras, números, espacios y guiones
+    .replace(/\s+/g, '-')     // Espacios a guiones
+    .replace(/-+/g, '-')      // Eliminar guiones múltiples
+    .replace(/^-+/, '')       // Eliminar guiones del inicio
+    .replace(/-+$/, '');      // Eliminar guiones del final
+};
 
 export default function MINDContentPage() {
   const params = useParams()

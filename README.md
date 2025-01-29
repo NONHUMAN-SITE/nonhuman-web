@@ -45,6 +45,13 @@ Nuestro renderizador también estructura automáticamente el contenido en base a
 
 Esto permite una organización clara y jerárquica de la información dentro del contenido renderizado.
 
+#### Slugify
+Para asegurar que los encabezados sean únicos y estén correctamente referenciados, se utiliza la función `slugify` en el componente `MarkdownRenderer`.
+
+> ⚠️ **Alerta:** Los títulos y sub-títulos deben ser únicos y además, no pueden contener tildes para que funcione bien el sidebar de los wikis.
+
+
+
 ## Instalación y ejecución
 Para ejecutar el proyecto en un entorno local:
 

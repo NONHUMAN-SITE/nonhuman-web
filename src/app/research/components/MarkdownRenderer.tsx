@@ -29,23 +29,49 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
       <ReactMarkdown 
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[
-          [rehypeSlug, { slugify: options?.slugify }],
+          [rehypeSlug, { 
+            slugify: (text: string) => {
+              const id = options?.slugify?.(text) || text
+                .toLowerCase()
+                .replace(/[áàäâã]/g, 'a')
+                .replace(/[éèëê]/g, 'e')
+                .replace(/[íìïî]/g, 'i')
+                .replace(/[óòöôõ]/g, 'o')
+                .replace(/[úùüû]/g, 'u')
+                .replace(/[^\w\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
+              return id;
+            }
+          }],
           rehypeKatex,
           rehypePrism
         ]}
         components={{
           h1: ({ children, id }) => (
-            <h1 id={id} className="text-4xl font-bold my-6">
+            <h1 
+              id={id} 
+              className="text-4xl font-bold my-6"
+              data-heading="1"
+            >
               {children}
             </h1>
           ),
           h2: ({ children, id }) => (
-            <h2 id={id} className="text-3xl font-bold my-5">
+            <h2 
+              id={id} 
+              className="text-3xl font-bold my-5"
+              data-heading="2"
+            >
               {children}
             </h2>
           ),
           h3: ({ children, id }) => (
-            <h3 id={id} className="text-2xl font-bold my-4">
+            <h3 
+              id={id} 
+              className="text-2xl font-bold my-4"
+              data-heading="3"
+            >
               {children}
             </h3>
           ),

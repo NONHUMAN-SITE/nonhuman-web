@@ -2,6 +2,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 1rem;
+  scroll-behavior: smooth;
 }
 
 .markdown-content figure {
@@ -40,10 +41,18 @@
 .markdown-content h1,
 .markdown-content h2,
 .markdown-content h3 {
-  scroll-margin-top: 120px; /* Ajustar según altura del header */
+  scroll-margin-top: 120px;
+  position: relative;
+  scroll-padding-top: 120px;
 }
 
 /* Añadir esto para el enfoque suave */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 120px;
+}
+
+[data-heading] {
+  scroll-margin-block-start: 120px;
+  position: relative;
 } 

@@ -129,6 +129,14 @@
   color: var(--text-color);
   line-height: 1.6;
   scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+/* Asegurar que los headings tienen espacio suficiente */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+  scroll-margin-top: 100px;
 }
 
 /* Estilos para las ecuaciones matemáticas */
@@ -182,60 +190,17 @@
   z-index: 1;
 }
 
-.wiki-layout .sidebar-wiki {
-  width: 280px;
-  position: fixed;
-  top: 100px;
-  right: calc((100vw - 1800px) / 2 + 2rem);
-  height: calc(100vh - 120px);
-  padding: 1.5rem;
-  background-color: black;
-  border-radius: 12px;
-  border: none;
-  flex-shrink: 0;
-  overflow-y: auto;
+/* Asegurar scroll padding para todos los headings */
+.markdown-content [id] {
+  scroll-margin-top: 120px;
+  scroll-padding-top: 120px;
+  position: relative;
 }
 
-.toc-item {
-  padding: 0.5rem 0;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: var(--text-color);
-  opacity: 0.7;
-}
-
-.toc-item:hover {
-  color: var(--primary-color);
-  opacity: 1;
-}
-
-.toc-item.active {
-  color: var(--primary-color);
-  opacity: 1;
-  font-weight: 600;
-}
-
-.toc-h1 {
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.toc-h2 {
-  font-size: 0.9rem;
-  padding-left: 1rem;
-  opacity: 0.8;
-}
-
-.toc-h3 {
-  font-size: 0.85rem;
-  padding-left: 2rem;
-  opacity: 0.7;
-}
-
-@media (max-width: 1800px) {
-  .wiki-layout .sidebar-wiki {
-    right: 2rem;
-  }
+[data-heading] {
+  position: relative;
+  scroll-snap-margin-top: 120px; /* Para navegadores más antiguos */
+  scroll-margin-block-start: 120px; /* Alternativa moderna */
 }
 
 @media (max-width: 1600px) {
@@ -246,24 +211,5 @@
 
   .wiki-layout .content-container {
     width: calc(100% - 320px);
-  }
-}
-
-@media (max-width: 1024px) {
-  .wiki-layout {
-    flex-direction: column;
-  }
-
-  .wiki-layout .content-container {
-    width: 100%;
-  }
-
-  .wiki-layout .sidebar-wiki {
-    position: relative;
-    width: 100%;
-    right: auto;
-    top: auto;
-    height: auto;
-    margin-top: 2rem;
   }
 }

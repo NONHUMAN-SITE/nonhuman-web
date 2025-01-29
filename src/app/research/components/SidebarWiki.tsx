@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState, useCallback } from 'react';
+import '../styles/sidebar-wiki.css';
 
 interface HeadingItem {
   text: string;
@@ -25,6 +26,7 @@ export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
       const level = match[1].length;
       const text = match[2].trim();
       const id = slugify(text);
+      
       headings.push({ text, level, id });
     }
     
@@ -34,15 +36,26 @@ export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
   const scrollToHeading = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const headerOffset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
+      requestAnimationFrame(() => {
+        const headerOffset = 120;
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        
+        window.scrollTo({
+          top: elementPosition - headerOffset,
+          behavior: 'smooth'
+        });
+        
+        setTimeout(() => {
+          const finalPosition = element.getBoundingClientRect().top + window.scrollY;
+          if (Math.abs(finalPosition - elementPosition) > 10) {
+            window.scrollTo({
+              top: finalPosition - headerOffset,
+              behavior: 'smooth'
+            });
+          }
+          setActiveId(id);
+        }, 100);
       });
-      setActiveId(id);
     }
   };
 
@@ -51,32 +64,33 @@ export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
     setHeadings(extractHeadings(content));
   }, [content, extractHeadings]);
 
-  // Observar las secciones visibles
+  // Actualizar el observer para mejor precisión
   useEffect(() => {
     if (!headings.length) return;
 
     const observerCallback: IntersectionObserverCallback = (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setActiveId(entry.target.id);
-        }
-      });
+      // Encontrar la entrada más cercana al viewport
+      const visibleEntries = entries.filter(entry => entry.isIntersecting);
+      if (visibleEntries.length > 0) {
+        const mostVisible = visibleEntries.reduce((prev, current) => {
+          return (prev.intersectionRatio > current.intersectionRatio) ? prev : current;
+        });
+        setActiveId(mostVisible.target.id);
+      }
     };
 
     const observerOptions: IntersectionObserverInit = {
-      rootMargin: '-20% 0px -80% 0px',
-      threshold: 0
+      rootMargin: '-100px 0px -80% 0px',
+      threshold: [0, 0.1, 0.5, 1]
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Pequeño delay para asegurar que los elementos están renderizados
+    // Aumentar el delay para asegurar que todo está renderizado
     const timer = setTimeout(() => {
-      headings.forEach(heading => {
-        const element = document.getElementById(heading.id);
-        if (element) observer.observe(element);
-      });
-    }, 100);
+      const headingElements = document.querySelectorAll('[data-heading]');
+      headingElements.forEach(element => observer.observe(element));
+    }, 200);
 
     return () => {
       observer.disconnect();

@@ -1,0 +1,68 @@
+.sidebar-wiki {
+  width: 280px;
+  position: fixed;
+  top: 100px;
+  right: calc((100vw - 1800px) / 2 + 2rem);
+  height: calc(100vh - 120px);
+  padding: 1.5rem;
+  background-color: black;
+  border-radius: 12px;
+  border: none;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.toc-item {
+  padding: 0.5rem 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+  opacity: 0.7;
+  position: relative;
+}
+
+.toc-item:hover {
+  color: #90EE90;
+  opacity: 1;
+}
+
+.toc-item.active {
+  color: #90EE90;
+  opacity: 1;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(144, 238, 144, 0.3);
+}
+
+.toc-h1 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.toc-h2 {
+  font-size: 0.9rem;
+  padding-left: 1rem;
+  opacity: 0.8;
+}
+
+.toc-h3 {
+  font-size: 0.85rem;
+  padding-left: 2rem;
+  opacity: 0.7;
+}
+
+@media (max-width: 1800px) {
+  .sidebar-wiki {
+    right: 2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sidebar-wiki {
+    position: relative;
+    width: 100%;
+    right: auto;
+    top: auto;
+    height: auto;
+    margin-top: 2rem;
+  }
+}
