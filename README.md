@@ -2,10 +2,10 @@
 
 ![NONHUMAN Logo](link_to_logo.png)
 
-## Descripción
+## 1. Descripción
 Este repositorio contiene el código fuente de la página oficial de [NONHUMAN](https://nonhuman.com). Es un proyecto web que puede ejecutarse y desarrollarse utilizando `npm run dev`.
 
-## To Do:
+## 2. To Do:
 - [ ] Filtrar los comentarios de las partes del código para que no las cuente como headers en markdown.
 - [ ] Asegurar que el bold en los headers sea automático para renderizar correctamente el markdown.
 - [ ] Asegurar que el markdown sea renderizado correctamente en el servidor.
@@ -14,13 +14,13 @@ Este repositorio contiene el código fuente de la página oficial de [NONHUMAN](
 
 - [ ] En Katex, arreglar el problema de que no se renderice correctamente la ecuación en el markdown. Específicamente no se renderiza bien la parte \sqrt{}. Tal vez debemos de usar otro paquete como MathJax.
 
-## Características principales
+## 3. Características principales
 El componente más importante de este proyecto es el **renderizador de Markdown**, el cual permite interpretar y estructurar contenido escrito en formato Markdown con algunas personalizaciones adicionales.
 
-### Sintaxis de Markdown personalizada
+### 3.1 Sintaxis de Markdown personalizada
 Para garantizar que el formato de Markdown sea interpretado correctamente, es importante seguir las siguientes reglas:
 
-#### Código
+#### 3.1.1 Código
 Para resaltar fragmentos de código, se debe iniciar con triple tilde (` ``` `) seguido del lenguaje de programación a renderizar. Por ejemplo:
 
 ```markdown
@@ -41,7 +41,7 @@ Donde:
 - `longitud` es el tamaño deseado de la imagen.
 - El enlace de la imagen debe ser un **URL público accesible**.
 
-#### Estructuración basada en encabezados
+#### 3.1.2 Estructuración basada en encabezados
 Nuestro renderizador también estructura automáticamente el contenido en base a los encabezados definidos en Markdown:
 - `# Encabezado 1` (h1)
 - `## Encabezado 2` (h2)
@@ -50,14 +50,29 @@ Nuestro renderizador también estructura automáticamente el contenido en base a
 
 Esto permite una organización clara y jerárquica de la información dentro del contenido renderizado.
 
-#### Slugify
+#### 3.1.3 Slugify
 Para asegurar que los encabezados sean únicos y estén correctamente referenciados, se utiliza la función `slugify` en el componente `MarkdownRenderer`.
 
 > ⚠️ **Alerta:** Los títulos y sub-títulos deben ser únicos y además, no pueden contener tildes para que funcione bien el sidebar de los wikis.
 
+#### 3.1.4 Mermaid
+Para los diagramas de mermaid debemos de utilizar el formato HTML para que se renderice correctamente.
+
+Un pequeño ejemplo de cómo se debe de escribir el diagrama de mermaid en HTML:
+
+```html
+<div class="mermaid">
+graph TD
+    A[Start] --> B{Decision}
+    B -- Yes --> C[Process 1]
+    B -- No --> D[Process 2]
+    C --> E[End]
+    D --> E
+</div>
+```
 
 
-## Instalación y ejecución
+## 4.Instalación y ejecución
 Para ejecutar el proyecto en un entorno local:
 
 ```sh
