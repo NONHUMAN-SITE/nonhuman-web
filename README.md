@@ -12,6 +12,8 @@ Este repositorio contiene el código fuente de la página oficial de [NONHUMAN](
 - [ ] Pensar en cómo renderizar el Mermaid, si de forma local o si de forma externa.
 - [ ] Agregar la parte del lenguaje en los markdowns
 
+- [ ] En Katex, arreglar el problema de que no se renderice correctamente la ecuación en el markdown. Específicamente no se renderiza bien la parte \sqrt{}. Tal vez debemos de usar otro paquete como MathJax.
+
 ## Características principales
 El componente más importante de este proyecto es el **renderizador de Markdown**, el cual permite interpretar y estructurar contenido escrito en formato Markdown con algunas personalizaciones adicionales.
 
