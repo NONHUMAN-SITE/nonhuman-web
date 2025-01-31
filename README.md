@@ -28,7 +28,7 @@ print("Hola, mundo!")
 ```
 
 
-#### 3.1.2 Imágenes con tamaño personalizado
+#### 3.1.2 Imágenes y videos con tamaño personalizado
 Para insertar imágenes con un tamaño definido, utilizamos la siguiente sintaxis:
 
 ```markdown
@@ -55,18 +55,45 @@ Para asegurar que los encabezados sean únicos y estén correctamente referencia
 > ⚠️ **Alerta:** Los títulos y sub-títulos deben ser únicos y además, no pueden contener tildes para que funcione bien el sidebar de los wikis.
 
 #### 3.1.5 Mermaid
-Para los diagramas de mermaid debemos de utilizar el formato HTML para que se renderice correctamente.
+* Para los diagramas de mermaid debemos de utilizar el formato HTML para que se renderice correctamente.
+* Además de que se debe de cumplir que el diagrama de mermaid debe de estar dentro de un div con la clase `mermaid`.
+* Al final de cada elemento de mermaid se debe de agregar un `;` para que se renderice correctamente.
+* No deben de existir saltos de línea en el diagrama de mermaid, ya que esto puede causar errores.
 
 Un pequeño ejemplo de cómo se debe de escribir el diagrama de mermaid en HTML:
 
 ```html
 <div class="mermaid">
-graph TD
-    A[Start] --> B{Decision}
-    B -- Yes --> C[Process 1]
-    B -- No --> D[Process 2]
-    C --> E[End]
-    D --> E
+    graph TD;
+    subgraph "Tokenization";
+    A[Input Text] --> B[BasicTokenizer];
+    B --> |Convert characters to tokens| C[Token Sequence];
+    C --> |Convert to tensor| D[Input Tensor idx];
+    end;
+    subgraph "Embedding";
+    D --> E[Token Embedding Table];
+    E --> |Embed tokens| F[Token Embeddings];
+    G[Positional Encoding] --> |Add position info| F;
+    end;
+    subgraph "Transformer Blocks";
+    F --> H[Multi-Head Attention];
+    H --> |Compute Attention| I[Self-Attention Layer];
+    I --> |Key, Query, Value Projections| J[Attention Computation];
+    J --> |Masked Softmax| K[Attention Probabilities];
+    K --> |Weighted Aggregation| L[Attention Output];
+    L --> M[Feed Forward Network];
+    M --> |Non-linear Transformation| N[Residual Connections];
+    N --> O[Layer Normalization];
+    end;
+    subgraph "Prediction";
+    O --> P[Language Model Head];
+    P --> |Convert to Logits| Q[Softmax];
+    Q --> |Probability Distribution| R[Token Sampling];
+    R --> |Select Next Token| S[Generated Token];
+    S --> |Append to Sequence| T{Continue Generation?};
+    T -->|Yes| D;
+    T -->|No| U[Final Output Text];
+    end;
 </div>
 ```
 
