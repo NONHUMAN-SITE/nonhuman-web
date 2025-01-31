@@ -321,4 +321,16 @@ html {
 .markdown-content .mermaid .label {
   color: #e5e5e5 !important;
   font-family: 'Fira Code', monospace !important;
+}
+
+/* Estilos para video */
+.markdown-content video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  background-color: #000;
+}
+
+.markdown-content video:focus {
+  outline: none;
 } 

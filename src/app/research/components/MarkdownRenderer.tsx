@@ -166,20 +166,39 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
               ? { width: sizeMatch[2], height: sizeMatch[3], alt: sizeMatch[1] }
               : { width: '600', height: '400', alt: alt };
 
+            // Detectar si es video por extensión
+            const isVideo = src?.match(/\.(webm|mp4|mov|ogg)$/i);
+
             return (
               <figure className="my-4">
-                <img 
-                  src={src} 
-                  alt={dimensions.alt} 
-                  className="mx-auto rounded-lg shadow-lg"
-                  loading="lazy"
-                  width={dimensions.width}
-                  height={dimensions.height}
-                  style={{ 
-                    maxWidth: `${dimensions.width}px`,
-                    height: 'auto'
-                  }}
-                />
+                {isVideo ? (
+                  <video
+                    src={src}
+                    className="mx-auto rounded-lg shadow-lg"
+                    controls
+                    muted
+                    loop
+                    width={dimensions.width}
+                    height={dimensions.height}
+                    style={{ 
+                      maxWidth: `${dimensions.width}px`,
+                      height: 'auto'
+                    }}
+                  />
+                ) : (
+                  <img 
+                    src={src} 
+                    alt={dimensions.alt} 
+                    className="mx-auto rounded-lg shadow-lg"
+                    loading="lazy"
+                    width={dimensions.width}
+                    height={dimensions.height}
+                    style={{ 
+                      maxWidth: `${dimensions.width}px`,
+                      height: 'auto'
+                    }}
+                  />
+                )}
                 {dimensions.alt && <figcaption className="text-sm text-gray-600 mt-2 text-center">{dimensions.alt}</figcaption>}
               </figure>
             )
