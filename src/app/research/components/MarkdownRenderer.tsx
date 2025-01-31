@@ -11,7 +11,7 @@ import 'katex/dist/katex.min.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import '../styles/markdown-content.css'
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Components } from 'react-markdown'
 
 interface MarkdownRendererProps {
@@ -49,6 +49,31 @@ interface ChildProps {
 
 export default function MarkdownRenderer({ content, options }: MarkdownRendererProps) {
   const [showCopied, setShowCopied] = useState(false);
+  const [mermaidInitialized, setMermaidInitialized] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !mermaidInitialized) {
+      import('mermaid').then((mermaidModule) => {
+        const mermaid = mermaidModule.default;
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'dark',
+          securityLevel: 'loose'
+        });
+        setMermaidInitialized(true);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (mermaidInitialized) {
+      import('mermaid').then((mermaidModule) => {
+        mermaidModule.default.run({
+          querySelector: '.mermaid',
+        });
+      });
+    }
+  }, [content, mermaidInitialized]);
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
@@ -188,7 +213,22 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
             );
           },
           code: ({ inline, className, children, ...props }: CodeProps) => {
-            const match = /language-(\w+)/.exec(className || '')
+            const match = /language-(\w+)/.exec(className || '');
+            
+            if (match?.[1] === 'mermaid') {
+              return (
+                <div className="mermaid" style={{
+                  backgroundColor: '#1a1a1a',
+                  borderRadius: '0.75rem',
+                  padding: '1.5rem',
+                  margin: '1.5rem 0',
+                  textAlign: 'center'
+                }}>
+                  {String(children).replace(/\n$/, '')}
+                </div>
+              );
+            }
+
             return !inline ? (
               <code
                 {...props}
@@ -197,7 +237,7 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
                 {children}
               </code>
             ) : (
-              <code {...props} className="bg-gray-800 text-gray-200 rounded-md px-2 py-1">
+              <code {...props} className="inline-code">
                 {children}
               </code>
             )
