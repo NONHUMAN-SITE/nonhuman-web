@@ -1,6 +1,6 @@
 # NONHUMAN-WEB
 
-![NONHUMAN Logo](public/NONHUMAN_logo.png)
+![NONHUMAN Logo](public/NONHUMAN-LOGO.png)
 
 ## 1. Descripción
 Este repositorio contiene el código fuente de la página oficial de [NONHUMAN](https://nonhuman.com). Es un proyecto web que puede ejecutarse y desarrollarse utilizando `npm run dev`.
