@@ -22,7 +22,7 @@ export default function MINDPage() {
         },
         { 
           id: '1.2', 
-          name: 'GPT2 (nanoGPT) (software)',
+          name: 'Implementation',
           description: language === 'en'
             ? "Practical implementation of a basic language model. We will detail with code and explanation how to implement a basic language model using transformers."
             : "Implementación práctica de un modelo de lenguaje básico. Detallaremos con código y explicación como se puede implementar un modelo de lenguaje básico usando transformers."
