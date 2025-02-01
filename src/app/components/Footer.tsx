@@ -18,10 +18,10 @@ export default function Footer() {
         <a href="https://linkedin.com/company/nonhuman" target="_blank" rel="noopener noreferrer">
           <FaLinkedin className="social-icon" />
         </a>
-        <a href="https://github.com/nonhuman" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/NONHUMAN-SITE" target="_blank" rel="noopener noreferrer">
           <FaGithub className="social-icon" />
         </a>
-        <a href="https://huggingface.co/nonhuman" target="_blank" rel="noopener noreferrer">
+        <a href="https://huggingface.co/NONHUMAN-RESEARCH" target="_blank" rel="noopener noreferrer">
           <SiHuggingface className="social-icon" />
         </a>
       </div>
