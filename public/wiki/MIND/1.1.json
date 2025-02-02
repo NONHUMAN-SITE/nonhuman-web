@@ -1,14 +1,14 @@
 {
     "es":{
         "title":"1.1 Attention is All You Need",
-        "description":"El artículo de investigación más importante de la historia",
+        "description":"Revisión y explicación de un paper fundamental en el desarrollo de los modelos de lenguaje actuales",
         "authors":"Leonardo Pérez, Brik Meza, Randy Loayza",
         "date":"29 de enero de 2025",
         "url":"wiki/MIND/1.1.es.md"
     },
     "en":{
         "title":"1.1 Attention is All You Need",
-        "description":"The most important research paper in history",
+        "description":"Review and explanation of a fundamental paper in the development of current language models",
         "authors":"Leonardo Pérez, Brik Meza, Randy Loayza",
         "date":"January 29, 2025",
         "url":"wiki/MIND/1.1.en.md"
