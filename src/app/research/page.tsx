@@ -37,14 +37,14 @@ export default function Research() {
     <MainLayout>
       <div className="research-container">
         <div className="research-header">
-          <h1 className="research-title lora-main">
-            {language === 'en' ? 'Research' : 'Investigación'}
+          <h1 className="research-title space-mono-bold">
+            {language === 'en' ? 'RESEARCH' : 'INVESTIGACIÓN'}
           </h1>
           <div className="search-container">
             <input 
               type="text" 
               placeholder={language === 'en' ? "Search projects..." : "Buscar proyectos..."}
-              className="search-input"
+              className="search-input space-mono-regular"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />

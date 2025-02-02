@@ -35,7 +35,7 @@ export default function Header() {
         <ul className="nav-list">
           <li><Link href="/">{language === 'en' ? 'Home' : 'Inicio'}</Link></li>
           <li><Link href="/research">{language === 'en' ? 'Research' : 'Investigación'}</Link></li>
-          <li><Link href="/newspaper">{language === 'en' ? 'Newspaper' : 'Noticias'}</Link></li>
+          <li><Link href="/articles">{language === 'en' ? 'Articles' : 'Articulos'}</Link></li>
           <li><Link href="/community">{language === 'en' ? 'Community' : 'Comunidad'}</Link></li>
         </ul>
         <div className="language-toggle-container">

@@ -1,0 +1,129 @@
+.articles-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.articles-title {
+  text-align: center;
+  font-size: 3rem;
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  color: var(--primary-color);
+  padding: 2rem;
+  margin: 2rem auto;
+  text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.5),
+               0 0 20px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.filters-container {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: black;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-bar {
+  flex: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-color);
+  font-family: "Space Mono", monospace;
+}
+
+.tag-select,
+.sort-select {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-color);
+  font-family: "Space Mono", monospace;
+  min-width: 150px;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.article-card {
+  background-color: black;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.article-header {
+  margin-bottom: 1rem;
+}
+
+.article-title {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+}
+
+.article-metadata {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-color);
+  opacity: 0.7;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.article-description {
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag-badge {
+  background-color: rgba(197, 7, 255, 0.2);
+  color: #9c07ff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-family: "Space Mono", monospace;
+  border: 1px solid rgba(156, 7, 255, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .filters-container {
+    flex-direction: column;
+  }
+  
+  .tag-select,
+  .sort-select {
+    width: 100%;
+  }
+}
