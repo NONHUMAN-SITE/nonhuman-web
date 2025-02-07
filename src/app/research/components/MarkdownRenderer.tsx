@@ -164,7 +164,7 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
             const sizeMatch = alt?.match(/(.*)\|(\d+)x(\d+)/);
             const dimensions = sizeMatch 
               ? { width: sizeMatch[2], height: sizeMatch[3], alt: sizeMatch[1] }
-              : { width: '600', height: '400', alt: alt };
+              : { width: '1000', height: '600', alt: alt };
 
             // Detectar si es video por extensión
             const isVideo = src?.match(/\.(webm|mp4|mov|ogg)$/i);
@@ -181,7 +181,7 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
                     width={dimensions.width}
                     height={dimensions.height}
                     style={{ 
-                      maxWidth: `${dimensions.width}px`,
+                      maxWidth: '100%',
                       height: 'auto'
                     }}
                   />
@@ -194,7 +194,7 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
                     width={dimensions.width}
                     height={dimensions.height}
                     style={{ 
-                      maxWidth: `${dimensions.width}px`,
+                      maxWidth: '100%',
                       height: 'auto'
                     }}
                   />
@@ -288,9 +288,14 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
           a: ({ children, href }) => (
             <a 
               href={href} 
-              className="text-green-600 hover:text-green-800 hover:underline"
+              className="link-style"
               target="_blank"
               rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                position: 'relative',
+                padding: '0 2px'
+              }}
             >
               {children}
             </a>

@@ -1,6 +1,7 @@
 'use client'
 import { useParams } from 'next/navigation'
 import { useLanguage } from '@/app/context/LanguageContext'
+import { useTheme } from '@/app/context/ThemeContext'
 import { useEffect, useState } from 'react'
 import MarkdownRenderer from '@/app/research/components/MarkdownRenderer'
 import SidebarWiki from '@/app/research/components/SidebarWiki'
@@ -49,6 +50,7 @@ const slugify = (str: string) => {
 export default function MINDContentPage() {
   const params = useParams()
   const { language } = useLanguage()
+  const { theme } = useTheme()
   const slug = params.slug as string
   const [content, setContent] = useState<string>('')
   const [metadata, setMetadata] = useState<ContentMetadata | null>(null)
@@ -83,7 +85,7 @@ export default function MINDContentPage() {
   }, [slug, language]) // Agregamos language como dependencia
 
   return (
-    <div className="wiki-layout">
+    <div className={`wiki-layout ${theme}`}>
       <div className="content-container">
         {metadata && (
           <div className="content-metadata">
@@ -95,10 +97,12 @@ export default function MINDContentPage() {
             </div>
           </div>
         )}
-        <MarkdownRenderer 
-          content={content}
-          options={{ slugify }}
-        />
+        <div className="markdown-wrapper">
+          <MarkdownRenderer 
+            content={content}
+            options={{ slugify }}
+          />
+        </div>
       </div>
       <SidebarWiki 
         content={content}

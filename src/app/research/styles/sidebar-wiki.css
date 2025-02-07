@@ -1,3 +1,12 @@
+/* Añadir variables de tema */
+:root {
+    --sidebar-bg-dark: var(--background-color-dark);
+    --sidebar-bg-light: var(--background-color-light);
+    --sidebar-border-dark: rgba(255, 255, 255, 0.1);
+    --sidebar-border-light: rgba(0, 0, 255, 0.1);
+    --sidebar-hover-color: var(--accent-color);
+}
+
 .sidebar-wiki {
   width: 280px;
   position: sticky;
@@ -5,12 +14,24 @@
   height: fit-content;
   max-height: calc(100vh - 120px);
   padding: 1.5rem;
-  background-color: black;
+  background-color: var(--background-color);
   border-radius: 12px;
-  border: none;
+  border: 1px solid var(--sidebar-border-dark);
   flex-shrink: 0;
   overflow-y: auto;
   margin-left: 2rem;
+  /* Ocultar scrollbar pero mantener funcionalidad */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Ocultar scrollbar para Chrome, Safari y Opera */
+.sidebar-wiki::-webkit-scrollbar {
+  display: none;
+}
+
+.wiki-layout.light .sidebar-wiki {
+  border: 1px solid var(--sidebar-border-light);
 }
 
 .toc-item {
@@ -23,15 +44,15 @@
 }
 
 .toc-item:hover {
-  color: #10b981;
+  color: var(--accent-color);
   opacity: 1;
 }
 
 .toc-item.active {
-  color: #10b981;
+  color: var(--accent-color);
   opacity: 1;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(144, 238, 144, 0.3);
+  text-shadow: 0 0 10px rgba(var(--accent-color), 0.3);
 }
 
 .toc-h1 {

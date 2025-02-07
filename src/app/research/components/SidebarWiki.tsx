@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import '../styles/sidebar-wiki.css';
 
 interface HeadingItem {
@@ -16,6 +16,7 @@ interface SidebarWikiProps {
 export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
   const [activeId, setActiveId] = useState<string>('');
   const [headings, setHeadings] = useState<HeadingItem[]>([]);
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
   const extractHeadings = useCallback((markdown: string): HeadingItem[] => {
     const headingRegex = /^(#{1,3})\s+(.+)$/gm;
@@ -64,18 +65,44 @@ export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
     setHeadings(extractHeadings(content));
   }, [content, extractHeadings]);
 
+  // Función para sincronizar el scroll del sidebar
+  const syncSidebarScroll = useCallback((activeId: string) => {
+    if (sidebarRef.current) {
+      const activeElement = sidebarRef.current.querySelector(`.toc-item.active`);
+      if (activeElement) {
+        const sidebarTop = sidebarRef.current.offsetTop;
+        const activeElementTop = activeElement.getBoundingClientRect().top;
+        const sidebarHeight = sidebarRef.current.clientHeight;
+        const activeElementHeight = (activeElement as HTMLElement).offsetHeight;
+
+        // Calcular la posición ideal para centrar el elemento activo
+        const scrollTarget = 
+          activeElementTop + 
+          sidebarRef.current.scrollTop - 
+          sidebarTop - 
+          (sidebarHeight / 2) + 
+          (activeElementHeight / 2);
+
+        sidebarRef.current.scrollTo({
+          top: scrollTarget,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }, []);
+
   // Actualizar el observer para mejor precisión
   useEffect(() => {
     if (!headings.length) return;
 
     const observerCallback: IntersectionObserverCallback = (entries) => {
-      // Encontrar la entrada más cercana al viewport
       const visibleEntries = entries.filter(entry => entry.isIntersecting);
       if (visibleEntries.length > 0) {
-        const mostVisible = visibleEntries.reduce((prev, current) => {
-          return (prev.intersectionRatio > current.intersectionRatio) ? prev : current;
-        });
-        setActiveId(mostVisible.target.id);
+        const mostVisible = visibleEntries.reduce((prev, current) =>
+          prev.intersectionRatio > current.intersectionRatio ? prev : current
+        );
+        const newActiveId = mostVisible.target.id;
+        setActiveId(newActiveId);
       }
     };
 
@@ -86,7 +113,6 @@ export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Aumentar el delay para asegurar que todo está renderizado
     const timer = setTimeout(() => {
       const headingElements = document.querySelectorAll('[data-heading]');
       headingElements.forEach(element => observer.observe(element));
@@ -96,7 +122,7 @@ export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
       observer.disconnect();
       clearTimeout(timer);
     };
-  }, [headings]);
+  }, [headings.length]);
 
   // Actualizar activeId basado en scroll
   useEffect(() => {
@@ -119,7 +145,7 @@ export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
   }, [headings]);
 
   return (
-    <aside className="sidebar-wiki">
+    <aside className="sidebar-wiki" ref={sidebarRef}>
       <nav>
         <h3 className="text-xl font-bold mb-4">Contenido</h3>
         <ul>

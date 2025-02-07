@@ -1,5 +1,14 @@
+:root {
+    --markdown-code-bg-dark: #1a1a1a;
+    --markdown-code-bg-light: #f5f5f5;
+    --markdown-border-dark: #333;
+    --markdown-border-light: #ddd;
+    --markdown-text-dark: #e5e5e5;
+    --markdown-text-light: #121212;
+}
+
 .markdown-content {
-  max-width: 800px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 1rem;
   line-height: 1.6;
@@ -10,13 +19,14 @@
   text-align: center;
 }
 
-.markdown-content img {
+.markdown-content img,
+.markdown-content video {
   height: auto;
   display: block;
   margin: 0 auto;
   transition: transform 0.2s;
   width: 100%;
-  max-width: 600px;
+  max-width: 1000px;
   object-fit: contain;
 }
 
@@ -27,7 +37,7 @@
 /* Estilos para el contenedor de código */
 .markdown-content pre {
   margin: 1.5em 0;
-  background-color: #1a1a1a;
+  background-color: var(--markdown-code-bg-dark);
   border-radius: 0.75rem;
   overflow-x: auto;
   position: relative;
@@ -111,7 +121,7 @@ html {
 .markdown-content em {
   font-style: italic;
   font-weight: 500;
-  color: #10b981; /* Color verde para destacar */
+  color: var(--accent-color);
 }
 
 .markdown-content strong {
@@ -124,7 +134,7 @@ html {
 .markdown-content strong em {
   font-weight: 600;
   font-style: italic;
-  color: #10b981;
+  color: var(--accent-color);
 }
 
 /* Mejorar el espaciado entre elementos de lista */
@@ -139,7 +149,7 @@ html {
 
 /* Asegurar que los guiones se muestren correctamente */
 .markdown-content li::marker {
-  color: #10b981;
+  color: var(--accent-color);
 }
 
 /* Tablas */
@@ -148,17 +158,17 @@ html {
   border-collapse: separate;
   border-spacing: 0;
   margin: 1rem 0;
-  background-color: #1a1a1a;
+  background-color: var(--background-color);
   border-radius: 0.75rem;
-  overflow: hidden; /* Importante para mantener los bordes redondeados */
+  overflow: hidden;
 }
 
 .markdown-content th,
 .markdown-content td {
-  border: 1px solid #333;
+  border: 1px solid var(--border-color);
   padding: 1rem;
   text-align: left;
-  color: #e5e5e5;
+  color: var(--text-color);
 }
 
 .markdown-content th {
@@ -176,7 +186,7 @@ html {
 
 /* Blockquotes */
 .markdown-content blockquote {
-  border-left: 4px solid #10b981;
+  border-left: 4px solid var(--accent-color);
   margin: 1.5rem 0;
   padding: 1rem 1.5rem;
   background-color: #1a1a1a;
@@ -187,12 +197,17 @@ html {
 
 /* Links */
 .markdown-content a {
-  color: #10b981;
-  text-decoration: none;
+  color: var(--accent-color);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: all 0.2s ease;
 }
 
 .markdown-content a:hover {
-  text-decoration: underline;
+  text-decoration-style: solid;
+  opacity: 0.8;
 }
 
 /* Task lists */
@@ -214,7 +229,7 @@ html {
   background-color: #262626;
   cursor: pointer;
   font-weight: 600;
-  color: #10b981;
+  color: var(--accent-color);
   list-style: none;
   position: relative;
 }
@@ -256,7 +271,7 @@ html {
   position: absolute;
   top: 0.75rem;
   right: 4rem;
-  background: #10b981;
+  background: var(--accent-color);
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 0.375rem;
@@ -274,7 +289,7 @@ html {
   transform: translateY(-50%);
   border-width: 4px;
   border-style: solid;
-  border-color: transparent transparent transparent #10b981;
+  border-color: transparent transparent transparent var(--accent-color);
 }
 
 @keyframes fadeOut {
@@ -286,7 +301,7 @@ html {
 /* Estilo para código inline */
 .markdown-content .inline-code {
   background-color: #2d2d2d;
-  color: #10b981;
+  color: var(--accent-color);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-family: 'Fira Code', monospace;
@@ -324,13 +339,6 @@ html {
 }
 
 /* Estilos para video */
-.markdown-content video {
-  max-width: 100%;
-  height: auto;
-  border-radius: 0.75rem;
-  background-color: #000;
-}
-
 .markdown-content video:focus {
   outline: none;
 } 

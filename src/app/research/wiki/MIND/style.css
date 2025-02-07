@@ -1,14 +1,18 @@
 /* Variables específicas para MIND page */
-.wiki-content.dark {
+.wiki-layout.dark {
     --mind-border-color: #ffffff;
     --mind-card-border: rgba(255, 255, 255, 0.1);
     --mind-index-border: rgba(255, 255, 255, 0.1);
+    --mind-container-bg: var(--background-color-dark);
+    --mind-container-border: rgba(255, 255, 255, 0.1);
 }
 
-.wiki-content.light {
+.wiki-layout.light {
     --mind-border-color: #0000ff;
     --mind-card-border: rgba(0, 0, 255, 0.1);
     --mind-index-border: rgba(0, 0, 255, 0.1);
+    --mind-container-bg: var(--background-color-light);
+    --mind-container-border: rgba(0, 0, 255, 0.1);
 }
 
 .roadmap-title {
@@ -144,6 +148,10 @@
   line-height: 1.6;
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
+  background-color: var(--mind-container-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid var(--mind-container-border);
 }
 
 /* Asegurar que los headings tienen espacio suficiente */
@@ -192,14 +200,14 @@
 }
 
 .wiki-layout .content-container {
-  width: 900px;
+  width: 1200px;
   flex-shrink: 0;
   margin: 0;
   margin-left: 100px;
   padding: 2rem;
-  background-color: black;
+  background-color: var(--mind-container-bg);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--mind-container-border);
   overflow: visible;
   position: relative;
   z-index: 1;
@@ -224,7 +232,7 @@
   }
 
   .wiki-layout .content-container {
-    width: 800px;
+    width: 1000px;
   }
 }
 
