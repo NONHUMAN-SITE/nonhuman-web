@@ -1,11 +1,13 @@
 'use client'
 import { useState } from 'react'
 import { useLanguage } from '@/app/context/LanguageContext'
+import { useTheme } from '@/app/context/ThemeContext'
 import ArticleCard from './components/ArticleCard'
 import './style.css'
 
 export default function ArticlesPage() {
   const { language } = useLanguage()
+  const { theme } = useTheme()
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedTag, setSelectedTag] = useState('all')
   const [sortOrder, setSortOrder] = useState('newest')

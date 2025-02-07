@@ -29,17 +29,25 @@
   .search-input {
     width: 100%;
     padding: 0.8rem 1.2rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--primary-color);
     border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--background-color);
     color: var(--text-color);
     font-family: "Space Mono", monospace;
     font-size: 1rem;
+    box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.1);
   }
   
   .search-input::placeholder {
-    color: rgba(250, 250, 250, 0.6);
+    color: var(--text-color);
+    opacity: 0.6;
     font-family: "Space Mono", monospace;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.2);
   }
   
   .projects-grid {
@@ -50,16 +58,18 @@
   }
   
   .project-card {
-    background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     overflow: hidden;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     max-width: var(--card-width);
     margin: 0 auto;
+    position: relative;
+    background: transparent;
   }
   
   .project-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(var(--primary-color-rgb), 0.2);
   }
   
   .project-image {
@@ -70,6 +80,7 @@
   
   .project-info {
     padding: 1.5rem;
+    background: transparent;
   }
   
   .project-title {
@@ -78,6 +89,7 @@
     margin-bottom: 0.5rem;
     font-family: "Space Mono", monospace;
     font-weight: 700;
+    text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.3);
   }
   
   .project-date {
@@ -92,4 +104,5 @@
     color: var(--text-color);
     line-height: 1.5;
     font-size: 1rem;
+    text-shadow: 0 0 8px rgba(var(--text-color-rgb), 0.2);
   }

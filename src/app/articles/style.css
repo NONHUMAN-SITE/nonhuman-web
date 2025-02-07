@@ -21,9 +21,9 @@
   gap: 1rem;
   margin: 2rem 0;
   padding: 1rem;
-  background-color: black;
+  background-color: var(--background-color);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--grid-color);
 }
 
 .search-bar {
@@ -34,8 +34,8 @@
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--grid-color);
+  background-color: var(--cell-color);
   color: var(--text-color);
   font-family: "Space Mono", monospace;
 }
@@ -44,8 +44,8 @@
 .sort-select {
   padding: 0.75rem 1rem;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--grid-color);
+  background-color: var(--cell-color);
   color: var(--text-color);
   font-family: "Space Mono", monospace;
   min-width: 150px;
@@ -59,10 +59,10 @@
 }
 
 .article-card {
-  background-color: black;
+  background-color: var(--background-color);
   border-radius: 12px;
   padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--grid-color);
   transition: all 0.3s ease;
 }
 
@@ -106,14 +106,20 @@
 }
 
 .tag-badge {
-  background-color: rgba(197, 7, 255, 0.2);
-  color: #9c07ff;
+  background-color: var(--cell-color);
+  color: var(--primary-color);
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   font-size: 0.75rem;
   font-family: "Space Mono", monospace;
-  border: 1px solid rgba(156, 7, 255, 0.3);
+  border: 1px solid var(--primary-color);
   backdrop-filter: blur(5px);
+}
+
+.tag-badge:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border-color: var(--primary-color);
 }
 
 /* Responsive adjustments */
