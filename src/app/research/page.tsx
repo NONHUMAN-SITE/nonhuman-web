@@ -1,5 +1,4 @@
 'use client'
-import MainLayout from '../main-layout'
 import { useState } from 'react'
 import ProjectCard from './components/ProjectCard'
 import { useLanguage } from '../context/LanguageContext'
@@ -34,34 +33,32 @@ export default function Research() {
   );
 
   return (
-    <MainLayout>
-      <div className="research-container">
-        <div className="research-header">
-          <h1 className="research-title space-mono-bold">
-            {language === 'en' ? 'RESEARCH' : 'INVESTIGACIÓN'}
-          </h1>
-          <div className="search-container">
-            <input 
-              type="text" 
-              placeholder={language === 'en' ? "Search projects..." : "Buscar proyectos..."}
-              className="search-input space-mono-regular"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className="projects-grid">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              title={project.title}
-              date={project.date}
-              imageUrl={project.imageUrl}
-              description={project.description}
-            />
-          ))}
+    <div className="research-container">
+      <div className="research-header">
+        <h1 className="research-title space-mono-bold">
+          {language === 'en' ? 'RESEARCH' : 'INVESTIGACIÓN'}
+        </h1>
+        <div className="search-container">
+          <input 
+            type="text" 
+            placeholder={language === 'en' ? "Search projects..." : "Buscar proyectos..."}
+            className="search-input space-mono-regular"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
       </div>
-    </MainLayout>
+      <div className="projects-grid">
+        {filteredProjects.map((project, index) => (
+          <ProjectCard
+            key={index}
+            title={project.title}
+            date={project.date}
+            imageUrl={project.imageUrl}
+            description={project.description}
+          />
+        ))}
+      </div>
+    </div>
   );
 }

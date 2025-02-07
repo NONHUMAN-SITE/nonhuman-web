@@ -9,6 +9,7 @@ interface GameOfLifeProps {
   reloadInterval?: number;
   spreadRadius?: number; // Radio de dispersión para las celdas
   enabled?: boolean; // Nueva prop
+  showCells?: boolean; // Nueva prop para mostrar/ocultar celdas
 }
 
 export default function GameOfLife({ 
@@ -18,7 +19,8 @@ export default function GameOfLife({
   initialActiveCells = 100, // Aumentado el número por defecto
   reloadInterval = 10000,
   spreadRadius = 20, // Radio de dispersión más grande
-  enabled = true // Por defecto está habilitado
+  enabled = true, // Por defecto está habilitado
+  showCells = true, // Por defecto muestra celdas
 }: GameOfLifeProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [grid, setGrid] = useState<boolean[][]>([]);
@@ -175,18 +177,22 @@ export default function GameOfLife({
     const drawGrid = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawBaseGrid();
-      grid.forEach((row, i) => {
-        row.forEach((cell, j) => {
-          if (cell) {
-            ctx.fillStyle = 'rgba(128, 128, 128, 0.5)'; // Color gris semi-transparente
-            ctx.fillRect(j * cellSize, i * cellSize, cellSize - 1, cellSize - 1);
-          }
+      if (showCells) {
+        grid.forEach((row, i) => {
+          row.forEach((cell, j) => {
+            if (cell) {
+              ctx.fillStyle = 'rgba(128, 128, 128, 0.5)';
+              ctx.fillRect(j * cellSize, i * cellSize, cellSize - 1, cellSize - 1);
+            }
+          });
         });
-      });
+      }
     };
 
     const updateAndDraw = () => {
-      setGrid(prevGrid => getNextGeneration(prevGrid));
+      if (showCells) {
+        setGrid(prevGrid => getNextGeneration(prevGrid));
+      }
       drawGrid();
     };
 
@@ -194,7 +200,7 @@ export default function GameOfLife({
     const intervalId = setInterval(updateAndDraw, updateSpeed);
 
     return () => clearInterval(intervalId);
-  }, [grid, cellSize, updateSpeed]);
+  }, [grid, cellSize, updateSpeed, showCells]);
 
   return enabled ? (
     <canvas

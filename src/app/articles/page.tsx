@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import { useLanguage } from '@/app/context/LanguageContext'
 import ArticleCard from './components/ArticleCard'
-import MainLayout from '@/app/main-layout'
 import './style.css'
 
 export default function ArticlesPage() {
@@ -39,58 +38,56 @@ export default function ArticlesPage() {
   const tags = ["all", "AI", "NLP", "Transformers", "RLHF", "Machine Learning", "VLM", "Computer Vision"]
 
   return (
-    <MainLayout>
-      <div className="articles-container">
-        <h1 className="articles-title space-mono-bold">
-          {language === 'en' ? 'ARTICLES' : 'ARTÍCULOS'}
-        </h1>
-        
-        <div className="filters-container">
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder={language === 'en' ? 'Search articles...' : 'Buscar artículos...'}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input"
-            />
-          </div>
-
-          <select 
-            value={selectedTag}
-            onChange={(e) => setSelectedTag(e.target.value)}
-            className="tag-select"
-          >
-            {tags.map((tag) => (
-              <option key={tag} value={tag}>
-                {tag === 'all' ? (language === 'en' ? 'All Tags' : 'Todas las Etiquetas') : tag}
-              </option>
-            ))}
-          </select>
-
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-            className="sort-select"
-          >
-            <option value="newest">
-              {language === 'en' ? 'Newest First' : 'Más Recientes'}
-            </option>
-            <option value="oldest">
-              {language === 'en' ? 'Oldest First' : 'Más Antiguos'}
-            </option>
-          </select>
+    <div className="articles-container">
+      <h1 className="articles-title space-mono-bold">
+        {language === 'en' ? 'ARTICLES' : 'ARTÍCULOS'}
+      </h1>
+      
+      <div className="filters-container">
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder={language === 'en' ? 'Search articles...' : 'Buscar artículos...'}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
         </div>
 
-        <div className="articles-grid">
-          {articles.map((article, index) => (
-            <ArticleCard
-              key={index}
-              {...article}
-            />
+        <select 
+          value={selectedTag}
+          onChange={(e) => setSelectedTag(e.target.value)}
+          className="tag-select"
+        >
+          {tags.map((tag) => (
+            <option key={tag} value={tag}>
+              {tag === 'all' ? (language === 'en' ? 'All Tags' : 'Todas las Etiquetas') : tag}
+            </option>
           ))}
-        </div>
+        </select>
+
+        <select
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+          className="sort-select"
+        >
+          <option value="newest">
+            {language === 'en' ? 'Newest First' : 'Más Recientes'}
+          </option>
+          <option value="oldest">
+            {language === 'en' ? 'Oldest First' : 'Más Antiguos'}
+          </option>
+        </select>
       </div>
-    </MainLayout>
+
+      <div className="articles-grid">
+        {articles.map((article, index) => (
+          <ArticleCard
+            key={index}
+            {...article}
+          />
+        ))}
+      </div>
+    </div>
   )
 }

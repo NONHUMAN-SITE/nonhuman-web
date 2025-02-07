@@ -4,6 +4,7 @@ import './globals.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import { LanguageProvider } from './context/LanguageContext'
+import GameOfLife from './components/GameOfLife'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,7 +31,14 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <LanguageProvider>
-          {children}
+          <div className="layout-container">
+            <GameOfLife updateSpeed={500} cellSize={30} showCells={false} />
+            <Header />
+            <main className="main-content">
+              {children}
+            </main>
+            <Footer />
+          </div>
         </LanguageProvider>
       </body>
     </html>

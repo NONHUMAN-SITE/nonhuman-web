@@ -1,12 +1,13 @@
 'use client'
 import { useLanguage } from '@/app/context/LanguageContext'
-import GameOfLife from '@/app/components/GameOfLife'
+import { useRouter, usePathname } from 'next/navigation'
 import './style.css'
-import { useRouter } from 'next/navigation'
 
 export default function MINDPage() {
   const { language } = useLanguage()
   const router = useRouter()
+  const pathname = usePathname()
+  const isSlugPage = pathname.includes('/MIND/') && pathname.split('/MIND/').length > 1
 
   const roadmapItems = [
     {
@@ -130,18 +131,10 @@ export default function MINDPage() {
   }
 
   return (
-    <>
-      <GameOfLife 
-        cellSize={30}
-        updateSpeed={2000}
-        initialActiveCells={100}
-        reloadInterval={10000}
-        spreadRadius={20}
-      />
+    <div className="wiki-content">
       <div className="roadmap-container">
         <h1 className="roadmap-title space-mono-bold">ROADMAP</h1>
         
-        {/* Índice */}
         <div className="roadmap-index">
           {roadmapItems.map((section) => (
             <div key={section.title} className="index-section">
@@ -166,7 +159,6 @@ export default function MINDPage() {
           ))}
         </div>
 
-        {/* Contenido con cards */}
         <div className="content-grid">
           {roadmapItems.flatMap((section) =>
             section.subItems.map((item) => (
@@ -193,7 +185,7 @@ export default function MINDPage() {
           )}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -5,6 +5,30 @@
 ## 1. Descripción
 Este repositorio contiene el código fuente de la página oficial de [NONHUMAN](https://nonhuman.com). Es un proyecto web que puede ejecutarse y desarrollarse utilizando `npm run dev`.
 
+### 1.1 Colores para el tema claro
+
+```css
+:root {
+    --primary-color: #fafafa;
+    --background-color: #0a0a0a;
+    --text-color: #ffffff;
+    --accent-color: #10b981;
+    --grid-color: rgba(240, 240, 236, 0.1);
+}
+```
+
+### 1.2 Colores para el tema oscuro
+
+```css
+:root {
+    --primary-color: #0a0a0a;
+    --background-color: #fafafa;
+    --text-color: #ffffff;
+    --accent-color: #10b981;
+    --grid-color: rgba(240, 240, 236, 0.1);
+}
+```
+
 ## 2. To Do:
 - [ ] Filtrar los comentarios de las partes del código para que no las cuente como headers en markdown.
 - [ ] Asegurar que el bold en los headers sea automático para renderizar correctamente el markdown.
