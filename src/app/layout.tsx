@@ -5,6 +5,8 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import { LanguageProvider } from './context/LanguageContext'
 import GameOfLife from './components/GameOfLife'
+import { ThemeProvider } from './context/ThemeContext'
+import ThemeApplier from './components/ThemeApplier'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,16 +32,20 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/NONHUMAN-LOGO.ico" />
       </head>
       <body className={inter.className}>
-        <LanguageProvider>
-          <div className="layout-container">
-            <GameOfLife updateSpeed={500} cellSize={30} showCells={false} />
-            <Header />
-            <main className="main-content">
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            <ThemeApplier>
+              <div className="layout-container">
+                <GameOfLife updateSpeed={500} cellSize={30} showCells={false} />
+                <Header />
+                <main className="main-content">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+            </ThemeApplier>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

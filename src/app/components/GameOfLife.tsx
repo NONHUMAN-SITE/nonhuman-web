@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 interface GameOfLifeProps {
   gridSize?: number; // tamaño de la cuadrícula (30px por defecto)
@@ -28,6 +29,7 @@ export default function GameOfLife({
     rows: 0, 
     cols: 0 
   });
+  const { theme } = useTheme();
 
   // Calcular dimensiones solo en el cliente
   useEffect(() => {
@@ -150,13 +152,12 @@ export default function GameOfLife({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Ajustar tamaño del canvas
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    // Dibujar el grid base
     const drawBaseGrid = () => {
-      ctx.strokeStyle = 'rgba(240, 240, 236, 0.1)';
+      const computedStyle = getComputedStyle(document.documentElement);
+      ctx.strokeStyle = computedStyle.getPropertyValue('--grid-color').trim();
       ctx.lineWidth = 1;
       
       for (let i = 0; i <= canvas.width; i += cellSize) {
@@ -178,10 +179,13 @@ export default function GameOfLife({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawBaseGrid();
       if (showCells) {
+        const computedStyle = getComputedStyle(document.documentElement);
+        const cellColor = computedStyle.getPropertyValue('--cell-color').trim();
+        
         grid.forEach((row, i) => {
           row.forEach((cell, j) => {
             if (cell) {
-              ctx.fillStyle = 'rgba(128, 128, 128, 0.5)';
+              ctx.fillStyle = cellColor;
               ctx.fillRect(j * cellSize, i * cellSize, cellSize - 1, cellSize - 1);
             }
           });
@@ -200,7 +204,7 @@ export default function GameOfLife({
     const intervalId = setInterval(updateAndDraw, updateSpeed);
 
     return () => clearInterval(intervalId);
-  }, [grid, cellSize, updateSpeed, showCells]);
+  }, [grid, cellSize, updateSpeed, showCells, theme]);
 
   return enabled ? (
     <canvas

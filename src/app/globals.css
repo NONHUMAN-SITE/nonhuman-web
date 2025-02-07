@@ -1,9 +1,30 @@
 :root {
-  --primary-color: #fafafa;
-  --background-color: #0a0a0a;
-  --text-color: #ffffff;
-  --accent-color: #10b981;
-  --grid-color: rgba(240, 240, 236, 0.1);
+  /* Dark theme colors (default) */
+  --primary-color-dark: #fafafa;
+  --background-color-dark: #0a0a0a;
+  --text-color-dark: #ffffff;
+  --accent-color-dark: #ff2828;
+  --border-color-dark: #ffffff;
+  --grid-color-dark: rgba(240, 240, 236, 0.1);
+  --cell-color-dark: rgba(128, 128, 128, 0.5);
+  
+  /* Light theme colors */
+  --primary-color-light: #0000ff;
+  --background-color-light: #fff5e6;
+  --text-color-light: #121212;
+  --accent-color-light: #0000ff;
+  --border-color-light: #fff5e6;
+  --grid-color-light: #bec2f5;
+  --cell-color-light: rgba(103, 13, 230, 0.3);
+
+  /* Dynamic colors that will change based on theme */
+  --primary-color: var(--primary-color-dark);
+  --background-color: var(--background-color-dark);
+  --text-color: var(--text-color-dark);
+  --accent-color: var(--accent-color-dark);
+  --border-color: var(--border-color-dark);
+  --grid-color: var(--grid-color-dark);
+  --cell-color: var(--cell-color-dark);
 }
 
 * {
@@ -26,8 +47,8 @@ body {
 
 .header {
   padding: 1.5rem;
-  border-bottom: 2px solid var(--primary-color);
-  background: rgba(10, 10, 10, 0.95);
+  border-bottom: 2px solid var(--border-color);
+  background: var(--background-color);
   position: fixed;
   top: 0;
   left: 0;
@@ -69,7 +90,7 @@ body {
 }
 
 .nav-list a {
-  color: var(--primary-color);
+  color: var(--text-color);
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -121,8 +142,8 @@ body {
 
 .footer {
   padding: 2rem;
-  border-top: 2px solid var(--primary-color);
-  background: rgba(10, 10, 10, 0.9);
+  border-top: 2px solid var(--border-color);
+  background: var(--background-color);
 }
 
 .social-links {
@@ -133,7 +154,7 @@ body {
 }
 
 .social-icon {
-  color: var(--primary-color);
+  color: var(--text-color);
   font-size: 1.5rem;
   transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -173,4 +194,22 @@ body {
   display: flex;
   align-items: center;
   margin-left: 20px;
+}
+
+/* Add theme toggle styles */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  padding: 4px 8px;
+  margin-left: 10px;
+}
+
+.theme-icon {
+  width: 20px;
+  height: 20px;
 }

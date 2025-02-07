@@ -2,13 +2,20 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { HiLanguage } from "react-icons/hi2"
+import { BsSun, BsMoon } from "react-icons/bs"
 import { useLanguage } from '../context/LanguageContext'
+import { useTheme } from '../context/ThemeContext'
 
 export default function Header() {
   const { language, setLanguage } = useLanguage();
+  const { theme, setTheme } = useTheme();
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'es' : 'en');
+  };
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (
@@ -18,8 +25,8 @@ export default function Header() {
       left: 0,
       right: 0,
       zIndex: 1000,
-      backgroundColor: 'rgba(0, 0, 0, 0.9)', // Fondo semi-transparente
-      backdropFilter: 'blur(5px)' // Efecto de desenfoque
+      backgroundColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.9)' : '#fffaf2',
+      backdropFilter: 'blur(5px)'
     }}>
       <nav className="nav-container">
         <Link href="/" className="logo-container">
@@ -42,6 +49,9 @@ export default function Header() {
           <button onClick={toggleLanguage} className="language-toggle">
             <HiLanguage className="language-icon" />
             {language.toUpperCase()}
+          </button>
+          <button onClick={toggleTheme} className="theme-toggle">
+            {theme === 'dark' ? <BsSun className="theme-icon" /> : <BsMoon className="theme-icon" />}
           </button>
         </div>
       </nav>

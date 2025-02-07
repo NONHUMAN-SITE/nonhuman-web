@@ -1,3 +1,16 @@
+/* Variables específicas para MIND page */
+.wiki-content.dark {
+    --mind-border-color: #ffffff;
+    --mind-card-border: rgba(255, 255, 255, 0.1);
+    --mind-index-border: rgba(255, 255, 255, 0.1);
+}
+
+.wiki-content.light {
+    --mind-border-color: #0000ff;
+    --mind-card-border: rgba(0, 0, 255, 0.1);
+    --mind-index-border: rgba(0, 0, 255, 0.1);
+}
+
 .roadmap-title {
     text-align: center;
     font-size: 3rem;
@@ -16,9 +29,9 @@
     max-width: 800px;
     margin: 2rem auto;
     padding: 2rem;
-    background-color: black;
+    background-color: var(--background-color);
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--mind-index-border);
 }
 
 .index-section {
@@ -51,16 +64,17 @@
 }
 
 .content-card {
-    background-color: black;
+    background-color: var(--background-color);
     border-radius: 12px;
     padding: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--mind-card-border);
     transition: all 0.3s ease;
 }
 
 .content-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--mind-border-color);
 }
 
 .card-title {
@@ -94,26 +108,26 @@
 }
 
 .status-badge {
-    background-color: rgba(197, 7, 255, 0.2);
-    color: #9c07ff;
+    background-color: var(--accent-color);
+    color: var(--background-color);
     padding: 0.25rem 0.75rem;
     border-radius: 999px;
     font-size: 0.75rem;
     font-family: "Space Mono", monospace;
     font-weight: 400;
-    border: 1px solid rgba(156, 7, 255, 0.3);
     backdrop-filter: blur(5px);
     white-space: nowrap;
 }
 
 .clickable {
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 .clickable:hover {
-  transform: scale(1.02);
-  opacity: 0.9;
+    transform: scale(1.02);
+    opacity: 0.9;
+    color: var(--accent-color);
 }
 
 .content-container {
