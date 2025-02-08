@@ -169,7 +169,6 @@
   color: var(--text-color);
   opacity: 0.7;
   font-size: 0.9rem;
-  margin-bottom: 1rem;
 }
 
 .article-page-tags {
@@ -199,57 +198,65 @@
   }
 }
 
-/* Layout para artículos con sidebar */
+/* Variables específicas para artículos */
+.wiki-layout.dark {
+  --article-border-color: rgba(255, 255, 255, 0.1);
+  --article-bg: var(--background-color-dark);
+}
+
+.wiki-layout.light {
+  --article-border-color: rgba(0, 0, 0, 0.1);
+  --article-bg: var(--background-color-light);
+}
+
+/* Layout específico para artículos */
 .wiki-layout {
   display: flex;
   justify-content: center;
   max-width: 1800px;
-  margin: 0 auto;
+  margin: 80px auto 0;
   padding: 2rem;
   gap: 2rem;
   position: relative;
   width: 100%;
-  margin-top: 80px;
   min-height: calc(100vh - 80px);
 }
 
-/* Container principal para el contenido */
-.wiki-layout .content-container {
+.wiki-layout .article-content {
   width: 1200px;
   flex-shrink: 0;
   margin: 0;
   margin-left: 100px;
   padding: 2rem;
-  background-color: var(--mind-container-bg);
+  background-color: var(--article-bg);
   border-radius: 12px;
-  border: 1px solid var(--mind-container-border);
+  border: 1px solid var(--article-border-color);
   overflow: visible;
   position: relative;
   z-index: 1;
 }
 
-/* Estilos para la cabecera del contenido (título, descripción, info) */
-.content-metadata {
+.article-metadata-header {
   margin-bottom: 2rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--article-border-color);
 }
 
-.content-metadata h1 {
+.article-page-title {
   color: var(--primary-color);
   font-size: 2.5rem;
   margin-bottom: 1rem;
   font-family: "Space Mono", monospace;
 }
 
-.metadata-description {
+.article-page-description {
   color: var(--text-color);
   font-size: 1.1rem;
   opacity: 0.9;
   margin-bottom: 1rem;
 }
 
-.metadata-info {
+.article-page-info {
   display: flex;
   justify-content: space-between;
   color: var(--text-color);
@@ -257,21 +264,20 @@
   font-size: 0.9rem;
 }
 
-/* Contenedor para el contenido Markdown */
-.markdown-wrapper {
-  color: var(--text-color);
-  line-height: 1.6;
-  scroll-behavior: smooth;
-  scroll-padding-top: 100px;
-  background-color: var(--mind-container-bg);
-  border-radius: 12px;
-  padding: 2rem;
-  border: 1px solid var(--mind-container-border);
+/* Responsive adjustments */
+@media (max-width: 1600px) {
+  .wiki-layout .article-content {
+    width: 1000px;
+  }
 }
 
-/* Responsive adjustments */
 @media (max-width: 1024px) {
   .wiki-layout {
-    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+  
+  .wiki-layout .article-content {
+    width: 100%;
+    margin-left: 0;
   }
 }

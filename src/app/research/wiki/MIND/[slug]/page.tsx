@@ -21,7 +21,7 @@ interface ContentData {
 }
 
 const slugify = (str: string) => {
-  // Primero normalizamos el string y reemplazamos caracteres especiales
+  // Normalización y transformación del string
   const normalized = str
     .replace(/[áàäâã]/g, 'a')
     .replace(/[éèëê]/g, 'e')
@@ -36,7 +36,6 @@ const slugify = (str: string) => {
     .replace(/ñ/g, 'n')
     .replace(/Ñ/g, 'n');
 
-  // Luego aplicamos las transformaciones estándar
   return normalized
     .toLowerCase()
     .trim()
@@ -48,41 +47,39 @@ const slugify = (str: string) => {
 };
 
 export default function MINDContentPage() {
-  const params = useParams()
-  const { language } = useLanguage()
-  const { theme } = useTheme()
-  const slug = params.slug as string
-  const [content, setContent] = useState<string>('')
-  const [metadata, setMetadata] = useState<ContentMetadata | null>(null)
+  const params = useParams();
+  const { language } = useLanguage();
+  const { theme } = useTheme();
+  const slug = params.slug as string;
+  const [content, setContent] = useState<string>('');
+  const [metadata, setMetadata] = useState<ContentMetadata | null>(null);
 
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        // Primero obtenemos los metadatos del JSON
-        const metadataResponse = await fetch(`/wiki/MIND/${slug}.json`)
-        const contentData: ContentData = await metadataResponse.json()
-        const currentMetadata = contentData[language as keyof ContentData]
-        setMetadata(currentMetadata)
+        // Obtenemos los metadatos del JSON
+        const metadataResponse = await fetch(`/wiki/MIND/${slug}.json`);
+        const contentData: ContentData = await metadataResponse.json();
+        const currentMetadata = contentData[language as keyof ContentData];
+        setMetadata(currentMetadata);
 
-        // Luego cargamos el contenido basado en la URL del metadata
-        const contentUrl = currentMetadata.url.startsWith('http') 
-          ? currentMetadata.url // URL externa
-          : `/${currentMetadata.url}` // URL local (añadimos / al inicio)
-
-        const contentResponse = await fetch(contentUrl)
-        const text = await contentResponse.text()
-        setContent(text)
+        // Cargamos el contenido markdown según la URL del metadata
+        const contentUrl = currentMetadata.url.startsWith('http')
+          ? currentMetadata.url
+          : `/${currentMetadata.url}`;
+        const contentResponse = await fetch(contentUrl);
+        const text = await contentResponse.text();
+        setContent(text);
       } catch (error) {
-        console.error('Error loading content:', error)
-        setContent(language === 'en' 
+        console.error('Error loading content:', error);
+        setContent(language === 'en'
           ? '# Error\nContent not found or error loading the page.'
-          : '# Error\nContenido no encontrado o error al cargar la página.'
-        )
+          : '# Error\nContenido no encontrado o error al cargar la página.');
       }
-    }
+    };
 
-    fetchContent()
-  }, [slug, language]) // Agregamos language como dependencia
+    fetchContent();
+  }, [slug, language]);
 
   return (
     <div className={`wiki-layout ${theme}`}>
@@ -107,5 +104,5 @@ export default function MINDContentPage() {
         slugify={slugify}
       />
     </div>
-  )
+  );
 }

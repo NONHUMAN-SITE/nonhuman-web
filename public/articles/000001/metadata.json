@@ -1,11 +1,18 @@
 {
-    "title_english": "Langraph Tutorial #1: Introduction to Langraph",
-    "title_spanish": "Tutorial de Langraph #1: Introducción a Langraph",
-    "description_english": "Tutorial on the Langraph framework for handling agents and LLMs",
-    "description_spanish": "Tutorial del framework de Langraph para el manejo de agentes y LLMs",
-    "author": "Leonardo Pérez",
-    "date": "2025-02-09",
-    "tags": ["Agents", "LLM", "Langraph"],
-    "article_english": "/articles/000001/article.en.md",
-    "article_spanish": "/articles/000001/article.es.md"
+    "es": {
+        "title": "Tutorial de Langraph #1: Introducción a Langraph",
+        "description": "Tutorial del framework de Langraph para el manejo de agentes y LLMs",
+        "authors": "Leonardo Pérez",
+        "date": "9 de febrero de 2025",
+        "url": "articles/000001/article.es.md",
+        "tags": ["Agents", "LLM", "Langraph"]
+    },
+    "en": {
+        "title": "Langraph Tutorial #1: Introduction to Langraph",
+        "description": "Tutorial on the Langraph framework for handling agents and LLMs",
+        "authors": "Leonardo Pérez",
+        "date": "February 9, 2025",
+        "url": "articles/000001/article.en.md",
+        "tags": ["Agents", "LLM", "Langraph"]
+    }
 }

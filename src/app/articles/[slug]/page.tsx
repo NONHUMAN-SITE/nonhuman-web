@@ -8,15 +8,14 @@ import SidebarWiki from '@/app/research/components/SidebarWiki'
 import '../style.css'
 
 interface ArticleMetadata {
-  title_english: string;
-  title_spanish: string;
-  description_english: string;
-  description_spanish: string;
-  author: string;
-  date: string;
-  tags: string[];
-  article_english: string;
-  article_spanish: string;
+  [key: string]: {
+    title: string;
+    description: string;
+    authors: string;
+    date: string;
+    url: string;
+    tags?: string[];
+  }
 }
 
 const slugify = (str: string) => {
@@ -61,11 +60,8 @@ export default function ArticlePage() {
         setMetadata(articleData)
 
         // Cargamos el contenido según el idioma
-        const contentPath = language === 'en'
-          ? `/articles/${id}/article.en.md`
-          : `/articles/${id}/article.es.md`
-
-        const contentResponse = await fetch(contentPath)
+        const contentPath = articleData[language].url
+        const contentResponse = await fetch(`/${contentPath}`)
         const text = await contentResponse.text()
         setContent(text)
       } catch (error) {
@@ -80,30 +76,19 @@ export default function ArticlePage() {
     fetchContent()
   }, [id, language])
 
-  // Formato de fecha similar a la wiki
-  const formattedDate = metadata?.date
-    ? new Date(metadata.date).toLocaleDateString(
-        language === 'en' ? 'en-US' : 'es-ES',
-        { year: 'numeric', month: 'long', day: 'numeric' }
-      )
-    : ''
-
-  // Seleccionamos título y descripción según el idioma
-  const title = language === 'en' ? metadata?.title_english : metadata?.title_spanish
-  const description = language === 'en'
-    ? metadata?.description_english
-    : metadata?.description_spanish
+  // No necesitamos formatear la fecha ya que viene formateada del JSON
+  const currentLanguageData = metadata?.[language]
 
   return (
     <div className={`wiki-layout ${theme}`}>
-      <div className="content-container">
-        {metadata && (
-          <div className="content-metadata">
-            <h1>{title}</h1>
-            <p className="metadata-description">{description}</p>
-            <div className="metadata-info">
-              <span>{metadata.author}</span>
-              <span>{formattedDate}</span>
+      <div className="article-content">
+        {currentLanguageData && (
+          <div className="article-metadata-header">
+            <h1 className="article-page-title">{currentLanguageData.title}</h1>
+            <p className="article-page-description">{currentLanguageData.description}</p>
+            <div className="article-page-info">
+              <span>{currentLanguageData.authors}</span>
+              <span>{currentLanguageData.date}</span>
             </div>
           </div>
         )}

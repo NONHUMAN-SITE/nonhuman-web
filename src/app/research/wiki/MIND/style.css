@@ -135,6 +135,7 @@
 }
 
 .content-container {
+  /* Este contenedor unifica los metadatos y el contenido markdown */
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
@@ -143,47 +144,50 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.markdown-content {
-  color: var(--text-color);
-  line-height: 1.6;
-  scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+.wiki-layout .content-container {
+  width: 1200px;
+  flex-shrink: 0;
+  margin: 0;
+  margin-left: 100px;
+  padding: 2rem;
   background-color: var(--mind-container-bg);
   border-radius: 12px;
-  padding: 2rem;
   border: 1px solid var(--mind-container-border);
+  overflow: visible;
+  position: relative;
+  z-index: 1;
 }
 
-/* Asegurar que los headings tienen espacio suficiente */
-.markdown-content h1,
-.markdown-content h2,
-.markdown-content h3 {
-  scroll-margin-top: 100px;
+/* Se han eliminado las reglas para el contenedor .markdown-content,
+   pues el markdown ahora se renderiza directamente dentro de .content-container */
+
+/* Estilos para la sección de metadatos */
+.content-metadata {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Estilos para las ecuaciones matemáticas */
-.katex-display {
-  margin: 1.5rem 0;
-  overflow-x: auto;
-  overflow-y: hidden;
+.content-metadata h1 {
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-family: "Space Mono", monospace;
 }
 
-.katex {
-  font-size: 1.1em;
+.metadata-description {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 1rem;
 }
 
-/* Estilos para ecuaciones inline */
-.katex-inline {
-  padding: 0 0.2em;
-}
-
-/* Ajustes para el scroll horizontal en ecuaciones largas */
-.katex-display > .katex {
-  white-space: nowrap;
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 0.5rem 0;
+.metadata-info {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-color);
+  opacity: 0.7;
+  font-size: 0.9rem;
 }
 
 .wiki-layout {
@@ -213,8 +217,8 @@
   z-index: 1;
 }
 
-/* Asegurar scroll padding para todos los headings */
-.markdown-content [id] {
+/* Asegurar scroll padding para todos los headings dentro del contenedor unificado */
+.content-container [id] {
   scroll-margin-top: 120px;
   scroll-padding-top: 120px;
   position: relative;
@@ -222,7 +226,7 @@
 
 [data-heading] {
   position: relative;
-  scroll-margin-block-start: 120px; /* Modern standard property */
+  scroll-margin-block-start: 120px;
 }
 
 @media (max-width: 1600px) {
@@ -234,32 +238,4 @@
   .wiki-layout .content-container {
     width: 1000px;
   }
-}
-
-.content-metadata {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.content-metadata h1 {
-  color: var(--primary-color);
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-family: "Space Mono", monospace;
-}
-
-.metadata-description {
-  color: var(--text-color);
-  font-size: 1.1rem;
-  opacity: 0.9;
-  margin-bottom: 1rem;
-}
-
-.metadata-info {
-  display: flex;
-  justify-content: space-between;
-  color: var(--text-color);
-  opacity: 0.7;
-  font-size: 0.9rem;
 }
