@@ -40,7 +40,7 @@ export default function Header() {
           />
         </Link>
         <ul className="nav-list">
-          <li><Link href="/">{language === 'en' ? 'Home' : 'Inicio'}</Link></li>
+          <li><Link href="/about">{language === 'en' ? 'About' : 'Nosotros'}</Link></li>
           <li><Link href="/research">{language === 'en' ? 'Research' : 'Investigación'}</Link></li>
           <li><Link href="/articles">{language === 'en' ? 'Articles' : 'Articulos'}</Link></li>
           <li><Link href="/community">{language === 'en' ? 'Community' : 'Comunidad'}</Link></li>
