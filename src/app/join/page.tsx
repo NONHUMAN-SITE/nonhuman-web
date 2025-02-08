@@ -4,6 +4,7 @@ import './style.css';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { useEffect } from 'react';
+import AnimatedSphere from '@/app/components/AnimatedSphere';
 
 const content = {
   en: {
@@ -36,7 +37,7 @@ export default function Join() {
   const t = content[language];
 
   useEffect(() => {
-    // Update form colors based on theme
+    // Actualiza los colores del formulario según el tema
     const root = document.documentElement;
     if (theme === 'light') {
       root.style.setProperty('--form-border', 'var(--form-border-light)');
@@ -101,14 +102,9 @@ export default function Join() {
         </form>
       </div>
       
-      <div className="join-image-container">
-        <Image
-          src="/join.png"
-          alt="Join NONHUMAN"
-          width={500}
-          height={500}
-          className="join-image"
-        />
+      {/* Se asigna un tamaño mayor para el contenedor del AnimatedSphere para que la escena sea más ancha y alta */}
+      <div className="join-image-container" style={{ width: '800px', height: '800px', marginTop: '50px' }}>
+        <AnimatedSphere />
       </div>
     </div>
   );
