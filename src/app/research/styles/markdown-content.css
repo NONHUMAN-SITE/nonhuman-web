@@ -5,6 +5,18 @@
     --markdown-border-light: #ddd;
     --markdown-text-dark: #e5e5e5;
     --markdown-text-light: #121212;
+    --table-bg-dark: #1a1a1a;
+    --table-border-dark: #333;
+    --table-header-bg-dark: #262626;
+    --table-row-hover-dark: rgba(255, 255, 255, 0.05);
+    --table-row-even-dark: rgba(255, 255, 255, 0.03);
+    --table-text-dark: #e5e5e5;
+    --table-bg-light: #ffffff;
+    --table-border-light: #e0e4ff;
+    --table-header-bg-light: #f5f6ff;
+    --table-row-hover-light: rgba(103, 13, 230, 0.05);
+    --table-row-even-light: rgba(245, 246, 255, 0.8);
+    --table-text-light: #121212;
 }
 
 .markdown-content {
@@ -125,7 +137,7 @@ html {
 
 .markdown-content strong {
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--accent-color);
 }
 
 /* Estilos específicos para el patrón * *Ejemplo:* */
@@ -151,36 +163,79 @@ html {
   color: var(--accent-color);
 }
 
-/* Tablas */
+/* Tablas generales (estructura) */
 .markdown-content table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  margin: 1rem 0;
-  background-color: var(--background-color);
-  border-radius: 0.75rem;
+  margin: 2rem 0;
   overflow: hidden;
+  border-radius: 0.5rem;
 }
 
+/* Tema oscuro */
+[data-theme="dark"] .markdown-content table {
+  background-color: var(--table-bg-dark);
+  border: 1px solid var(--table-border-dark);
+}
+
+[data-theme="dark"] .markdown-content th {
+  background-color: var(--table-header-bg-dark);
+  color: var(--table-text-dark);
+  border-bottom: 2px solid var(--table-border-dark);
+}
+
+[data-theme="dark"] .markdown-content td {
+  color: var(--table-text-dark);
+  border-bottom: 1px solid var(--table-border-dark);
+}
+
+[data-theme="dark"] .markdown-content tr:nth-child(even) {
+  background-color: var(--table-row-even-dark);
+}
+
+[data-theme="dark"] .markdown-content tr:hover {
+  background-color: var(--table-row-hover-dark);
+}
+
+/* Tema claro */
+[data-theme="light"] .markdown-content table {
+  background-color: var(--table-bg-light);
+  border: 1px solid var(--table-border-light);
+}
+
+[data-theme="light"] .markdown-content th {
+  background-color: var(--table-header-bg-light);
+  color: var(--table-text-light);
+  border-bottom: 2px solid var(--table-border-light);
+}
+
+[data-theme="light"] .markdown-content td {
+  color: var(--table-text-light);
+  border-bottom: 1px solid var(--table-border-light);
+}
+
+[data-theme="light"] .markdown-content tr:nth-child(even) {
+  background-color: var(--table-row-even-light);
+}
+
+[data-theme="light"] .markdown-content tr:hover {
+  background-color: var(--table-row-hover-light);
+}
+
+/* Estilos comunes */
 .markdown-content th,
 .markdown-content td {
-  border: 1px solid var(--border-color);
   padding: 1rem;
   text-align: left;
-  color: var(--text-color);
 }
 
 .markdown-content th {
-  background-color: #262626;
   font-weight: 600;
 }
 
-.markdown-content tr:nth-child(even) {
-  background-color: #222;
-}
-
-.markdown-content tr:hover {
-  background-color: #2a2a2a;
+.markdown-content tr:last-child td {
+  border-bottom: none;
 }
 
 /* Blockquotes */

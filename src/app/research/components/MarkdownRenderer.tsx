@@ -16,6 +16,7 @@ import { Components } from 'react-markdown'
 
 interface MarkdownRendererProps {
   content: string;
+  theme?: 'light' | 'dark';
   options?: {
     slugify?: (str: string) => string;
   };
@@ -47,7 +48,7 @@ interface ChildProps {
   children?: string | ChildProps[] | ReactNode;
 }
 
-export default function MarkdownRenderer({ content, options }: MarkdownRendererProps) {
+export default function MarkdownRenderer({ content, options, theme = 'dark' }: MarkdownRendererProps) {
   const [showCopied, setShowCopied] = useState(false);
   const [mermaidInitialized, setMermaidInitialized] = useState(false);
 
@@ -87,7 +88,7 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
   };
 
   return (
-    <div className="markdown-content">
+    <div className="markdown-content" data-theme={theme}>
       <ReactMarkdown 
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[
@@ -262,25 +263,38 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
               </code>
             )
           },
-          table: ({ children }) => {
-            // Asegurarse de que los children están dentro de filas
-            const rows = React.Children.toArray(children).filter(child => {
-              // Filtrar nodos de texto y elementos no válidos
-              if (typeof child === 'string') return false;
-              if (React.isValidElement(child) && child.type === 'tr') return true;
-              return false;
-            });
-
-            return (
-              <div className="overflow-x-auto">
-                <table className="min-w-full">
-                  <tbody>
-                    {rows}
-                  </tbody>
-                </table>
-              </div>
-            );
-          },
+          table: ({ children }) => (
+            <div className="overflow-x-auto my-8">
+              <table>
+                {children}
+              </table>
+            </div>
+          ),
+          thead: ({ children }) => (
+            <thead>
+              {children}
+            </thead>
+          ),
+          tbody: ({ children }) => (
+            <tbody>
+              {children}
+            </tbody>
+          ),
+          tr: ({ children }) => (
+            <tr>
+              {children}
+            </tr>
+          ),
+          th: ({ children }) => (
+            <th>
+              {children}
+            </th>
+          ),
+          td: ({ children }) => (
+            <td>
+              {children}
+            </td>
+          ),
           blockquote: ({ children }) => (
             <blockquote className="border-l-4 border-green-500 pl-4 italic">
               {children}
@@ -337,7 +351,7 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
             </em>
           ),
           strong: ({ children }) => (
-            <strong className="font-bold">
+            <strong className="font-bold" style={{ color: "var(--accent-color)" }}>
               {children}
             </strong>
           ),
@@ -346,7 +360,8 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
           'details', 'summary', 'div', 'span',
           'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
           'p', 'img', 'pre', 'code', 'table', 'blockquote', 'a',
-          'ul', 'ol', 'li', 'em', 'strong'
+          'ul', 'ol', 'li', 'em', 'strong',
+          'thead', 'tbody', 'tr', 'th', 'td'
         ]}
         unwrapDisallowed={true}
       >
