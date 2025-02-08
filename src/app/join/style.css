@@ -1,0 +1,146 @@
+/* Custom form colors */
+:root {
+  /* Dark theme form colors */
+  --form-border-dark: #404040;
+  --form-focus-dark: #ff2828;
+  
+  /* Light theme form colors */
+  --form-border-light: #d4d4d4;
+  --form-focus-light: #0000ff;
+
+  /* Dynamic form colors that will change based on theme */
+  --form-border: var(--form-border-dark);
+  --form-focus: var(--form-focus-dark);
+}
+
+.join-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.join-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.join-title {
+  font-family: "Space Mono", monospace;
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.join-description {
+  margin-bottom: 3rem;
+}
+
+.join-description p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-family: "Space Mono", monospace;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.8rem;
+  border: 2px solid var(--form-border);
+  background: var(--background-color);
+  color: var(--text-color);
+  border-radius: 4px;
+  font-family: "Inter", sans-serif;
+  transition: all 0.3s ease;
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--form-focus);
+  box-shadow: 0 0 5px rgba(var(--form-focus), 0.2);
+}
+
+.submit-button {
+  background: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  padding: 1rem 2rem;
+  font-family: "Space Mono", monospace;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  opacity: 0.9;
+}
+
+.join-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: sticky;
+  top: 100px;
+}
+
+.join-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .join-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .join-content {
+    max-width: 100%;
+  }
+
+  .join-image-container {
+    position: static;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .join-title {
+    font-size: 2rem;
+  }
+
+  .join-description p {
+    font-size: 1rem;
+  }
+}

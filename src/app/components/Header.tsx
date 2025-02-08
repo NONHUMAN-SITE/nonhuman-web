@@ -25,7 +25,7 @@ export default function Header() {
       left: 0,
       right: 0,
       zIndex: 1000,
-      backgroundColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.9)' : '#fffaf2',
+      backgroundColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.9)' : 'var(--background-color)',
       backdropFilter: 'blur(5px)'
     }}>
       <nav className="nav-container">
@@ -43,7 +43,7 @@ export default function Header() {
           <li><Link href="/about">{language === 'en' ? 'About' : 'Nosotros'}</Link></li>
           <li><Link href="/research">{language === 'en' ? 'Research' : 'Investigación'}</Link></li>
           <li><Link href="/articles">{language === 'en' ? 'Articles' : 'Articulos'}</Link></li>
-          <li><Link href="/community">{language === 'en' ? 'Community' : 'Comunidad'}</Link></li>
+          <li><Link href="/join">{language === 'en' ? 'Join' : 'Únete'}</Link></li>
         </ul>
         <div className="language-toggle-container">
           <button onClick={toggleLanguage} className="language-toggle">
