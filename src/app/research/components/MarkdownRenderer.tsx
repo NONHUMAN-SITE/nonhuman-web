@@ -96,14 +96,14 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
             slugify: (text: string) => {
               const id = options?.slugify?.(text) || text
                 .toLowerCase()
-                .replace(/[áàäâã]/g, 'a')
-                .replace(/[éèëê]/g, 'e')
-                .replace(/[íìïî]/g, 'i')
-                .replace(/[óòöôõ]/g, 'o')
-                .replace(/[úùüû]/g, 'u')
-                .replace(/[^\w\s-]/g, '')
-                .replace(/\s+/g, '-')
-                .replace(/-+/g, '-');
+                //.replace(/[áàäâã]/g, 'a')
+                //.replace(/[éèëê]/g, 'e')
+                //.replace(/[íìïî]/g, 'i')
+                //.replace(/[óòöôõ]/g, 'o')
+                //.replace(/[úùüû]/g, 'u')
+                //.replace(/[^\w\s-]/g, '')
+                //.replace(/\s+/g, '-')
+                //.replace(/-+/g, '-');
               return id;
             }
           }],
@@ -194,6 +194,7 @@ export default function MarkdownRenderer({ content, options }: MarkdownRendererP
                     width={dimensions.width}
                     height={dimensions.height}
                     style={{ 
+                      width: dimensions.width + 'px',
                       maxWidth: '100%',
                       height: 'auto'
                     }}
