@@ -15,29 +15,20 @@ export default function ArticlesPage() {
   // Example articles data
   const articles = [
     {
-      title: "Understanding Transformer Architecture",
-      description: "A deep dive into the architecture that revolutionized natural language processing, exploring its key components and mechanisms.",
-      date: "2024-03-15",
-      tags: ["AI", "NLP", "Transformers"],
-      author: "Maria García"
-    },
-    {
-      title: "Implementing RLHF: A Practical Guide",
-      description: "Step-by-step guide on implementing Reinforcement Learning from Human Feedback, with code examples and best practices.",
-      date: "2024-03-10",
-      tags: ["RLHF", "Machine Learning", "Implementation"],
-      author: "John Smith"
-    },
-    {
-      title: "The Future of Vision Language Models",
-      description: "Exploring the latest developments in multimodal AI and their potential impact on future applications.",
-      date: "2024-03-05",
-      tags: ["VLM", "Computer Vision", "AI"],
-      author: "Alex Johnson"
+      id: "000001",
+      title_english: "Langraph Tutorial #1: Introduction to Langraph",
+      title_spanish: "Tutorial de Langraph #1: Introducción a Langraph",
+      description_english: "Tutorial on the Langraph framework for handling agents and LLMs",
+      description_spanish: "Tutorial del framework de Langraph para el manejo de agentes y LLMs",
+      date: "2025-02-09",
+      tags: ["Agents", "LLM", "Langraph"],
+      author: "Leonardo Pérez",
+      article_english: "/articles/000001/article.en.md",
+      article_spanish: "/articles/000001/article.es.md"
     }
   ]
 
-  const tags = ["all", "AI", "NLP", "Transformers", "RLHF", "Machine Learning", "VLM", "Computer Vision"]
+  const tags = ["all", "Agents", "LLM", "Langraph","VLM","World Models"]
 
   return (
     <div className="articles-container">
@@ -86,7 +77,12 @@ export default function ArticlesPage() {
         {articles.map((article, index) => (
           <ArticleCard
             key={index}
-            {...article}
+            id={article.id}
+            title={language === 'en' ? article.title_english : article.title_spanish}
+            description={language === 'en' ? article.description_english : article.description_spanish}
+            date={article.date}
+            tags={article.tags}
+            author={article.author}
           />
         ))}
       </div>

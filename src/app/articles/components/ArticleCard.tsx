@@ -1,4 +1,9 @@
+'use client'
+import Link from 'next/link'
+import { useLanguage } from '@/app/context/LanguageContext'
+
 interface ArticleCardProps {
+  id: string;
   title: string;
   description: string;
   date: string;
@@ -6,14 +11,29 @@ interface ArticleCardProps {
   author: string;
 }
 
-export default function ArticleCard({ title, description, date, tags, author }: ArticleCardProps) {
+export default function ArticleCard({
+  id,
+  title,
+  description,
+  date,
+  tags,
+  author
+}: ArticleCardProps) {
+  const { language } = useLanguage()
+  
+  // Formatear la fecha según el idioma
+  const formattedDate = new Date(date).toLocaleDateString(
+    language === 'en' ? 'en-US' : 'es-ES',
+    { year: 'numeric', month: 'long', day: 'numeric' }
+  )
+  
   return (
-    <div className="article-card">
+    <Link href={`/articles/${id}`} className="article-card">
       <div className="article-header">
-        <h2 className="article-title space-mono-bold">{title}</h2>
+        <h2 className="article-title">{title}</h2>
         <div className="article-metadata">
-          <span className="article-date">{date}</span>
-          <span className="article-author">{author}</span>
+          <span>{author}</span>
+          <span>{formattedDate}</span>
         </div>
       </div>
       <p className="article-description">{description}</p>
@@ -24,6 +44,6 @@ export default function ArticleCard({ title, description, date, tags, author }: 
           </span>
         ))}
       </div>
-    </div>
-  );
+    </Link>
+  )
 }

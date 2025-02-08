@@ -97,12 +97,10 @@ export default function MINDContentPage() {
             </div>
           </div>
         )}
-        <div className="markdown-wrapper">
-          <MarkdownRenderer 
-            content={content}
-            options={{ slugify }}
-          />
-        </div>
+        <MarkdownRenderer 
+          content={content}
+          options={{ slugify }}
+        />
       </div>
       <SidebarWiki 
         content={content}

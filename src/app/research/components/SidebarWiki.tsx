@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState, useCallback, useRef } from 'react';
 import '../styles/sidebar-wiki.css';
+import { useLanguage } from '@/app/context/LanguageContext';
 
 interface HeadingItem {
   text: string;
@@ -14,6 +15,7 @@ interface SidebarWikiProps {
 }
 
 export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
+  const { language } = useLanguage();
   const [activeId, setActiveId] = useState<string>('');
   const [headings, setHeadings] = useState<HeadingItem[]>([]);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -147,7 +149,9 @@ export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
   return (
     <aside className="sidebar-wiki" ref={sidebarRef}>
       <nav>
-        <h3 className="text-xl font-bold mb-4">Contenido</h3>
+        <h3 className="text-xl font-bold mb-4">
+          {language === 'es' ? 'Contenido' : 'Content'}
+        </h3>
         <ul>
           {headings.map((heading, index) => (
             <li 
