@@ -3,8 +3,9 @@ import Image from 'next/image';
 import './style.css';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import AnimatedSphere from '@/app/components/AnimatedSphere';
+import AnimatedSphereMobile from '@/app/components/AnimatedSphereMobile';
 
 const content = {
   en: {
@@ -34,7 +35,18 @@ const content = {
 export default function Join() {
   const { language } = useLanguage();
   const { theme } = useTheme();
+  const [isMobile, setIsMobile] = useState(false);
   const t = content[language];
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     // Actualiza los colores del formulario según el tema
@@ -100,12 +112,19 @@ export default function Join() {
 
           <button type="submit" className="submit-button">{t.submit}</button>
         </form>
+
+        {isMobile && (
+          <div className="mobile-sphere-container">
+            <AnimatedSphereMobile />
+          </div>
+        )}
       </div>
       
-      {/* Se asigna un tamaño mayor para el contenedor del AnimatedSphere para que la escena sea más ancha y alta */}
-      <div className="join-image-container" style={{ width: '800px', height: '800px', marginTop: '50px' }}>
-        <AnimatedSphere />
-      </div>
+      {!isMobile && (
+        <div className="join-image-container" style={{ width: '800px', height: '800px', marginTop: '50px' }}>
+          <AnimatedSphere />
+        </div>
+      )}
     </div>
   );
 }
