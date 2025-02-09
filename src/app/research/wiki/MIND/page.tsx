@@ -133,7 +133,7 @@ export default function MINDPage() {
   }
 
   return (
-    <div className={`wiki-content ${theme}`}>
+    <div className={`wiki-content ${theme} mind-page-layout`}>
       <div className="roadmap-container">
         <h1 className="roadmap-title space-mono-bold">ROADMAP</h1>
         

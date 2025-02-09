@@ -239,3 +239,29 @@
     width: 1000px;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Cambios para vista mobile: Organizar TODOS los containers en una sola columna
+--------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* La clase `mind-page-layout` obliga a mostrar los containers en columna en mobile */
+  .mind-page-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+  }
+  
+  /* Forzar el ancho completo y ajustar márgenes y padding para ambos containers */
+  .mind-page-layout .roadmap-container,
+  .mind-page-layout .content-grid {
+      width: 100%;
+      margin: 0;
+      padding: 1rem;
+  }
+  
+  /* Ahora, en mobile, el grid de contenido muestra sus items en una sola columna */
+  .mind-page-layout .content-grid {
+      grid-template-columns: 1fr;
+  }
+}
