@@ -395,4 +395,11 @@ html {
 /* Estilos para video */
 .markdown-content video:focus {
   outline: none;
+}
+
+@media (max-width: 1000px) {
+  .markdown-content {
+    max-width: 100%;
+    padding: 1rem;
+  }
 } 

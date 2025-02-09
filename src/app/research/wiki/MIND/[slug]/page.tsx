@@ -53,6 +53,16 @@ export default function MINDContentPage() {
   const slug = params.slug as string;
   const [content, setContent] = useState<string>('');
   const [metadata, setMetadata] = useState<ContentMetadata | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const updateIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    updateIsMobile();
+    window.addEventListener('resize', updateIsMobile);
+    return () => window.removeEventListener('resize', updateIsMobile);
+  }, []);
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -99,10 +109,13 @@ export default function MINDContentPage() {
           options={{ slugify }}
         />
       </div>
-      <SidebarWiki 
-        content={content}
-        slugify={slugify}
-      />
+      {/* Renderizamos el sidebar solo en desktop */}
+      {!isMobile && (
+        <SidebarWiki 
+          content={content}
+          slugify={slugify}
+        />
+      )}
     </div>
   );
 }

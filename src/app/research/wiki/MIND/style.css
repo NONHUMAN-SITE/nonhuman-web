@@ -252,7 +252,7 @@
       gap: 1.5rem;
   }
   
-  /* Forzar el ancho completo y ajustar márgenes y padding para ambos containers */
+  /* Forzar el ancho completo y ajustar márgenes y padding para los containers de roadmap y grid */
   .mind-page-layout .roadmap-container,
   .mind-page-layout .content-grid {
       width: 100%;
@@ -263,5 +263,47 @@
   /* Ahora, en mobile, el grid de contenido muestra sus items en una sola columna */
   .mind-page-layout .content-grid {
       grid-template-columns: 1fr;
+  }
+  
+  /* Convertir el layout en columna */
+  .wiki-layout {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  /* Ajustar el contenedor del contenido del artículo a ancho completo */
+  .article-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* **Nuevo:** Ajustar el contenedor de contenido markdown para páginas MIND a ancho completo */
+  .wiki-layout .content-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-left: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Ocultar el sidebar en mobile */
+  .sidebar-wiki {
+    display: none;
+  }
+  
+  /* NUEVO: Ajuste para que las imágenes de los proyectos se muestren en su totalidad y se reduzcan de tamaño
+     Se aplican a imágenes dentro de la grid o dentro de las cards */
+  .content-grid img,
+  .content-card img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
   }
 }

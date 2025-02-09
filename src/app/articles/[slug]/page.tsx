@@ -97,10 +97,13 @@ export default function ArticlePage() {
           options={{ slugify }}
         />
       </div>
-      <SidebarWiki 
-        content={content}
-        slugify={slugify}
-      />
+      {/* Contenedor para el Sidebar; se oculta en la vista mobile */}
+      <div className="sidebar-wiki">
+        <SidebarWiki 
+          content={content}
+          slugify={slugify}
+        />
+      </div>
     </div>
   )
 }
