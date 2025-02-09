@@ -60,6 +60,28 @@ export default function Join() {
     }
   }, [theme]);
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.currentTarget);
+    const fullName = formData.get('fullName');
+    const email = formData.get('email');
+    const statement = formData.get('statement');
+    const linkedin = formData.get('linkedin');
+
+    const emailBody = `Nombre: ${fullName}
+Email: ${email}
+
+Statement:
+${statement}
+
+LinkedIn: ${linkedin || 'No proporcionado'}`;
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=nonhuman.site@gmail.com&su=${encodeURIComponent('[NONHUMAN WEB CONTACT]')}&body=${encodeURIComponent(emailBody)}`;
+
+    window.open(gmailUrl, '_blank');
+  };
+
   return (
     <div className="join-container">
       <div className="join-content">
@@ -70,7 +92,7 @@ export default function Join() {
           <p>{t.description2}</p>
         </div>
 
-        <form className="join-form">
+        <form className="join-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="fullName">{t.fullName}</label>
             <input 
