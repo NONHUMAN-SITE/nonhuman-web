@@ -124,6 +124,34 @@
   margin: 2rem auto 0;
 }
 
+.title-container {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.title-option {
+  font-family: "Space Mono", monospace;
+  font-size: 3rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+}
+
+.title-option.active {
+  color: var(--accent-color);
+}
+
+.title-option:not(.active) {
+  opacity: 0.5;
+  font-size: 2.5rem;
+  color: var(--text-color);
+}
+
+.title-option:hover:not(.active) {
+  opacity: 0.7;
+}
+
 /* Responsive design */
 @media (max-width: 1024px) {
   .join-container {
@@ -153,5 +181,17 @@
   .mobile-sphere-container {
     width: 250px;
     height: 250px;
+  }
+
+  .title-container {
+    gap: 1rem;
+  }
+
+  .title-option {
+    font-size: 2rem;
+  }
+
+  .title-option:not(.active) {
+    font-size: 1.8rem;
   }
 }

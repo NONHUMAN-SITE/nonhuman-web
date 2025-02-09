@@ -14,10 +14,10 @@ export default function Footer() {
           se controla mediante la propiedad "gap" en la clase ".social-links" del archivo globals.css.
         */}
         <div className="social-links">
-          <a href="https://twitter.com/nonhuman" target="_blank" rel="noopener noreferrer">
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
             <FaTwitter className="social-icon" />
           </a>
-          <a href="https://instagram.com/nonhuman" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/0xnonhuman/" target="_blank" rel="noopener noreferrer">
             <FaInstagram className="social-icon" />
           </a>
           <a href="https://linkedin.com/company/nonhuman" target="_blank" rel="noopener noreferrer">
