@@ -132,7 +132,7 @@ graph.invoke({"graph_state": "Hi, this is Leo"})
 
 The output could be as follows:
 
-```
+```bash
 ---Node 1---
 ---Node 2---
 {'graph_state': 'Hi, this is Leo. I am happy'}
