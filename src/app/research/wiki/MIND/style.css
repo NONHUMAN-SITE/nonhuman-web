@@ -283,8 +283,8 @@
   
   /* **Nuevo:** Ajustar el contenedor de contenido markdown para páginas MIND a ancho completo */
   .wiki-layout .content-container {
-    width: 100%;
-    max-width: 100%;
+    width: 170%;
+    max-width: 160vw;
     margin: 0 auto;
     margin-left: 0;
     padding: 1rem;

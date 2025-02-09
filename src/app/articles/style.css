@@ -281,3 +281,28 @@
     margin-left: 0;
   }
 }
+
+/* Ajustes para vista mobile */
+@media (max-width: 768px) {
+  /* Convertir el layout en columna */
+  .wiki-layout {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  /* Ajustar el contenedor del contenido del artículo */
+  .wiki-layout .article-content {
+    width: 170%;
+    max-width: 160vw;
+    margin: 0 auto;
+    margin-left: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Ocultar el sidebar en mobile */
+  .sidebar-wiki {
+    display: none;
+  }
+}

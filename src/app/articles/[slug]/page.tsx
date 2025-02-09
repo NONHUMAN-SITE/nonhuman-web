@@ -50,6 +50,17 @@ export default function ArticlePage() {
   const id = params.slug as string
   const [content, setContent] = useState<string>('')
   const [metadata, setMetadata] = useState<ArticleMetadata | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Añadir detector de mobile
+  useEffect(() => {
+    const updateIsMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    updateIsMobile()
+    window.addEventListener('resize', updateIsMobile)
+    return () => window.removeEventListener('resize', updateIsMobile)
+  }, [])
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -97,13 +108,12 @@ export default function ArticlePage() {
           options={{ slugify }}
         />
       </div>
-      {/* Contenedor para el Sidebar; se oculta en la vista mobile */}
-      <div className="sidebar-wiki">
+      {!isMobile && (
         <SidebarWiki 
           content={content}
           slugify={slugify}
         />
-      </div>
+      )}
     </div>
   )
 }
