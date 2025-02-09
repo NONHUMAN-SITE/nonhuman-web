@@ -106,3 +106,31 @@
     font-size: 1rem;
     text-shadow: 0 0 8px rgba(var(--text-color-rgb), 0.2);
   }
+
+  /* Responsive Styles for Mobile */
+  @media (max-width: 768px) {
+    .research-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: -10.0rem;
+    }
+    
+    .research-title {
+        font-size: 2.5rem;
+    }
+    
+    .search-container {
+        margin-top: 1rem;
+        width: 100%;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-image {
+        height: 300px;
+        object-fit: cover;
+    }
+  }
