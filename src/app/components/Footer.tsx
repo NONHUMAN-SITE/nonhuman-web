@@ -8,6 +8,10 @@ export default function Footer() {
 
   return (
     <footer className="footer">
+      {/*
+        En la versión móvil, la separación entre los íconos de redes sociales 
+        se controla mediante la propiedad "gap" en la clase ".social-links" del archivo globals.css.
+      */}
       <div className="social-links">
         <a href="https://twitter.com/nonhuman" target="_blank" rel="noopener noreferrer">
           <FaTwitter className="social-icon" />

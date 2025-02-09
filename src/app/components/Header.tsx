@@ -1,7 +1,9 @@
 'use client'
 import Link from 'next/link'
-import Image from 'next/image'
-import { HiLanguage } from "react-icons/hi2"
+import { useState } from 'react'
+import { GiHamburgerMenu } from 'react-icons/gi'
+import { IoMdClose } from 'react-icons/io'
+import { GrLanguage } from "react-icons/gr";
 import { BsSun, BsMoon } from "react-icons/bs"
 import { useLanguage } from '../context/LanguageContext'
 import { useTheme } from '../context/ThemeContext'
@@ -9,6 +11,7 @@ import { useTheme } from '../context/ThemeContext'
 export default function Header() {
   const { language, setLanguage } = useLanguage();
   const { theme, setTheme } = useTheme();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'es' : 'en');
@@ -16,6 +19,11 @@ export default function Header() {
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
+  // Cierra el menú móvil al hacer clic en un enlace
+  const handleLinkClick = () => {
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -29,25 +37,22 @@ export default function Header() {
       backdropFilter: 'blur(5px)'
     }}>
       <nav className="nav-container">
-        <Link href="/" className="logo-container">
-          <Image
-            src="/NONHUMAN-LOGO.png"
-            alt="NONHUMAN Logo"
-            width={50}
-            height={50}
-            className="logo-image"
-            style={{ borderRadius: '8px' }}
-          />
+        <Link href="/" className="logo-container" onClick={handleLinkClick}>
+          <span className="logo-text">N</span>
         </Link>
-        <ul className="nav-list">
-          <li><Link href="/about">{language === 'en' ? 'About' : 'Nosotros'}</Link></li>
-          <li><Link href="/research">{language === 'en' ? 'Research' : 'Investigación'}</Link></li>
-          <li><Link href="/articles">{language === 'en' ? 'Articles' : 'Articulos'}</Link></li>
-          <li><Link href="/join">{language === 'en' ? 'Join' : 'Únete'}</Link></li>
+        {/* Botón para mostrar/ocultar el menú en versión móvil */}
+        <button className="mobile-menu-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          {isMobileMenuOpen ? <IoMdClose className="menu-icon" /> : <GiHamburgerMenu className="menu-icon" />}
+        </button>
+        <ul className={`nav-list ${isMobileMenuOpen ? 'open' : ''}`}>
+          <li><Link href="/about" onClick={handleLinkClick}>{language === 'en' ? 'About' : 'Nosotros'}</Link></li>
+          <li><Link href="/research" onClick={handleLinkClick}>{language === 'en' ? 'Research' : 'Investigación'}</Link></li>
+          <li><Link href="/articles" onClick={handleLinkClick}>{language === 'en' ? 'Articles' : 'Articulos'}</Link></li>
+          <li><Link href="/join" onClick={handleLinkClick}>{language === 'en' ? 'Join' : 'Únete'}</Link></li>
         </ul>
-        <div className="language-toggle-container">
+        <div className="language-theme-toggle">
           <button onClick={toggleLanguage} className="language-toggle">
-            <HiLanguage className="language-icon" />
+            <GrLanguage className="language-icon" />
             {language.toUpperCase()}
           </button>
           <button onClick={toggleTheme} className="theme-toggle">
