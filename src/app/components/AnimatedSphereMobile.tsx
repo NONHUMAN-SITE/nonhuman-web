@@ -81,7 +81,7 @@ export default function AnimatedSphereMobile() {
         container.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [theme]);
 
   useEffect(() => {
     const newColor = theme === 'light'

@@ -1,4 +1,5 @@
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface ProjectCardProps {
   title: string;
@@ -22,7 +23,13 @@ export default function ProjectCard({
 
   return (
     <div className="project-card" onClick={handleClick} style={{ cursor: 'pointer' }}>
-      <img src={imageUrl} alt={title} className="project-image" />
+      <Image 
+        src={imageUrl} 
+        alt={title} 
+        className="project-image"
+        width={400}
+        height={300}
+      />
       <div className="project-info">
         <h3 className="project-title">{title}</h3>
         <p className="project-date">{date}</p>

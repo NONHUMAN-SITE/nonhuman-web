@@ -97,7 +97,7 @@ export default function AnimatedSphere() {
         container.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [theme]);
 
   // Al cambiar el tema, se actualizan los colores de los materiales
   useEffect(() => {

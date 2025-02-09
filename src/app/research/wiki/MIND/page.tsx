@@ -1,15 +1,13 @@
 'use client'
 import { useLanguage } from '@/app/context/LanguageContext'
 import { useTheme } from '@/app/context/ThemeContext'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import './style.css'
 
 export default function MINDPage() {
   const { language } = useLanguage()
   const { theme } = useTheme()
   const router = useRouter()
-  const pathname = usePathname()
-  const isSlugPage = pathname.includes('/MIND/') && pathname.split('/MIND/').length > 1
 
   const roadmapItems = [
     {

@@ -1,12 +1,10 @@
 'use client'
 import { useLanguage } from '../context/LanguageContext'
-import { useTheme } from '../context/ThemeContext'
 import Link from 'next/link'
 import './style.css'
 
 export default function About() {
   const { language } = useLanguage()
-  const { theme } = useTheme()
 
   const content = {
     en: {

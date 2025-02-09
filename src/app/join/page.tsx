@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image';
 import './style.css';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';

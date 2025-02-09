@@ -18,7 +18,7 @@ export default function Research() {
         : "Explicando los Large Language Models (LLM) desde cero. Todo lo que necesitas saber sobre estos y cómo construir uno"
     },
     {
-      title: "S0-ARM100",
+      title: "SO-ARM100",
       date: "January 19, 2025",
       imageUrl: "/projects/so-arm100.png",
       description: language === 'en'

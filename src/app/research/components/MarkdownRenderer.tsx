@@ -12,7 +12,7 @@ import 'prismjs/themes/prism-tomorrow.css'
 import '../styles/markdown-content.css'
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
 import React, { useState, useEffect } from 'react'
-import { Components } from 'react-markdown'
+import Image from 'next/image'
 
 interface MarkdownRendererProps {
   content: string;
@@ -28,28 +28,13 @@ type CodeProps = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> & {
   children?: ReactNode;
 }
 
-// Actualizado el tipo PreProps para usar Components
-type PreProps = Components['pre'] & {
-  children?: ReactNode;
-  className?: string;
-}
-
 interface CodeElement extends React.ReactElement {
   props: {
     children?: string | ReactNode[];
   };
 }
 
-interface ChildProps {
-  type?: string;
-  props?: {
-    children?: string | ChildProps[] | ReactNode;
-  };
-  children?: string | ChildProps[] | ReactNode;
-}
-
 export default function MarkdownRenderer({ content, options, theme = 'dark' }: MarkdownRendererProps) {
-  const [showCopied, setShowCopied] = useState(false);
   const [mermaidInitialized, setMermaidInitialized] = useState(false);
 
   useEffect(() => {
@@ -64,7 +49,7 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
         setMermaidInitialized(true);
       });
     }
-  }, []);
+  }, [mermaidInitialized]);
 
   useEffect(() => {
     if (mermaidInitialized) {
@@ -75,17 +60,6 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
       });
     }
   }, [content, mermaidInitialized]);
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        setShowCopied(true);
-        setTimeout(() => setShowCopied(false), 2000);
-      })
-      .catch(err => {
-        console.error('Error al copiar:', err);
-      });
-  };
 
   return (
     <div className="markdown-content" data-theme={theme}>
@@ -143,15 +117,23 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
           h5: ({ children }) => <h5 className="text-lg font-bold my-2">{children}</h5>,
           h6: ({ children }) => <h6 className="text-base font-bold my-2">{children}</h6>,
           p: ({ children, node }) => {
-            const hasOnlyPreChild = node?.children?.length === 1 && 
-              node?.children[0]?.type === 'element' && 
-              node?.children[0]?.tagName === 'pre';
+            type MarkdownNode = {
+              children?: Array<{
+                type: string;
+                tagName?: string;
+              }>;
+            };
+
+            const typedNode = node as MarkdownNode;
+            const hasOnlyPreChild = typedNode?.children?.length === 1 && 
+              typedNode?.children[0]?.type === 'element' && 
+              typedNode?.children[0]?.tagName === 'pre';
 
             if (hasOnlyPreChild) {
               return <>{children}</>;
             }
 
-            const hasImage = node?.children?.some((child: any) => 
+            const hasImage = typedNode?.children?.some((child: { type: string; tagName?: string; }) => 
               child.type === 'element' && child.tagName === 'img'
             );
             
@@ -164,10 +146,9 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
           img: ({ src, alt }) => {
             const sizeMatch = alt?.match(/(.*)\|(\d+)x(\d+)/);
             const dimensions = sizeMatch 
-              ? { width: sizeMatch[2], height: sizeMatch[3], alt: sizeMatch[1] }
-              : { width: '1000', height: '600', alt: alt };
+              ? { width: parseInt(sizeMatch[2]), height: parseInt(sizeMatch[3]), alt: sizeMatch[1] }
+              : { width: 1000, height: 600, alt: alt };
 
-            // Detectar si es video por extensión
             const isVideo = src?.match(/\.(webm|mp4|mov|ogg)$/i);
 
             return (
@@ -187,15 +168,13 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
                     }}
                   />
                 ) : (
-                  <img 
-                    src={src} 
-                    alt={dimensions.alt} 
+                  <Image 
+                    src={src || ''} 
+                    alt={dimensions.alt || ''} 
                     className="mx-auto rounded-lg shadow-lg"
-                    loading="lazy"
                     width={dimensions.width}
                     height={dimensions.height}
                     style={{ 
-                      width: dimensions.width + 'px',
                       maxWidth: '100%',
                       height: 'auto'
                     }}
@@ -205,7 +184,7 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
               </figure>
             )
           },
-          pre: ({ node, ...props }) => {
+          pre: ({ ...props }) => {
             const children = props.children as ReactNode;
             const code = React.Children.toArray(children)[0] as CodeElement;
             let codeText = '';
@@ -315,12 +294,12 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
               {children}
             </a>
           ),
-          details: ({ children, node }) => (
+          details: ({ children }) => (
             <details className="html-details">
               {children}
             </details>
           ),
-          summary: ({ children, node }) => (
+          summary: ({ children }) => (
             <summary className="html-summary">
               {children}
             </summary>

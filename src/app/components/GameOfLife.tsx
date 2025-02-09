@@ -1,9 +1,8 @@
 'use client'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
 interface GameOfLifeProps {
-  gridSize?: number; // tamaño de la cuadrícula (30px por defecto)
   cellSize?: number; // tamaño de cada celda
   updateSpeed?: number; // Velocidad de actualización en ms (default: 2000ms)
   initialActiveCells?: number; // Número de celdas activas iniciales
@@ -14,7 +13,6 @@ interface GameOfLifeProps {
 }
 
 export default function GameOfLife({ 
-  gridSize = 30, 
   cellSize = 30,
   updateSpeed = 2000,
   initialActiveCells = 100, // Aumentado el número por defecto
@@ -48,35 +46,30 @@ export default function GameOfLife({
     return () => window.removeEventListener('resize', handleResize);
   }, [cellSize]);
 
-  // Función para crear un nuevo patrón aleatorio
-  const createRandomPattern = () => {
+  // Movemos createRandomPattern dentro de useCallback
+  const createRandomPattern = useCallback(() => {
     const { rows, cols } = dimensions;
     const initialGrid = Array(rows).fill(null).map(() =>
       Array(cols).fill(false)
     );
 
-    // Definir múltiples puntos de origen
     const origins = [
-      { row: Math.floor(rows / 2), col: Math.floor(cols / 2) },           // Centro
-      { row: Math.floor(rows / 3), col: Math.floor(cols / 3) },           // Superior izquierda
-      { row: Math.floor(rows / 3), col: Math.floor((cols * 2) / 3) },     // Superior derecha
-      { row: Math.floor((rows * 2) / 3), col: Math.floor(cols / 3) },     // Inferior izquierda
-      { row: Math.floor((rows * 2) / 3), col: Math.floor((cols * 2) / 3)} // Inferior derecha
+      { row: Math.floor(rows / 2), col: Math.floor(cols / 2) },
+      { row: Math.floor(rows / 3), col: Math.floor(cols / 3) },
+      { row: Math.floor(rows / 3), col: Math.floor((cols * 2) / 3) },
+      { row: Math.floor((rows * 2) / 3), col: Math.floor(cols / 3) },
+      { row: Math.floor((rows * 2) / 3), col: Math.floor((cols * 2) / 3)}
     ];
 
     let cellsPlaced = 0;
     while (cellsPlaced < initialActiveCells) {
-      // Seleccionar un punto de origen aleatorio
       const origin = origins[Math.floor(Math.random() * origins.length)];
-      
-      // Radio aleatorio alrededor del punto de origen
       const radius = Math.floor(Math.random() * spreadRadius);
       const angle = Math.random() * Math.PI * 2;
       
       const row = origin.row + Math.floor(Math.cos(angle) * radius);
       const col = origin.col + Math.floor(Math.sin(angle) * radius);
 
-      // Asegurarse de que la celda está dentro de los límites y no está ya activa
       if (row >= 0 && row < rows && col >= 0 && col < cols && !initialGrid[row][col]) {
         initialGrid[row][col] = true;
         cellsPlaced++;
@@ -84,7 +77,7 @@ export default function GameOfLife({
     }
 
     return initialGrid;
-  };
+  }, [dimensions, initialActiveCells, spreadRadius]);
 
   // En el useEffect de inicialización
   useEffect(() => {
@@ -96,7 +89,32 @@ export default function GameOfLife({
 
       return () => clearInterval(reloadId);
     }
-  }, [dimensions.rows, dimensions.cols]);
+  }, [dimensions.rows, dimensions.cols, createRandomPattern, reloadInterval]);
+
+  // Movemos getNextGeneration dentro de useCallback
+  const getNextGeneration = useCallback((currentGrid: boolean[][]) => {
+    const nextGrid = currentGrid.map((row, i) =>
+      row.map((cell, j) => {
+        let neighbors = 0;
+        
+        for (let x = -1; x <= 1; x++) {
+          for (let y = -1; y <= 1; y++) {
+            if (x === 0 && y === 0) continue;
+            const newI = (i + x + dimensions.rows) % dimensions.rows;
+            const newJ = (j + y + dimensions.cols) % dimensions.cols;
+            if (currentGrid[newI][newJ]) neighbors++;
+          }
+        }
+
+        if (cell) {
+          return neighbors === 2 || neighbors === 3;
+        } else {
+          return neighbors === 3;
+        }
+      })
+    );
+    return nextGrid;
+  }, [dimensions]);
 
   // Manejar clicks en el canvas
   const handleCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
@@ -115,33 +133,6 @@ export default function GameOfLife({
       newGrid[row][col] = !newGrid[row][col];
       return newGrid;
     });
-  };
-
-  // Reglas del Game of Life
-  const getNextGeneration = (currentGrid: boolean[][]) => {
-    const nextGrid = currentGrid.map((row, i) =>
-      row.map((cell, j) => {
-        let neighbors = 0;
-        
-        // Verificar las 8 celdas vecinas
-        for (let x = -1; x <= 1; x++) {
-          for (let y = -1; y <= 1; y++) {
-            if (x === 0 && y === 0) continue;
-            const newI = (i + x + dimensions.rows) % dimensions.rows;
-            const newJ = (j + y + dimensions.cols) % dimensions.cols;
-            if (currentGrid[newI][newJ]) neighbors++;
-          }
-        }
-
-        // Aplicar reglas del Game of Life
-        if (cell) {
-          return neighbors === 2 || neighbors === 3;
-        } else {
-          return neighbors === 3;
-        }
-      })
-    );
-    return nextGrid;
   };
 
   // Dibujar en el canvas
@@ -204,7 +195,7 @@ export default function GameOfLife({
     const intervalId = setInterval(updateAndDraw, updateSpeed);
 
     return () => clearInterval(intervalId);
-  }, [grid, cellSize, updateSpeed, showCells, theme]);
+  }, [grid, cellSize, updateSpeed, showCells, theme, getNextGeneration]);
 
   return enabled ? (
     <canvas

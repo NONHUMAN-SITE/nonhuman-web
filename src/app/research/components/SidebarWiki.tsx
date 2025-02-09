@@ -67,32 +67,6 @@ export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
     setHeadings(extractHeadings(content));
   }, [content, extractHeadings]);
 
-  // Función para sincronizar el scroll del sidebar
-  const syncSidebarScroll = useCallback((activeId: string) => {
-    if (sidebarRef.current) {
-      const activeElement = sidebarRef.current.querySelector(`.toc-item.active`);
-      if (activeElement) {
-        const sidebarTop = sidebarRef.current.offsetTop;
-        const activeElementTop = activeElement.getBoundingClientRect().top;
-        const sidebarHeight = sidebarRef.current.clientHeight;
-        const activeElementHeight = (activeElement as HTMLElement).offsetHeight;
-
-        // Calcular la posición ideal para centrar el elemento activo
-        const scrollTarget = 
-          activeElementTop + 
-          sidebarRef.current.scrollTop - 
-          sidebarTop - 
-          (sidebarHeight / 2) + 
-          (activeElementHeight / 2);
-
-        sidebarRef.current.scrollTo({
-          top: scrollTarget,
-          behavior: 'smooth'
-        });
-      }
-    }
-  }, []);
-
   // Actualizar el observer para mejor precisión
   useEffect(() => {
     if (!headings.length) return;
@@ -129,8 +103,6 @@ export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
   // Actualizar activeId basado en scroll
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      
       for (const heading of headings) {
         const element = document.getElementById(heading.id);
         if (element) {
