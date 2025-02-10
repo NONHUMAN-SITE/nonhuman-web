@@ -12,7 +12,7 @@ export default function Research() {
     {
       title: "MIND",
       date: "January 19, 2025",
-      imageUrl: "/projects/mind.png",
+      imageUrl: "/projects/mind-test2.png",
       description: language === 'en' 
         ? "Explaining Large Language Models (LLM) from scratch. Everything you need to know about them and how to build one"
         : "Explicando los Large Language Models (LLM) desde cero. Todo lo que necesitas saber sobre estos y cómo construir uno"
