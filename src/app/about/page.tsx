@@ -77,7 +77,7 @@ export default function About() {
         </p>
       </div>
 
-      <Link href="/community" className="join-us-link">
+      <Link href="/join" className="join-us-link">
         {content[language].joinUs}
       </Link>
     </div>
