@@ -7,6 +7,7 @@ import { LanguageProvider } from './context/LanguageContext'
 import GameOfLife from './components/GameOfLife'
 import { ThemeProvider } from './context/ThemeContext'
 import ThemeApplier from './components/ThemeApplier'
+import { Analytics } from '@vercel/analytics/next'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -47,6 +48,7 @@ export default function RootLayout({
             </ThemeApplier>
           </LanguageProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
