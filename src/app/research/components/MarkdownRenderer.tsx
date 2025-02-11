@@ -38,28 +38,30 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
   const [mermaidInitialized, setMermaidInitialized] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !mermaidInitialized) {
+    if (typeof window !== 'undefined') {
       import('mermaid').then((mermaidModule) => {
         const mermaid = mermaidModule.default;
         mermaid.initialize({
           startOnLoad: true,
-          theme: 'dark',
+          theme: theme === 'dark' ? 'dark' : 'default',
           securityLevel: 'loose'
         });
         setMermaidInitialized(true);
       });
     }
-  }, [mermaidInitialized]);
+  }, [theme]);
 
   useEffect(() => {
     if (mermaidInitialized) {
       import('mermaid').then((mermaidModule) => {
-        mermaidModule.default.run({
-          querySelector: '.mermaid',
+        const mermaid = mermaidModule.default;
+        document.querySelectorAll('.mermaid').forEach(element => {
+          element.innerHTML = element.getAttribute('data-original-content') || element.innerHTML;
         });
+        mermaid.init(undefined, '.mermaid');
       });
     }
-  }, [content, mermaidInitialized]);
+  }, [content, mermaidInitialized, theme]);
 
   return (
     <div className="markdown-content" data-theme={theme}>
@@ -217,13 +219,17 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
             
             if (match?.[1] === 'mermaid') {
               return (
-                <div className="mermaid" style={{
-                  backgroundColor: '#1a1a1a',
-                  borderRadius: '0.75rem',
-                  padding: '1.5rem',
-                  margin: '1.5rem 0',
-                  textAlign: 'center'
-                }}>
+                <div 
+                  className="mermaid" 
+                  data-original-content={String(children).replace(/\n$/, '')}
+                  style={{
+                    backgroundColor: theme === 'dark' ? '#1a1a1a' : '#f5f5f5',
+                    borderRadius: '0.75rem',
+                    padding: '1.5rem',
+                    margin: '1.5rem 0',
+                    textAlign: 'center'
+                  }}
+                >
                   {String(children).replace(/\n$/, '')}
                 </div>
               );

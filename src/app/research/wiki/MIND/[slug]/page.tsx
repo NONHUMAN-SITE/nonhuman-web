@@ -107,6 +107,7 @@ export default function MINDContentPage() {
         <MarkdownRenderer 
           content={content}
           options={{ slugify }}
+          theme={theme}
         />
       </div>
       {/* Renderizamos el sidebar solo en desktop */}
