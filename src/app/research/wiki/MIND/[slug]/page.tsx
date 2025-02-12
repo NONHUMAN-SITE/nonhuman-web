@@ -54,6 +54,7 @@ export default function MINDContentPage() {
   const [content, setContent] = useState<string>('');
   const [metadata, setMetadata] = useState<ContentMetadata | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [key, setKey] = useState(0);
 
   useEffect(() => {
     const updateIsMobile = () => {
@@ -82,6 +83,7 @@ export default function MINDContentPage() {
         
         const text = await contentResponse.text();
         setContent(text);
+        setKey(prev => prev + 1);
       } catch (error) {
         console.error('Error loading content:', error);
         setContent('');
@@ -145,6 +147,7 @@ export default function MINDContentPage() {
           </div>
         )}
         <MarkdownRenderer 
+          key={`${key}-${theme}`}
           content={content}
           options={{ slugify }}
           theme={theme}

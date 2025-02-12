@@ -187,27 +187,38 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
+  padding: 0.5rem;
 }
 
 .language-toggle, .theme-toggle {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   background: none;
   border: none;
   cursor: pointer;
   color: var(--text-color);
-  padding: 4px 8px;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  min-height: 36px;
 }
 
-.language-icon {
-  width: 20px;
-  height: 20px;
+.language-toggle:hover, .theme-toggle:hover {
+  background-color: rgba(128, 128, 128, 0.1);
 }
 
-.theme-icon {
+.language-icon, .theme-icon {
   width: 20px;
   height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.language-text {
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 /* Ocultamos inicialmente el botón de menú en versiones de escritorio */
@@ -305,6 +316,25 @@ body {
   
   .social-icon {
     font-size: 1.2rem;
+  }
+
+  .language-theme-toggle {
+    padding: 0.25rem;
+    gap: 0.5rem;
+  }
+
+  .language-toggle, .theme-toggle {
+    padding: 6px;
+    min-height: 32px;
+  }
+
+  .language-icon, .theme-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .language-text {
+    font-size: 0.8rem;
   }
 }
 

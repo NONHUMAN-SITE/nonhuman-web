@@ -1,0 +1,16 @@
+{
+    "es":{
+        "title":"2.1 Entrenamiento de SO-ARM100 con Action Chunking Transformers (ACT)",
+        "description":"Explicación detallada del paper Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware",
+        "authors":"Leonardo Pérez, Randy Loayza",
+        "date":"12 de febrero de 2025",
+        "url":"wiki/SO-ARM100/2.1.es.md"
+    },
+    "en":{
+        "title":"2.1 Training SO-ARM100 with Action Chunking Transformers (ACT)",
+        "description":"Detailed explanation of the paper Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware",
+        "authors":"Leonardo Pérez, Randy Loayza",
+        "date":"February 12, 2025",
+        "url":"wiki/SO-ARM100/2.1.en.md"
+    }
+}

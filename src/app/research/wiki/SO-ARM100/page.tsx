@@ -45,11 +45,11 @@ Con SO-ARM100, buscamos acelerar la adopción de la robótica inteligente, facil
   const roadmapItems = [
     {
       title: language === 'en' ? '1. Construction' : '1. Construcción',
-      completed: false,
       subItems: [
         { 
           id: '1.1', 
           name: 'Building SO-ARM100',
+          completed: false,
           description: language === 'en' 
             ? "Detailed documentation of the SO-ARM100 robotic arm construction process, including hardware specifications and assembly guidelines."
             : "Documentación detallada del proceso de construcción del brazo robótico SO-ARM100, incluyendo especificaciones de hardware y guías de ensamblaje."
@@ -58,11 +58,11 @@ Con SO-ARM100, buscamos acelerar la adopción de la robótica inteligente, facil
     },
     {
       title: language === 'en' ? '2. Training Papers' : '2. Papers para entrenar',
-      completed: false,
       subItems: [
         { 
           id: '2.1', 
           name: 'Training with Action Chunking Transformers',
+          completed: true,
           description: language === 'en'
             ? "Implementation and analysis of Action Chunking Transformers for efficient robotic control and task execution."
             : "Implementación y análisis de Action Chunking Transformers para el control robótico eficiente y la ejecución de tareas."
@@ -124,11 +124,6 @@ Con SO-ARM100, buscamos acelerar la adopción de la robótica inteligente, facil
               <div key={section.title} className="index-section">
                 <div className="index-header">
                   <div className="index-title space-mono-bold">{section.title}</div>
-                  {!section.completed && (
-                    <span className="status-badge">
-                      {language === 'en' ? 'Under development' : 'En desarrollo'}
-                    </span>
-                  )}
                 </div>
                 {section.subItems.map((item) => (
                   <div 
@@ -136,7 +131,14 @@ Con SO-ARM100, buscamos acelerar la adopción de la robótica inteligente, facil
                     className="index-subitem space-mono-regular clickable"
                     onClick={() => handleItemClick(item.id)}
                   >
-                    {item.id} {item.name}
+                    <div className="subitem-content">
+                      <span>{item.id} {item.name}</span>
+                      {!item.completed && (
+                        <span className="status-badge">
+                          {language === 'en' ? 'Under development' : 'En desarrollo'}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -158,7 +160,7 @@ Con SO-ARM100, buscamos acelerar la adopción de la robótica inteligente, facil
                   <h3 className="card-title space-mono-bold">
                     {item.id} {item.name}
                   </h3>
-                  {!section.completed && (
+                  {!item.completed && (
                     <span className="status-badge">
                       {language === 'en' ? 'Under development' : 'En desarrollo'}
                     </span>

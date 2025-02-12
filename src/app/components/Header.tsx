@@ -52,11 +52,14 @@ export default function Header() {
         </ul>
         <div className="language-theme-toggle">
           <button onClick={toggleLanguage} className="language-toggle">
-            <GrLanguage className="language-icon" />
-            {language.toUpperCase()}
+            <GrLanguage className="language-icon" aria-label="Toggle language" />
+            <span className="language-text">{language.toUpperCase()}</span>
           </button>
           <button onClick={toggleTheme} className="theme-toggle">
-            {theme === 'dark' ? <BsSun className="theme-icon" /> : <BsMoon className="theme-icon" />}
+            {theme === 'dark' ? 
+              <BsSun className="theme-icon" aria-label="Switch to light mode" /> : 
+              <BsMoon className="theme-icon" aria-label="Switch to dark mode" />
+            }
           </button>
         </div>
       </nav>
