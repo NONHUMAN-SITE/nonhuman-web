@@ -4,6 +4,8 @@ import { useTheme } from '@/app/context/ThemeContext'
 import { useRouter } from 'next/navigation'
 import './style.css'
 import { useState } from 'react'
+import { FaGithub } from 'react-icons/fa'
+import { SiHuggingface } from 'react-icons/si'
 
 export default function MINDPage() {
   const { language } = useLanguage()
@@ -174,6 +176,25 @@ Este proyecto representa una exploración profunda de una de las tecnologías m�
     <div className={`wiki-content ${theme} mind-page-layout`}>
       <h1 className="mind-title space-mono-bold">MIND</h1>
       
+      <div className="floating-project-links">
+        <a 
+          href="https://github.com/NONHUMAN-SITE/MIND" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="floating-project-link"
+        >
+          <FaGithub className="floating-project-icon" />
+        </a>
+        <a 
+          href="https://huggingface.co/NONHUMAN-RESEARCH" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="floating-project-link"
+        >
+          <SiHuggingface className="floating-project-icon" />
+        </a>
+      </div>
+
       <div className="mind-filters-container">
         <button 
           className={`mind-selector-button ${selectedSection === 'about' ? 'active' : ''}`}
