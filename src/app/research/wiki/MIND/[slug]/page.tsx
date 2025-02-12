@@ -67,29 +67,69 @@ export default function MINDContentPage() {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        // Obtenemos los metadatos del JSON
         const metadataResponse = await fetch(`/wiki/MIND/${slug}.json`);
+        if (!metadataResponse.ok) throw new Error('Content not found');
+        
         const contentData: ContentData = await metadataResponse.json();
         const currentMetadata = contentData[language as keyof ContentData];
         setMetadata(currentMetadata);
 
-        // Cargamos el contenido markdown según la URL del metadata
         const contentUrl = currentMetadata.url.startsWith('http')
           ? currentMetadata.url
           : `/${currentMetadata.url}`;
         const contentResponse = await fetch(contentUrl);
+        if (!contentResponse.ok) throw new Error('Content not found');
+        
         const text = await contentResponse.text();
         setContent(text);
       } catch (error) {
         console.error('Error loading content:', error);
-        setContent(language === 'en'
-          ? '# Error\nContent not found or error loading the page.'
-          : '# Error\nContenido no encontrado o error al cargar la página.');
+        setContent('');
+        setMetadata(null);
       }
     };
 
     fetchContent();
   }, [slug, language]);
+
+  if (!content && !metadata) {
+    return (
+      <div 
+        className={`${theme}`}
+        style={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '1rem',
+          fontFamily: '"Space Mono", monospace'
+        }}
+      >
+        <h1 
+          style={{
+            fontSize: '4rem',
+            color: 'var(--accent-color)',
+            textAlign: 'center'
+          }}
+        >
+          SOON...
+        </h1>
+        <p
+          style={{
+            fontSize: '1.5rem',
+            color: 'var(--accent-color)',
+            opacity: 0.7,
+            textAlign: 'center'
+          }}
+        >
+          {language === 'en' 
+            ? 'This content is under development'
+            : 'Este contenido está en desarrollo'}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className={`wiki-layout ${theme}`}>
