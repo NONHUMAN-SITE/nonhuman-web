@@ -307,3 +307,137 @@
     margin: 0 auto;
   }
 }
+
+.mind-title {
+  text-align: center;
+  font-size: 4.5rem;
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  color: var(--primary-color);
+  background-color: transparent;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  text-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.6),
+               0 0 30px rgba(var(--primary-color-rgb), 0.4),
+               0 0 45px rgba(var(--primary-color-rgb), 0.2);
+  letter-spacing: 0.5rem;
+}
+
+.section-selector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: -1px;
+  padding: 0 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.selector-button {
+  padding: 0.75rem 2rem;
+  font-family: "Space Mono", monospace;
+  font-size: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px 8px 0 0;
+  opacity: 0.7;
+}
+
+.selector-button:hover {
+  opacity: 1;
+  color: var(--primary-color);
+}
+
+.selector-button.active {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  opacity: 1;
+}
+
+.about-content {
+  padding: 2rem;
+  line-height: 1.8;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  white-space: pre-line;
+}
+
+/* Ajustar el roadmap-index para que se conecte con los botones */
+.roadmap-index {
+  position: relative;
+  z-index: 1;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mind-title {
+    font-size: 3rem;
+    padding: 1rem;
+    letter-spacing: 0.3rem;
+  }
+
+  .section-selector {
+    padding: 0 1rem;
+  }
+
+  .selector-button {
+    padding: 0.5rem 1rem;
+  }
+}
+
+.mind-filters-container {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: var(--background-color);
+  border-radius: 12px;
+  border: 1px solid var(--grid-color);
+  max-width: 800px;
+  justify-content: center;
+}
+
+.mind-selector-button {
+  padding: 0.75rem 2rem;
+  font-family: "Space Mono", monospace;
+  font-size: 1rem;
+  background-color: var(--cell-color);
+  border: 1px solid var(--grid-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  min-width: 150px;
+}
+
+.mind-selector-button:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.mind-selector-button.active {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border-color: var(--primary-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mind-filters-container {
+    padding: 0.5rem;
+    margin: 1rem;
+  }
+
+  .mind-selector-button {
+    padding: 0.5rem 1rem;
+    min-width: 120px;
+  }
+}

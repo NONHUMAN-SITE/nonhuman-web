@@ -3,15 +3,42 @@ import { useLanguage } from '@/app/context/LanguageContext'
 import { useTheme } from '@/app/context/ThemeContext'
 import { useRouter } from 'next/navigation'
 import './style.css'
+import { useState } from 'react'
 
 export default function MINDPage() {
   const { language } = useLanguage()
   const { theme } = useTheme()
   const router = useRouter()
+  const [selectedSection, setSelectedSection] = useState<'about' | 'content'>('about')
+
+  const aboutEn = `MIND is a comprehensive research project dedicated to the deep understanding and development of advanced language models. Our initiative not only addresses the theoretical foundations that underpin this technology but also explores its evolution over time, breaking down the key contributions that have defined the state of the art in artificial intelligence.
+
+Through a rigorous approach, we analyze in detail the most influential papers in the development of neural network-driven language models. Our goal is not only to understand these advancements but also to translate them into practical implementations, demonstrating how theoretical concepts can materialize in code.
+
+Our research spans from the mathematical foundations of these models to their architectural structures, training algorithms, optimization techniques, and evaluation strategies. We delve into topics such as tokenization, embeddings, attention mechanisms, pretraining, and fine-tuning, exploring each with the necessary depth to understand their impact on model performance and generalization capabilities.
+
+Moreover, MIND is not limited to theory: we develop our own implementations, replicate benchmark experiments, and optimize existing models to generate new knowledge and actively contribute to the AI research community. We focus on the engineering behind these systems, analyzing computational challenges, training efficiency, scalability, and practical applications across various domains.
+
+This project represents a deep exploration of one of the most influential technologies of our era, with the goal of not only understanding it but also advancing its development and democratizing its knowledge.`
+
+  const aboutEs = `MIND es un proyecto de investigación integral dedicado a la comprensión profunda y el desarrollo de modelos de lenguaje avanzados. Nuestra iniciativa no solo aborda los fundamentos teóricos que sustentan esta tecnología, sino que también explora su evolución a lo largo del tiempo, desglosando las contribuciones clave que han definido el estado del arte en inteligencia artificial.
+
+A través de un enfoque riguroso, analizamos en detalle los papers más influyentes en el desarrollo de los modelos de lenguaje impulsados por redes neuronales. No solo buscamos entender estos avances, sino también traducirlos en implementaciones prácticas, demostrando cómo los conceptos teóricos pueden materializarse en código.
+
+Nuestra investigación abarca desde las bases matemáticas de estos modelos hasta sus estructuras arquitectónicas, algoritmos de entrenamiento, técnicas de optimización y estrategias de evaluación. Profundizamos en temas como tokenización, embeddings, mecanismos de atención, preentrenamiento y ajuste fino, explorando cada uno con el nivel de detalle necesario para comprender su impacto en el rendimiento y la capacidad de generalización de los modelos.
+
+Además, MIND no se limita a la teoría: desarrollamos implementaciones propias, replicamos experimentos de referencia y optimizamos modelos existentes, con el fin de generar nuevo conocimiento y contribuir activamente a la comunidad de investigación en IA. Nos enfocamos en la ingeniería detrás de estos sistemas, analizando desafíos computacionales, eficiencia de entrenamiento, escalabilidad y aplicaciones prácticas en diversos ámbitos.
+
+Este proyecto representa una exploración profunda de una de las tecnologías más influyentes de nuestra era, con el objetivo de no solo entenderla, sino también de avanzar en su desarrollo y democratizar su conocimiento.`
+
+  const aboutContent = {
+    en: aboutEn,
+    es: aboutEs
+  }
 
   const roadmapItems = [
     {
-      title: '1. Fundamentals',
+      title: language === 'en' ? '1. Fundamentals' : '1. Fundamentos',
       completed: true,
       subItems: [
         { 
@@ -31,96 +58,109 @@ export default function MINDPage() {
       ]
     },
     {
-      title: '2. Assistant',
+      title: language === 'en' ? '2. Assistant' : '2. Asistente',
       completed: false,
       subItems: [
         { 
-          id: '2.1', 
-          name: 'Data (Tokenizer, tipos de dataset)',
-          description: language === 'en'
-            ? "Deep dive into data processing for language models: tokenization methods (BPE, WordPiece, SentencePiece), dataset types (instruction tuning, conversation, code), data cleaning and preprocessing techniques, and best practices for dataset creation and curation."
-            : "Análisis profundo del procesamiento de datos para modelos de lenguaje: métodos de tokenización (BPE, WordPiece, SentencePiece), tipos de datasets (instruction tuning, conversación, código), técnicas de limpieza y preprocesamiento, y mejores prácticas para la creación y curación de datasets."
-        },
-        { 
           id: '2.2', 
-          name: 'LoRA',
+          name: 'RLHF',
           description: language === 'en'
-            ? "Comprehensive study of Low-Rank Adaptation (LoRA): theory behind parameter-efficient fine-tuning, implementation details, rank selection, adapter fusion techniques, and practical applications in model customization with minimal computational resources."
-            : "Estudio completo de Low-Rank Adaptation (LoRA): teoría detrás del fine-tuning eficiente en parámetros, detalles de implementación, selección de rango, técnicas de fusión de adaptadores y aplicaciones prácticas en la personalización de modelos con recursos computacionales mínimos."
+            ? "In-depth exploration of Reinforcement Learning from Human Feedback: reward modeling, policy optimization, PPO implementation, and practical challenges in alignment training."
+            : "Exploración detallada del Aprendizaje por Refuerzo con Feedback Humano: modelado de recompensas, optimización de políticas, implementación de PPO y desafíos prácticos en el entrenamiento de alineación."
         },
         { 
           id: '2.3', 
-          name: 'RLHF',
-          description: language === 'en'
-            ? "In-depth exploration of Reinforcement Learning from Human Feedback: reward modeling, policy optimization, PPO implementation, human feedback collection strategies, and practical challenges in alignment training. Includes case studies from successful RLHF implementations."
-            : "Exploración detallada del Aprendizaje por Refuerzo con Feedback Humano: modelado de recompensas, optimización de políticas, implementación de PPO, estrategias de recolección de feedback humano y desafíos prácticos en el entrenamiento de alineación. Incluye casos de estudio de implementaciones exitosas de RLHF."
-        },
-        { 
-          id: '2.4', 
           name: 'DPO',
           description: language === 'en'
-            ? "Detailed analysis of Direct Preference Optimization: theoretical foundations, comparison with RLHF, implementation methodology, preference dataset creation, training strategies, and real-world applications in model alignment without reward modeling."
-            : "Análisis detallado de Direct Preference Optimization: fundamentos teóricos, comparación con RLHF, metodología de implementación, creación de datasets de preferencias, estrategias de entrenamiento y aplicaciones prácticas en la alineación de modelos sin modelado de recompensas."
-        },
-        { 
-          id: '2.5', 
-          name: 'Scaling Laws',
-          description: language === 'en'
-            ? "Comprehensive review of language model scaling laws: computational requirements, parameter scaling efficiency, dataset size relationships, training dynamics, performance predictions, and practical implications for model development and deployment."
-            : "Revisión exhaustiva de las leyes de escalado en modelos de lenguaje: requerimientos computacionales, eficiencia del escalado de parámetros, relaciones con el tamaño del dataset, dinámica de entrenamiento, predicciones de rendimiento e implicaciones prácticas para el desarrollo y despliegue de modelos."
+            ? "Detailed analysis of Direct Preference Optimization: theoretical foundations, implementation methodology, and real-world applications in model alignment."
+            : "Análisis detallado de Direct Preference Optimization: fundamentos teóricos, metodología de implementación y aplicaciones prácticas en la alineación de modelos."
         }
       ]
     },
     {
-      title: language === 'en' ? '3. Validation' : '3. Validación',
+      title: language === 'en' ? '3. Optimization' : '3. Optimización',
       completed: false,
       subItems: [
         { 
           id: '3.1', 
-          name: 'benchmarks (MMLU, ETC)',
+          name: 'LoRA',
           description: language === 'en'
-            ? "Extensive coverage of language model evaluation: MMLU (massive multitask language understanding), TruthfulQA, HumanEval, HELM framework, custom benchmark creation, and comprehensive analysis of model capabilities across different domains and tasks."
-            : "Cobertura extensiva de la evaluación de modelos de lenguaje: MMLU (comprensión masiva multitarea), TruthfulQA, HumanEval, framework HELM, creación de benchmarks personalizados y análisis comprensivo de las capacidades del modelo en diferentes dominios y tareas."
+            ? "Comprehensive study of Low-Rank Adaptation: theory, implementation details, and practical applications in model customization."
+            : "Estudio completo de Low-Rank Adaptation: teoría, detalles de implementación y aplicaciones prácticas en la personalización de modelos."
+        },
+        { 
+          id: '3.2', 
+          name: 'Scaling Laws',
+          description: language === 'en'
+            ? "Comprehensive review of language model scaling laws: computational requirements, parameter scaling efficiency, and practical implications."
+            : "Revisión exhaustiva de las leyes de escalado en modelos de lenguaje: requerimientos computacionales, eficiencia del escalado de parámetros e implicaciones prácticas."
         }
       ]
     },
     {
-      title: language === 'en' ? '4. New Architectures' : '4. Nuevas arquitecturas',
+      title: language === 'en' ? '4. Data' : '4. Datos',
       completed: false,
       subItems: [
         { 
           id: '4.1', 
-          name: 'MOE',
+          name: 'Training Data and Benchmarks',
           description: language === 'en'
-            ? "Deep dive into Mixture of Experts architecture: expert network design, routing mechanisms, conditional computation, training strategies, scaling considerations, and practical implementation of sparse models for improved efficiency and performance."
-            : "Análisis profundo de la arquitectura Mixture of Experts: diseño de redes expertas, mecanismos de enrutamiento, computación condicional, estrategias de entrenamiento, consideraciones de escalado e implementación práctica de modelos dispersos para mejorar la eficiencia y el rendimiento."
-        },
-        { 
-          id: '4.2', 
-          name: 'VLM',
-          description: language === 'en'
-            ? "Comprehensive study of Vision Language Models: multimodal architectures, vision encoders, cross-attention mechanisms, training strategies for image-text alignment, and applications in various tasks including image understanding, generation, and manipulation."
-            : "Estudio completo de Vision Language Models: arquitecturas multimodales, codificadores de visión, mecanismos de atención cruzada, estrategias de entrenamiento para alineación imagen-texto y aplicaciones en diversas tareas incluyendo comprensión, generación y manipulación de imágenes."
-        },
-        { 
-          id: '4.3', 
-          name: 'SPEECH 2 SPEECH',
-          description: language === 'en'
-            ? "In-depth exploration of direct speech-to-speech models: audio processing, voice conversion techniques, prosody transfer, multilingual capabilities, real-time processing considerations, and practical applications in voice synthesis and translation."
-            : "Exploración detallada de modelos directos de voz a voz: procesamiento de audio, técnicas de conversión de voz, transferencia de prosodia, capacidades multilingües, consideraciones de procesamiento en tiempo real y aplicaciones prácticas en síntesis y traducción de voz."
+            ? "Deep dive into data processing, dataset types, evaluation frameworks, and comprehensive analysis of model capabilities."
+            : "Análisis profundo del procesamiento de datos, tipos de datasets, frameworks de evaluación y análisis comprensivo de las capacidades del modelo."
         }
       ]
     },
     {
-      title: '5. O1',
+      title: language === 'en' ? '5. Architectures' : '5. Arquitecturas',
       completed: false,
       subItems: [
         { 
           id: '5.1', 
-          name: 'Roadmap to O1',
+          name: 'MOE',
           description: language === 'en'
-            ? "Comprehensive strategic plan for achieving O1: technical requirements analysis, infrastructure planning, resource optimization, scalability considerations, implementation phases, and success metrics for reaching artificial general intelligence objectives."
-            : "Plan estratégico integral para alcanzar O1: análisis de requerimientos técnicos, planificación de infraestructura, optimización de recursos, consideraciones de escalabilidad, fases de implementación y métricas de éxito para alcanzar objetivos de inteligencia artificial general."
+            ? "Deep dive into Mixture of Experts architecture: expert network design, routing mechanisms, and practical implementation."
+            : "Análisis profundo de la arquitectura Mixture of Experts: diseño de redes expertas, mecanismos de enrutamiento e implementación práctica."
+        },
+        { 
+          id: '5.2', 
+          name: 'VLM',
+          description: language === 'en'
+            ? "Comprehensive study of Vision Language Models: multimodal architectures, vision encoders, and cross-attention mechanisms."
+            : "Estudio completo de Vision Language Models: arquitecturas multimodales, codificadores de visión y mecanismos de atención cruzada."
+        },
+        { 
+          id: '5.3', 
+          name: 'Qwen2-Audio',
+          description: language === 'en'
+            ? "In-depth exploration of Qwen2-Audio: audio processing, speech recognition, and practical applications."
+            : "Exploración detallada de Qwen2-Audio: procesamiento de audio, reconocimiento de voz y aplicaciones prácticas."
+        }
+      ]
+    },
+    {
+      title: language === 'en' ? '6. Reasoning models' : '6. Modelos de razonamiento',
+      completed: false,
+      subItems: [
+        { 
+          id: '6.1', 
+          name: 'Deepseek Math',
+          description: language === 'en'
+            ? "Analysis of mathematical reasoning capabilities in language models and their applications."
+            : "Análisis de las capacidades de razonamiento matemático en modelos de lenguaje y sus aplicaciones."
+        },
+        { 
+          id: '6.2', 
+          name: 'Deepseek R1',
+          description: language === 'en'
+            ? "Study of advanced reasoning techniques and their implementation in language models."
+            : "Estudio de técnicas avanzadas de razonamiento y su implementación en modelos de lenguaje."
+        },
+        { 
+          id: '6.3', 
+          name: 'Road to O1',
+          description: language === 'en'
+            ? "Comprehensive strategic plan for achieving artificial general intelligence objectives."
+            : "Plan estratégico integral para alcanzar objetivos de inteligencia artificial general."
         }
       ]
     }
@@ -132,33 +172,56 @@ export default function MINDPage() {
 
   return (
     <div className={`wiki-content ${theme} mind-page-layout`}>
-      <div className="roadmap-container">
-        <h1 className="roadmap-title space-mono-bold">ROADMAP</h1>
-        
-        <div className="roadmap-index">
-          {roadmapItems.map((section) => (
-            <div key={section.title} className="index-section">
-              <div className="index-header">
-                <div className="index-title space-mono-bold">{section.title}</div>
-                {!section.completed && (
-                  <span className="status-badge">
-                    {language === 'en' ? 'Under development' : 'En desarrollo'}
-                  </span>
-                )}
-              </div>
-              {section.subItems.map((item) => (
-                <div 
-                  key={item.id} 
-                  className="index-subitem space-mono-regular clickable"
-                  onClick={() => handleItemClick(item.id)}
-                >
-                  {item.id} {item.name}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+      <h1 className="mind-title space-mono-bold">MIND</h1>
+      
+      <div className="mind-filters-container">
+        <button 
+          className={`mind-selector-button ${selectedSection === 'about' ? 'active' : ''}`}
+          onClick={() => setSelectedSection('about')}
+        >
+          About
+        </button>
+        <button 
+          className={`mind-selector-button ${selectedSection === 'content' ? 'active' : ''}`}
+          onClick={() => setSelectedSection('content')}
+        >
+          Content
+        </button>
+      </div>
 
+      <div className="roadmap-index">
+        {selectedSection === 'about' ? (
+          <div className="about-content">
+            <p>{language === 'en' ? aboutContent.en : aboutContent.es}</p>
+          </div>
+        ) : (
+          <>
+            {roadmapItems.map((section) => (
+              <div key={section.title} className="index-section">
+                <div className="index-header">
+                  <div className="index-title space-mono-bold">{section.title}</div>
+                  {!section.completed && (
+                    <span className="status-badge">
+                      {language === 'en' ? 'Under development' : 'En desarrollo'}
+                    </span>
+                  )}
+                </div>
+                {section.subItems.map((item) => (
+                  <div 
+                    key={item.id} 
+                    className="index-subitem space-mono-regular clickable"
+                    onClick={() => handleItemClick(item.id)}
+                  >
+                    {item.id} {item.name}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+
+      {selectedSection === 'content' && (
         <div className="content-grid">
           {roadmapItems.flatMap((section) =>
             section.subItems.map((item) => (
@@ -184,7 +247,7 @@ export default function MINDPage() {
             ))
           )}
         </div>
-      </div>
+      )}
     </div>
   )
 }
