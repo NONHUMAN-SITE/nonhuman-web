@@ -1,8 +1,8 @@
 'use client'
-import { FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa'
-import { SiHuggingface } from 'react-icons/si'
+import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa'
+import { SiHuggingface, SiNotion } from 'react-icons/si'
 import { useLanguage } from '../context/LanguageContext'
-
+import { RiTwitterXLine } from "react-icons/ri";
 export default function Footer() {
   const { language } = useLanguage();
 
@@ -14,8 +14,8 @@ export default function Footer() {
           se controla mediante la propiedad "gap" en la clase ".social-links" del archivo globals.css.
         */}
         <div className="social-links">
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-            <FaTwitter className="social-icon" />
+          <a href="https://x.com/0xnonhuman" target="_blank" rel="noopener noreferrer">
+            <RiTwitterXLine className="social-icon" />
           </a>
           <a href="https://www.instagram.com/0xnonhuman/" target="_blank" rel="noopener noreferrer">
             <FaInstagram className="social-icon" />
@@ -28,6 +28,9 @@ export default function Footer() {
           </a>
           <a href="https://huggingface.co/NONHUMAN-RESEARCH" target="_blank" rel="noopener noreferrer">
             <SiHuggingface className="social-icon" />
+          </a>
+          <a href="https://malachite-meadow-670.notion.site/NONHUMAN-138c884b65b8802fbd66feb7b223ae3c" target="_blank" rel="noopener noreferrer">
+            <SiNotion className="social-icon" />
           </a>
         </div>
         <div className="footer-text">

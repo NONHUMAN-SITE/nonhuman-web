@@ -155,11 +155,18 @@ body {
   background: var(--background-color);
 }
 
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .social-links {
   display: flex;
   justify-content: center;
   gap: 2rem;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  padding: 0 1rem;
 }
 
 .social-icon {
@@ -177,6 +184,7 @@ body {
   text-align: center;
   font-size: 0.9rem;
   opacity: 0.8;
+  padding: 0 1rem;
 }
 
 .footer-text p {
@@ -300,22 +308,24 @@ body {
   }
 
   .footer {
-    text-align: center;
-    padding: 1rem;
+    padding: 1.5rem 1rem;
   }
   
-  /* Ajustes en el footer para redes sociales: se muestran en fila y con íconos más pequeños */
   .social-links {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;  /* Aumenta este valor para que los íconos se separen más */
+    gap: 1.5rem;
     margin-bottom: 1rem;
+    justify-content: center;
   }
   
   .social-icon {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+  }
+
+  .social-links a {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .language-theme-toggle {
@@ -335,6 +345,17 @@ body {
 
   .language-text {
     font-size: 0.8rem;
+  }
+}
+
+/* Media Query para pantallas muy pequeñas */
+@media (max-width: 360px) {
+  .social-links {
+    gap: 1rem;
+  }
+
+  .social-icon {
+    font-size: 1.2rem;
   }
 }
 
