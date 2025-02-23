@@ -1,0 +1,18 @@
+{
+    "es": {
+        "title": "Análisis del Teorema del Gradiente de la Política",
+        "description": "Análisis del teorema del gradiente de la política y su aplicación en Reinforcement Learning",
+        "authors": "Leonardo Pérez",
+        "date": "23 de febrero de 2025",
+        "url": "articles/000002/article.es.md",
+        "tags": ["Policy Gradient", "Reinforcement Learning"]
+    },
+    "en": {
+        "title": "Analysis of the Policy Gradient Theorem",
+        "description": "Analysis of the policy gradient theorem and its application in Reinforcement Learning",
+        "authors": "Leonardo Pérez",
+        "date": "February 23, 2025",
+        "url": "articles/000002/article.en.md",
+        "tags": ["Policy Gradient", "Reinforcement Learning"]
+    }
+}
