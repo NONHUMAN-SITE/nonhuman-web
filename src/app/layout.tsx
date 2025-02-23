@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Lora, Press_Start_2P } from 'next/font/google'
 import './globals.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -10,6 +10,15 @@ import ThemeApplier from './components/ThemeApplier'
 import { Analytics } from '@vercel/analytics/next'
 
 const inter = Inter({ subsets: ['latin'] })
+const lora = Lora({ 
+  subsets: ['latin'],
+  variable: '--font-lora',
+})
+const pressStart2P = Press_Start_2P({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-press-start-2p',
+})
 
 export const metadata: Metadata = {
   title: 'NONHUMAN',
@@ -27,13 +36,11 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
         <link rel="icon" href="/NONHUMAN-LOGO.ico" sizes="any" />
         <link rel="icon" href="/NONHUMAN-LOGO.ico" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/NONHUMAN-LOGO.ico" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} ${lora.variable} ${pressStart2P.variable}`}>
         <ThemeProvider>
           <LanguageProvider>
             <ThemeApplier>

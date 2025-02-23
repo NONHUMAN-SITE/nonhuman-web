@@ -15,7 +15,7 @@ export default function ArticlesPage() {
   const sortDropdownRef = useRef<HTMLDivElement>(null)
 
   // Example articles data
-  const articles = [
+  const articles = useMemo(() => [
     {
       id: "000001",
       title_english: "Langraph Tutorial #1: Introduction to Langraph",
@@ -40,7 +40,7 @@ export default function ArticlesPage() {
       article_english: "/articles/000002/article.en.md",
       article_spanish: "/articles/000002/article.es.md"
     }
-  ]
+  ], [])
 
   const tags = ["All", "Agents", "LLM", "Langraph", "Reinforcement Learning"]
 
@@ -174,7 +174,7 @@ export default function ArticlesPage() {
 
       <div className="articles-grid">
         {filteredAndSortedArticles.length > 0 ? (
-          filteredAndSortedArticles.map((article, index) => (
+          filteredAndSortedArticles.map((article) => (
             <ArticleCard
               key={article.id}
               id={article.id}
