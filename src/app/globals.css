@@ -105,6 +105,7 @@ body {
   letter-spacing: 2px;
   font-size: 0.9rem;
   transition: color 0.3s ease;
+  font-family: "Space Mono", monospace;
 }
 
 .nav-list a:hover {
@@ -227,6 +228,7 @@ body {
 .language-text {
   font-size: 0.9rem;
   font-weight: 500;
+  font-family: "Space Mono", monospace;
 }
 
 /* Ocultamos inicialmente el botón de menú en versiones de escritorio */

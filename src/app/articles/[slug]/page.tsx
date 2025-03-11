@@ -3,8 +3,8 @@ import { useParams } from 'next/navigation'
 import { useLanguage } from '@/app/context/LanguageContext'
 import { useTheme } from '@/app/context/ThemeContext'
 import { useEffect, useState } from 'react'
-import MarkdownRenderer from '@/app/research/components/MarkdownRenderer'
-import SidebarWiki from '@/app/research/components/SidebarWiki'
+import MarkdownRenderer from '@/app/projects/components/MarkdownRenderer'
+import SidebarWiki from '@/app/projects/components/SidebarWiki'
 import '../style.css'
 
 interface ArticleMetadata {

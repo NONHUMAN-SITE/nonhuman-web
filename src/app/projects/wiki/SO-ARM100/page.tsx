@@ -72,7 +72,7 @@ Con SO-ARM100, buscamos acelerar la adopción de la robótica inteligente, facil
   ]
 
   const handleItemClick = (itemId: string) => {
-    router.push(`/research/wiki/SO-ARM100/${itemId}`)
+    router.push(`/projects/wiki/SO-ARM100/${itemId}`)
   }
 
   return (

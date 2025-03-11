@@ -46,7 +46,7 @@ export default function Header() {
         </button>
         <ul className={`nav-list ${isMobileMenuOpen ? 'open' : ''}`}>
           <li><Link href="/about" onClick={handleLinkClick}>{language === 'en' ? 'About' : 'Nosotros'}</Link></li>
-          <li><Link href="/research" onClick={handleLinkClick}>{language === 'en' ? 'Research' : 'Investigación'}</Link></li>
+          <li><Link href="/projects" onClick={handleLinkClick}>{language === 'en' ? 'Projects' : 'Proyectos'}</Link></li>
           <li><Link href="/articles" onClick={handleLinkClick}>{language === 'en' ? 'Articles' : 'Articulos'}</Link></li>
           <li><Link href="/join" onClick={handleLinkClick}>{language === 'en' ? 'Join/Contact' : 'Únete/Contáctanos'}</Link></li>
         </ul>

@@ -176,12 +176,12 @@ Este proyecto representa una exploración profunda de una de las tecnologías m�
   ]
 
   const handleItemClick = (itemId: string) => {
-    router.push(`/research/wiki/MIND/${itemId}`)
+    router.push(`/projects/wiki/MIND/${itemId}`)
   }
 
   return (
     <div className={`wiki-content ${theme} mind-page-layout`}>
-      <h1 className="mind-title space-mono-bold">MIND</h1>
+      <h1 className="mind-title">MIND</h1>
       
       <div className="floating-project-links">
         <a 
@@ -207,13 +207,13 @@ Este proyecto representa una exploración profunda de una de las tecnologías m�
           className={`mind-selector-button ${selectedSection === 'about' ? 'active' : ''}`}
           onClick={() => setSelectedSection('about')}
         >
-          About
+          {language === 'en' ? 'About' : 'Acerca de'}
         </button>
         <button 
           className={`mind-selector-button ${selectedSection === 'content' ? 'active' : ''}`}
           onClick={() => setSelectedSection('content')}
         >
-          Content
+          {language === 'en' ? 'Content' : 'Contenido'}
         </button>
       </div>
 
@@ -227,12 +227,12 @@ Este proyecto representa una exploración profunda de una de las tecnologías m�
             {roadmapItems.map((section) => (
               <div key={section.title} className="index-section">
                 <div className="index-header">
-                  <div className="index-title space-mono-bold">{section.title}</div>
+                  <div className="index-title">{section.title}</div>
                 </div>
                 {section.subItems.map((item) => (
                   <div 
                     key={item.id} 
-                    className="index-subitem space-mono-regular clickable"
+                    className="index-subitem clickable"
                     onClick={() => handleItemClick(item.id)}
                   >
                     <div className="subitem-content">

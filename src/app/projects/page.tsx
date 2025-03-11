@@ -12,7 +12,6 @@ export default function Research() {
     {
       title: "MIND",
       date: "January 19, 2025",
-      imageUrl: "/projects/mind-test2.png",
       description: language === 'en' 
         ? "Explaining Large Language Models (LLM) from scratch. Everything you need to know about them and how to build one"
         : "Explicando los Large Language Models (LLM) desde cero. Todo lo que necesitas saber sobre estos y cómo construir uno"
@@ -20,7 +19,6 @@ export default function Research() {
     {
       title: "SO-ARM100",
       date: "January 19, 2025",
-      imageUrl: "/projects/so-arm100.png",
       description: language === 'en'
         ? "Training SO-ARM100 robotic arms with neural networks. Detailed documentation on how you can do it with various techniques"
         : "Entrenando los brazos robóticos de SO-ARM100 con redes neuronales. La documentación detallada de cómo puedes hacerlo y con diversas técnicas"
@@ -35,29 +33,30 @@ export default function Research() {
   return (
     <div className="research-container">
       <div className="research-header">
-        <h1 className="research-title space-mono-bold">
-          {language === 'en' ? 'RESEARCH' : 'INVESTIGACIÓN'}
+        <h1 className="research-title">
+          {language === 'en' ? 'PROJECTS' : 'PROYECTOS'}
         </h1>
         <div className="search-container">
           <input 
             type="text" 
             placeholder={language === 'en' ? "Search projects..." : "Buscar proyectos..."}
-            className="search-input space-mono-regular"
+            className="search-input"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
       </div>
-      <div className="projects-grid">
-        {filteredProjects.map((project, index) => (
-          <ProjectCard
-            key={index}
-            title={project.title}
-            date={project.date}
-            imageUrl={project.imageUrl}
-            description={project.description}
-          />
-        ))}
+      <div className="research-content">
+        <div className="projects-grid">
+          {filteredProjects.map((project, index) => (
+            <ProjectCard
+              key={index}
+              title={project.title}
+              date={project.date}
+              description={project.description}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
