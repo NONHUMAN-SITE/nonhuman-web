@@ -39,6 +39,18 @@ export default function ArticlesPage() {
       author: "Leonardo Pérez",
       article_english: "/articles/000002/article.en.md",
       article_spanish: "/articles/000002/article.es.md"
+    },
+    {
+      id: "000003",
+      title_english: "Explaining Proximal Policy Optimization",
+      title_spanish: "Explicando Proximal Policy Optimization",
+      description_english: "Explaining and analyzing the Proximal Policy Optimization algorithm and its implementation in PyTorch",
+      description_spanish: "Explicación y análisis del algoritmo Proximal Policy Optimization y su implementación en PyTorch",
+      date: "2025-03-20",
+      tags: ["Reinforcement Learning"],
+      author: "Leonardo Pérez",
+      article_english: "/articles/000003/article.en.md",
+      article_spanish: "/articles/000003/article.es.md"
     }
   ], [])
 

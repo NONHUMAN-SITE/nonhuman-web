@@ -375,10 +375,10 @@
   left: 0;
   right: 0;
   margin-top: 0.5rem;
-  background-color: var(--cell-color);
+  background-color: var(--background-color);
   border: 1px solid var(--grid-color);
   border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   max-height: 200px;
   overflow-y: auto;
@@ -389,6 +389,7 @@
   cursor: pointer;
   font-family: "Space Mono", monospace;
   transition: all 0.2s ease;
+  background-color: var(--background-color);
 }
 
 .dropdown-item:hover {

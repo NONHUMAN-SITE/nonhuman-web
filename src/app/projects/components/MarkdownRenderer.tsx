@@ -34,6 +34,60 @@ interface CodeElement extends React.ReactElement {
   };
 }
 
+// Nuevo componente para renderizar tarjetas de enlace especiales
+function SpecialLinkCard({ href }: { href: string }) {
+  const [ogImage, setOgImage] = useState<string | null>(null);
+  const source = href.includes('github.com') ? 'github.com' : 'huggingface.co';
+
+  useEffect(() => {
+    async function fetchOGImage() {
+      try {
+        if (href.includes('github.com')) {
+          const regex = /github\.com\/([^\/]+)\/([^\/\?#]+)/;
+          const match = href.match(regex);
+          if (match) {
+            const [, owner, repo] = match;
+            setOgImage(`https://opengraph.githubassets.com/1/${owner}/${repo}`);
+          }
+        } else if (href.includes('huggingface.co')) {
+          const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(href)}`);
+          const data = await response.json();
+          const html = data.contents;
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const ogImageMeta = doc.querySelector('meta[property="og:image"]');
+          const ogImageUrl = ogImageMeta?.getAttribute('content');
+          if (ogImageUrl) {
+            setOgImage(ogImageUrl);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching OG image:', error);
+      }
+    }
+
+    fetchOGImage();
+  }, [href]);
+
+  return (
+    <span className="markdown-card-wrapper">
+      <a href={href} target="_blank" rel="noopener noreferrer" className="markdown-card">
+        {ogImage && (
+          <>
+            <img 
+              src={ogImage} 
+              alt=""
+              className="markdown-card-image"
+              loading="lazy"
+            />
+            <span className="markdown-card-source">From {source}</span>
+          </>
+        )}
+      </a>
+    </span>
+  );
+}
+
 export default function MarkdownRenderer({ content, options, theme = 'dark' }: MarkdownRendererProps) {
   const [mermaidInitialized, setMermaidInitialized] = useState(false);
 
@@ -72,15 +126,7 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
           [rehypeSlug, { 
             slugify: (text: string) => {
               const id = options?.slugify?.(text) || text
-                .toLowerCase()
-                //.replace(/[áàäâã]/g, 'a')
-                //.replace(/[éèëê]/g, 'e')
-                //.replace(/[íìïî]/g, 'i')
-                //.replace(/[óòöôõ]/g, 'o')
-                //.replace(/[úùüû]/g, 'u')
-                //.replace(/[^\w\s-]/g, '')
-                //.replace(/\s+/g, '-')
-                //.replace(/-+/g, '-');
+                .toLowerCase();
               return id;
             }
           }],
@@ -127,6 +173,16 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
             };
 
             const typedNode = node as MarkdownNode;
+            
+            // Si el párrafo contiene solo un enlace especial, no lo envolvemos en <p>
+            const hasOnlySpecialLink = typedNode?.children?.length === 1 && 
+              typedNode?.children[0]?.type === 'element' && 
+              typedNode?.children[0]?.tagName === 'a';
+
+            if (hasOnlySpecialLink) {
+              return <>{children}</>;
+            }
+
             const hasOnlyPreChild = typedNode?.children?.length === 1 && 
               typedNode?.children[0]?.type === 'element' && 
               typedNode?.children[0]?.tagName === 'pre';
@@ -135,7 +191,7 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
               return <>{children}</>;
             }
 
-            const hasImage = typedNode?.children?.some((child: { type: string; tagName?: string; }) => 
+            const hasImage = typedNode?.children?.some(child => 
               child.type === 'element' && child.tagName === 'img'
             );
             
@@ -248,58 +304,41 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
               </code>
             )
           },
-          table: ({ children }) => (
-            <div className="overflow-x-auto my-8">
-              <table>
+          // Componente personalizado para enlaces
+          a: ({ children, href }) => {
+            // Verificamos si es un enlace de GitHub o Hugging Face
+            if (
+              href &&
+              (href.includes('github.com') || href.includes('huggingface.co')) &&
+              // Verificamos que children sea un string y coincida con el href
+              (
+                (typeof children === 'string' && children === href) ||
+                (Array.isArray(children) && 
+                 children.length === 1 && 
+                 typeof children[0] === 'string' && 
+                 children[0] === href)
+              )
+            ) {
+              return <SpecialLinkCard href={href} />;
+            }
+
+            // Caso por defecto: renderizamos el enlace normal
+            return (
+              <a 
+                href={href} 
+                className="link-style"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-block',
+                  position: 'relative',
+                  padding: '0 2px'
+                }}
+              >
                 {children}
-              </table>
-            </div>
-          ),
-          thead: ({ children }) => (
-            <thead>
-              {children}
-            </thead>
-          ),
-          tbody: ({ children }) => (
-            <tbody>
-              {children}
-            </tbody>
-          ),
-          tr: ({ children }) => (
-            <tr>
-              {children}
-            </tr>
-          ),
-          th: ({ children }) => (
-            <th>
-              {children}
-            </th>
-          ),
-          td: ({ children }) => (
-            <td>
-              {children}
-            </td>
-          ),
-          blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-green-500 pl-4 italic">
-              {children}
-            </blockquote>
-          ),
-          a: ({ children, href }) => (
-            <a 
-              href={href} 
-              className="link-style"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-block',
-                position: 'relative',
-                padding: '0 2px'
-              }}
-            >
-              {children}
-            </a>
-          ),
+              </a>
+            );
+          },
           details: ({ children }) => (
             <details className="html-details">
               {children}
