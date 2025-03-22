@@ -59,7 +59,7 @@ export default function ArticlesPage() {
       description_english: "Explaining and analyzing the AI agent design patterns and their implementation in LangGraph",
       description_spanish: "Explicación y análisis de los patrones de diseño de agentes de IA y su implementación en LangGraph",
       date: "2025-03-21",
-      tags: ["LangGraph"],
+      tags: ["LangGraph","Agents"],
       author: "Raúl Quispe",
       article_english: "/articles/000004/article.en.md",
       article_spanish: "/articles/000004/article.es.md"
