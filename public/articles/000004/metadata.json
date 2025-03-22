@@ -6,7 +6,7 @@
         "links": ["https://www.linkedin.com/in/raul-quispe-totocayo-08493b172/"],
         "date": "21 de marzo de 2025",
         "url": "articles/000004/article.es.md",
-        "tags": ["LangGraph"]
+        "tags": ["LangGraph","Agents"]
     },
     "en": {
         "title": "Designing AI Agent Patterns",
@@ -15,6 +15,6 @@
         "links": ["https://www.linkedin.com/in/raul-quispe-totocayo-08493b172/"],
         "date": "March 21, 2025",
         "url": "articles/000004/article.en.md",
-        "tags": ["LangGraph"]
+        "tags": ["LangGraph","Agents"]
     }
 }
