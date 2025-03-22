@@ -2,7 +2,8 @@
     "es": {
         "title": "Tutorial de Langraph #1: Introducción a Langraph",
         "description": "Tutorial del framework de Langraph para el manejo de agentes y LLMs",
-        "authors": "Leonardo Pérez",
+        "authors": ["Leonardo Pérez"],
+        "links": ["https://www.linkedin.com/in/leonardo-p%C3%A9rez-a0459a211/"],
         "date": "9 de febrero de 2025",
         "url": "articles/000001/article.es.md",
         "tags": ["Agents", "LLM", "Langraph"]
@@ -10,7 +11,8 @@
     "en": {
         "title": "Langraph Tutorial #1: Introduction to Langraph",
         "description": "Tutorial on the Langraph framework for handling agents and LLMs",
-        "authors": "Leonardo Pérez",
+        "authors": ["Leonardo Pérez"],
+        "links": ["https://www.linkedin.com/in/leonardo-p%C3%A9rez-a0459a211/"],
         "date": "February 9, 2025",
         "url": "articles/000001/article.en.md",
         "tags": ["Agents", "LLM", "Langraph"]

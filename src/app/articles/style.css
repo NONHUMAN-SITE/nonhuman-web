@@ -293,6 +293,17 @@
   font-size: 0.9rem;
 }
 
+.article-page-info a {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.article-page-info a:hover {
+  opacity: 0.8;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1600px) {
   .wiki-layout .article-content {

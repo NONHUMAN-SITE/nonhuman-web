@@ -41,6 +41,14 @@
   object-fit: contain;
 }
 
+.markdown-content img[src$=".gif"] {
+  max-width: 100%;
+  height: auto;
+  margin: 2rem auto;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .markdown-content img:hover {
   transform: scale(1.01);
 }

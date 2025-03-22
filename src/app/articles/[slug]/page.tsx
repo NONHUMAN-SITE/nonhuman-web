@@ -6,15 +6,17 @@ import { useEffect, useState } from 'react'
 import MarkdownRenderer from '@/app/projects/components/MarkdownRenderer'
 import SidebarWiki from '@/app/projects/components/SidebarWiki'
 import '../style.css'
+import React from 'react'
 
 interface ArticleMetadata {
   [key: string]: {
     title: string;
     description: string;
-    authors: string;
+    authors: string[];
     date: string;
     url: string;
     tags?: string[];
+    links: string[];
   }
 }
 
@@ -98,7 +100,18 @@ export default function ArticlePage() {
             <h1 className="article-page-title">{currentLanguageData.title}</h1>
             <p className="article-page-description">{currentLanguageData.description}</p>
             <div className="article-page-info">
-              <span>{currentLanguageData.authors}</span>
+              {currentLanguageData.authors.map((author, index) => (
+                <React.Fragment key={`author-${index}`}>
+                  <a 
+                    href={metadata?.[language].links[index]} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    {author}
+                  </a>
+                  {index < currentLanguageData.authors.length - 1 && <span>, </span>}
+                </React.Fragment>
+              ))}
               <span>{currentLanguageData.date}</span>
             </div>
           </div>

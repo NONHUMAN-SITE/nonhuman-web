@@ -2,7 +2,8 @@
     "es": {
         "title": "Explicando Proximal Policy Optimization",
         "description": "Explicación y análisis del algoritmo Proximal Policy Optimization y su implementación en PyTorch",
-        "authors": "Leonardo Pérez",
+        "authors": ["Leonardo Pérez"],
+        "links": ["https://www.linkedin.com/in/leonardo-p%C3%A9rez-a0459a211/"],
         "date": "20 de marzo de 2025",
         "url": "articles/000003/article.es.md",
         "tags": ["Reinforcement Learning"]
@@ -10,7 +11,8 @@
     "en": {
         "title": "Explaining Proximal Policy Optimization",
         "description": "Explaining and analyzing the Proximal Policy Optimization algorithm and its implementation in PyTorch",
-        "authors": "Leonardo Pérez",
+        "authors": ["Leonardo Pérez"],
+        "links": ["https://www.linkedin.com/in/leonardo-p%C3%A9rez-a0459a211/"],
         "date": "March 20, 2025",
         "url": "articles/000003/article.en.md",
         "tags": ["Reinforcement Learning"]

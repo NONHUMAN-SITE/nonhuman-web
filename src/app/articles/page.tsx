@@ -51,6 +51,18 @@ export default function ArticlesPage() {
       author: "Leonardo Pérez",
       article_english: "/articles/000003/article.en.md",
       article_spanish: "/articles/000003/article.es.md"
+    },
+    {
+      id: "000004",
+      title_english: "Designing AI Agent Patterns",
+      title_spanish: "Diseño de patrones de agentes de IA",
+      description_english: "Explaining and analyzing the AI agent design patterns and their implementation in LangGraph",
+      description_spanish: "Explicación y análisis de los patrones de diseño de agentes de IA y su implementación en LangGraph",
+      date: "2025-03-21",
+      tags: ["LangGraph"],
+      author: "Raúl Quispe",
+      article_english: "/articles/000004/article.en.md",
+      article_spanish: "/articles/000004/article.es.md"
     }
   ], [])
 

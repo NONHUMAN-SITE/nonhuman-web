@@ -207,7 +207,27 @@ export default function MarkdownRenderer({ content, options, theme = 'dark' }: M
               ? { width: parseInt(sizeMatch[2]), height: parseInt(sizeMatch[3]), alt: sizeMatch[1] }
               : { width: 1000, height: 600, alt: alt };
 
+            const isGithubRaw = src?.includes('raw.githubusercontent.com');
             const isVideo = src?.match(/\.(webm|mp4|mov|ogg)$/i);
+            const isGif = src?.match(/\.gif$/i);
+
+            // Si es un GIF o viene de GitHub raw, usar img en lugar de Image
+            if (isGif || isGithubRaw) {
+              return (
+                <figure className="my-4">
+                  <img
+                    src={src || ''}
+                    alt={dimensions.alt || ''}
+                    className="mx-auto rounded-lg shadow-lg"
+                    style={{ 
+                      maxWidth: '100%',
+                      height: 'auto'
+                    }}
+                  />
+                  {dimensions.alt && <figcaption className="text-sm text-gray-600 mt-2 text-center">{dimensions.alt}</figcaption>}
+                </figure>
+              );
+            }
 
             return (
               <figure className="my-4">

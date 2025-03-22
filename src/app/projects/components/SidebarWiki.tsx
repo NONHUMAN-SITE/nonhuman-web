@@ -21,16 +21,17 @@ export default function SidebarWiki({ content, slugify }: SidebarWikiProps) {
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   const extractHeadings = useCallback((markdown: string): HeadingItem[] => {
+    const markdownWithoutCode = markdown.replace(/```[\s\S]*?```/g, '');
+  
     const headingRegex = /^(#{1,3})\s+(.+)$/gm;
     const headings: HeadingItem[] = [];
     
     let match: RegExpExecArray | null;
-    while ((match = headingRegex.exec(markdown)) !== null) {
+    while ((match = headingRegex.exec(markdownWithoutCode)) !== null) {
       const level = match[1].length;
       const text = match[2].trim();
-      const id = slugify(text);
       
-      headings.push({ text, level, id });
+      headings.push({ text, level, id: slugify(text) });
     }
     
     return headings;
